@@ -114,6 +114,9 @@
         <file alias="ic-nav-master-active">cari/res/img/ic-nav-master-active.svg</file>
         <file alias="ic-nav-master-hover">cari/res/img/ic-nav-master-hover.svg</file>
         <file alias="ic-nav-master">cari/res/img/ic-nav-master.svg</file>
+        <file alias="ic-nav-masterlist-active">cari/res/img/ic-nav-masterlist-active.svg</file>
+        <file alias="ic-nav-masterlist-hover">cari/res/img/ic-nav-masterlist-hover.svg</file>
+        <file alias="ic-nav-masterlist">cari/res/img/ic-nav-masterlist.svg</file>
         <file alias="ic-nav-privacy-active">cari/res/img/ic-nav-privacy-active.svg</file>
         <file alias="ic-nav-privacy-hover">cari/res/img/ic-nav-privacy-hover.svg</file>
         <file alias="ic-nav-privacy">cari/res/img/ic-nav-privacy.svg</file>

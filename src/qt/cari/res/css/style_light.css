@@ -352,6 +352,42 @@ QPushButton[cssClass="img-nav-logo"] {
     font-size:14px;
     color: #91ff87;
 }
+*[cssClass="btn-nav-masterlist"] {
+    qproperty-icon: url("://ic-nav-masterlist") off,
+    url("://ic-nav-masterlist-active") on;
+    qproperty-iconSize: 24px 30px;
+    background-color:transparent;
+    font-size:14px;
+    color: #8fa68d;
+}
+
+*[cssClass="btn-nav-masterlist"]:checked {
+    qproperty-icon: url("://ic-nav-masterlist-active");
+    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #2a5925, stop: 1 #182b16);
+    font-size:14px;
+    color: #91ff87;
+}
+
+*[cssClass="btn-nav-masterlist"]:checked:hover {
+    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #2a5925, stop: 1 #182b16);
+    color: #91ff87;
+}
+
+*[cssClass="btn-nav-masterlist"]:hover {
+    qproperty-icon: url("://ic-nav-masterlist-hover");
+    qproperty-iconSize: 24px 30px;
+    background-color: #1A000000;
+    color: #8fa68d;
+}
+
+*[cssClass="btn-nav-masterlist-active"] {
+    qproperty-icon:url("://ic-nav-masterlist-active");
+    qproperty-iconSize: 24px 30px;
+    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #2a5925, stop: 1 #182b16);
+    font-size:14px;
+    color: #91ff87;
+}
+
 
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH       TOP BAR

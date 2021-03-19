@@ -34,6 +34,7 @@ private Q_SLOTS:
     void onDashboardClicked();
     void onAddressClicked();
     void onMasterNodesClicked();
+    void onMasterNodesListClicked();
     void onColdStakingClicked();
     void onSettingsClicked();
     void onReceiveClicked();

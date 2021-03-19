@@ -15,6 +15,7 @@ QT_FORMS_UI = \
   qt/forms/editaddressdialog.ui \
   qt/forms/helpmessagedialog.ui \
   qt/forms/intro.ui \
+  qt/forms/masternodelist.ui \
   qt/forms/openuridialog.ui \
   qt/forms/optionsdialog.ui \
   qt/forms/rpcconsole.ui \
@@ -84,6 +85,7 @@ QT_MOC_CPP = \
   qt/moc_intro.cpp \
   qt/moc_macdockiconhandler.cpp \
   qt/moc_macnotificationhandler.cpp \
+  qt/cari/moc_masternodelist.cpp \
   qt/moc_notificator.cpp \
   qt/moc_openuridialog.cpp \
   qt/moc_optionsdialog.cpp \
@@ -193,6 +195,7 @@ BITCOIN_QT_H = \
   qt/intro.h \
   qt/macdockiconhandler.h \
   qt/macnotificationhandler.h \
+  qt/cari/masternodelist.h \
   qt/networkstyle.h \
   qt/notificator.h \
   qt/openuridialog.h \
@@ -312,6 +315,7 @@ RES_ICONS = \
   qt/cari/res/img/ic-wallet-status-unlocked.svg \
   qt/cari/res/img/ic-check-peers.svg \
   qt/cari/res/img/ic-nav-master-active.svg \
+  qt/cari/res/img/ic-nav-masterlist-active.svg \
   qt/cari/res/img/ic-watch-password-white.svg \
   qt/cari/res/img/bg-welcome-container.jpg \
   qt/cari/res/img/bg-welcome-container.png \
@@ -320,6 +324,7 @@ RES_ICONS = \
   qt/cari/res/img/bg-welcome-container@3x.png \
   qt/cari/res/img/ic-check-staking-off.svg \
   qt/cari/res/img/ic-nav-master-hover.svg \
+  qt/cari/res/img/ic-nav-masterlist-hover.svg \
   qt/cari/res/img/ic-watch-password.svg \
   qt/cari/res/img/bg-welcome.jpg \
   qt/cari/res/img/bg-welcome.svg \
@@ -328,6 +333,7 @@ RES_ICONS = \
   qt/cari/res/img/bg-welcome.png \
   qt/cari/res/img/ic-check-staking.svg \
   qt/cari/res/img/ic-nav-master.svg \
+  qt/cari/res/img/ic-nav-masterlist.svg \
   qt/cari/res/img/img-dashboard-banner.jpg \
   qt/cari/res/img/btn-radio-active.svg \
   qt/cari/res/img/ic-check-sync-off.svg \
@@ -508,6 +514,7 @@ BITCOIN_QT_BASE_CPP = \
   qt/csvmodelwriter.cpp \
   qt/guiutil.cpp \
   qt/intro.cpp \
+  qt/cari/masternodelist.cpp \
   qt/networkstyle.cpp \
   qt/notificator.cpp \
   qt/optionsdialog.cpp \
@@ -529,6 +536,7 @@ BITCOIN_QT_WALLET_CPP = \
   qt/coincontroldialog.cpp \
   qt/coincontroltreewidget.cpp \
   qt/editaddressdialog.cpp \
+  qt/cari/masternodelist.cpp \
   qt/openuridialog.cpp \
   qt/paymentrequestplus.cpp \
   qt/paymentserver.cpp \

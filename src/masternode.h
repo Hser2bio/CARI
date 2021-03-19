@@ -281,6 +281,7 @@ public:
         return strStatus;
     }
 
+    std::string GetStatus();
     int64_t GetLastPaid();
     bool IsValidNetAddr();
 

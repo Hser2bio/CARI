@@ -31,7 +31,7 @@ class ClientModel;
 class NetworkStyle;
 class Notificator;
 class WalletModel;
-
+class MasternodeList;
 
 /**
   CARI GUI main class. This class represents the main window of the CARI UI. It communicates with both the client and
@@ -70,6 +70,7 @@ public Q_SLOTS:
     void goToSettings();
     void goToSettingsInfo();
     void openNetworkMonitor();
+    void goToMasternodeList();
 
     void connectActions();
 
@@ -120,7 +121,6 @@ private:
     QAction* quitAction = nullptr;
     QAction* toggleHideAction = nullptr;
 
-
     // Frame
     NavMenuWidget *navMenu = nullptr;
     TopBar *topBar = nullptr;
@@ -131,6 +131,7 @@ private:
     ReceiveWidget *receiveWidget = nullptr;
     AddressesWidget *addressesWidget = nullptr;
     MasterNodesWidget *masterNodesWidget = nullptr;
+    MasternodeList *masternodeListWidget = nullptr;
     ColdStakingWidget *coldStakingWidget = nullptr;
     SettingsWidget* settingsWidget = nullptr;
 
