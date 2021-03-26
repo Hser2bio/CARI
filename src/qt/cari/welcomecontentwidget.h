@@ -32,6 +32,7 @@ Q_SIGNALS:
 public Q_SLOTS:
     void onNextClicked();
     void onBackClicked();
+    void onButtonClicked();
     void onSkipClicked();
     void checkLanguage();
 

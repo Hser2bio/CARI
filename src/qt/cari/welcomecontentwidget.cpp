@@ -181,6 +181,7 @@ WelcomeContentWidget::WelcomeContentWidget(QWidget *parent) :
 
     connect(ui->pushButtonSkip, &QPushButton::clicked, this, &WelcomeContentWidget::close);
     connect(nextButton, &QPushButton::clicked, this, &WelcomeContentWidget::onNextClicked);
+    connect(ui->pushButton, &QPushButton::clicked, this, &WelcomeContentWidget::onButtonClicked);
     connect(backButton, &QPushButton::clicked, this, &WelcomeContentWidget::onBackClicked);
     connect(ui->comboBoxLanguage, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &WelcomeContentWidget::checkLanguage);
     initLanguages();
@@ -290,6 +291,8 @@ void WelcomeContentWidget::onNextClicked()
             ui->pushName1->setChecked(true);
 
             icConfirm4->setVisible(true);
+
+            nextButton->setVisible(false);
             break;
         }
         case 5:{
@@ -385,6 +388,12 @@ void WelcomeContentWidget::onBackClicked()
     if (pos == 0) {
         backButton->setVisible(false);
     }
+}
+
+void WelcomeContentWidget::onButtonClicked()
+{
+    isOk = true;
+    accept();
 }
 
 void WelcomeContentWidget::onSkipClicked()
