@@ -360,8 +360,8 @@ za staking</translation>
         <translation>PONIŠTI</translation>
     </message>
     <message>
-        <source>CARI will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your CARIs from being stolen by malware infecting your computer.</source>
-        <translation>CARI će se sada zatvoriti kako bi se dovršio proces šifriranja. Ne zaboravite da šifriranje Vašeg novčanika ne može u potpunosti zaštititi vaše CARI od krađje zlonamjernog softvera koji zarazi vaše računalo.</translation>
+        <source>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
+        <translation>PIVX će se sada zatvoriti kako bi se dovršio proces šifriranja. Ne zaboravite da šifriranje Vašeg novčanika ne može u potpunosti zaštititi vaše PIV od krađje zlonamjernog softvera koji zarazi vaše računalo.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -851,6 +851,10 @@ Potrošnja ovih novčića morat će se obaviti iz novčanika ili uredjaja koji s
         <translation>Novčići delegirani</translation>
     </message>
     <message>
+        <source>You don't have any %1 to select.</source>
+        <translation>Nemate ni jedan %1 za odabrati.</translation>
+    </message>
+    <message>
         <source>Cannot perform operation, wallet locked</source>
         <translation>Ne može se izvršiti operacija, novčanik je zaključan</translation>
     </message>
@@ -955,6 +959,10 @@ vlasnika</translation>
         <translation>Statistika stakinga</translation>
     </message>
     <message>
+        <source>How to get PIV</source>
+        <translation>Kako dobiti PIV</translation>
+    </message>
+    <message>
         <source>Sort by</source>
         <translation>Sortiraj prema</translation>
     </message>
@@ -975,8 +983,8 @@ vlasnika</translation>
         <translation>Filtriraj prema</translation>
     </message>
     <message>
-        <source>Amount of CARI and zCARI staked.</source>
-        <translation>Iznos CARI i zCARI koji se stakea.</translation>
+        <source>Amount of PIV and zPIV staked.</source>
+        <translation>Iznos PIV i zPIV koji se stakea.</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -2196,6 +2204,10 @@ Adresa: %4
         <source>Ping Time</source>
         <translation>Ping Time</translation>
     </message>
+    <message>
+        <source>NodeID</source>
+        <translation>NodeID</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -2204,8 +2216,8 @@ Adresa: %4
         <translation>Iznos</translation>
     </message>
     <message>
-        <source>Enter CARI address (e.g. %1)</source>
-        <translation>Upišite CARI adresu (npr. %1)</translation>
+        <source>Enter PIVX address (e.g. %1)</source>
+        <translation>Upišite PIVX adresu (npr. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2248,12 +2260,12 @@ Adresa: %4
         <translation>%1 ms</translation>
     </message>
     <message>
-        <source>A fatal error occurred. CARI can no longer continue safely and will quit.</source>
-        <translation>Dogodila se fatalna pogreška. CARI ne može sigurno nastaviti i izaći će.</translation>
+        <source>A fatal error occurred. PIVX can no longer continue safely and will quit.</source>
+        <translation>Dogodila se fatalna pogreška. PIVX ne može sigurno nastaviti i izaći će.</translation>
     </message>
     <message>
-        <source>CARI Core</source>
-        <translation>CARI Core</translation>
+        <source>PIVX Core</source>
+        <translation>PIVX Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
@@ -2272,8 +2284,8 @@ Adresa: %4
         <translation>Greška pri čitanju masternode konfiguracijske datoteke: %1</translation>
     </message>
     <message>
-        <source>CARI Core didn't yet exit safely...</source>
-        <translation>CARI Core nije ugašen sigurno...</translation>
+        <source>PIVX Core didn't yet exit safely...</source>
+        <translation>PIVX Core nije ugašen sigurno...</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -2893,6 +2905,10 @@ Adresa: %4
         <translation>Moje adrese</translation>
     </message>
     <message>
+        <source>List your own addresses</source>
+        <translation>Prikažite vlastite adrese</translation>
+    </message>
+    <message>
         <source>Create Request</source>
         <translation>Kreiraj zahtjev</translation>
     </message>
@@ -2991,8 +3007,8 @@ Adresa: %4
         <translation>Iznos</translation>
     </message>
     <message>
-        <source>CARI</source>
-        <translation>CARI</translation>
+        <source>PIV</source>
+        <translation>PIV</translation>
     </message>
     <message>
         <source>D7VFR83SQbiezrW72hjcWJtcfip5krte2Z </source>
@@ -3251,12 +3267,28 @@ Ovi novčići više neće biti cold-stakeani.</translation>
         <translation>Upravljanje novčićima</translation>
     </message>
     <message>
+        <source>Select the source of the coins</source>
+        <translation>Izaberite izvor novčića</translation>
+    </message>
+    <message>
         <source>Change Address</source>
         <translation>Adresa za ostatak</translation>
     </message>
     <message>
+        <source>Customize the change address</source>
+        <translation>Prilagodite adresu za ostatak</translation>
+    </message>
+    <message>
         <source>Open URI</source>
         <translation>Otvori URI</translation>
+    </message>
+    <message>
+        <source>Unlocked remaining</source>
+        <translation>Preostalo otključano</translation>
+    </message>
+    <message>
+        <source>You don't have any %1 to select.</source>
+        <translation>Nemate ni jedan %1 za odabrati.</translation>
     </message>
     <message>
         <source>No contacts available, you can go to the contacts screen and add some there!</source>
@@ -3504,6 +3536,10 @@ Ovi novčići više neće biti cold-stakeani.</translation>
         <translation>Otvori datoteku za uklanjanje pogrešaka</translation>
     </message>
     <message>
+        <source>Command Line Options</source>
+        <translation>Mogućnosti naredbene ploče</translation>
+    </message>
+    <message>
         <source>Clear history</source>
         <translation>Očisti povijest</translation>
     </message>
@@ -3699,16 +3735,16 @@ Došlo je do greške prilikom spremanja popisa adresa u %1. Molimo pokušajte po
         <translation>Obrazac</translation>
     </message>
     <message>
-        <source>1) What is CARI?</source>
-        <translation>1) Što je CARI?</translation>
+        <source>1) What is PIVX?</source>
+        <translation>1) Što je PIVX?</translation>
     </message>
     <message>
-        <source>2) Why are my CARI unspendable?</source>
-        <translation>2) Zašto se moji CARI ne mogu potrošiti?</translation>
+        <source>2) Why are my PIV unspendable?</source>
+        <translation>2) Zašto se moji PIV ne mogu potrošiti?</translation>
     </message>
     <message>
-        <source>https://CARI.org/</source>
-        <translation>https://CARI.org/</translation>
+        <source>https://PIVX.org/</source>
+        <translation>https://PIVX.org/</translation>
     </message>
     <message>
         <source>1</source>
@@ -3753,25 +3789,25 @@ vodjenje Masternode-ova za stvaranje i glasanje o prijedlozima.
         <translation>2</translation>
     </message>
     <message>
-        <source>Why are my CARI unspendable?</source>
-        <translation>Zašto se moji CARI ne mogu potrošiti?</translation>
+        <source>Why are my PIV unspendable?</source>
+        <translation>Zašto se moji PIV ne mogu potrošiti?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Newly received CARI requires 6 confirmations on the network
+                           Newly received PIVX requires 6 confirmations on the network
                            to become eligible for spending which can take ~6 minutes.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Your CARI wallet also needs to be completely synchronized
+                           Your PIVX wallet also needs to be completely synchronized
                            to see and spend balances on the network.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-Novoprimljeni CARI zahtjeva 6 potvrda na mreži
+Novoprimljeni PIVX zahtjeva 6 potvrda na mreži
 da bi se mogao potrošiti što može potrajati ~6 minuta.
 &lt;/p&gt;&lt;p align="justify"&gt;
-Vaš CARI novčanik takođjer treba biti u potpunosti sinkroniziran
+Vaš PIVX novčanik takođjer treba biti u potpunosti sinkroniziran
 da biste vidjeli i mogli potrošiti sredstva na mreži.
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
 </translation>
@@ -3779,6 +3815,10 @@ da biste vidjeli i mogli potrošiti sredstva na mreži.
     <message>
         <source>3</source>
         <translation>3</translation>
+    </message>
+    <message>
+        <source>How do I stake PIV?</source>
+        <translation>Kako stakeat PIV?</translation>
     </message>
     <message>
         <source>4</source>
@@ -3805,8 +3845,8 @@ da biste vidjeli i mogli potrošiti sredstva na mreži.
         <translation>Što je Masternode Controller?</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 1,000 CARI collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;Masternode Controller novčanik je mjesto gdje zalog od 1,000 CARI može stajati tijekom Controller-Remote podešavanja masternode-a. To je novčanik koji može aktivirati Remote masternode novčanik(e) i omogućiti Vam držanje zaloga novčića offline dok Remote masternode novčanik ostaje online.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 10,000 PIV collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;Masternode Controller novčanik je mjesto gdje zalog od 10,000 PIV može stajati tijekom Controller-Remote podešavanja masternode-a. To je novčanik koji može aktivirati Remote masternode novčanik(e) i omogućiti Vam držanje zaloga novčića offline dok Remote masternode novčanik ostaje online.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>
@@ -4047,6 +4087,10 @@ Zahtjevi:
     <message>
         <source>Main</source>
         <translation>Glavno</translation>
+    </message>
+    <message>
+        <source>Customize the main application options</source>
+        <translation>Prilagodite glavne mogućnosti aplikacije</translation>
     </message>
     <message>
         <source>Size of database cache</source>
@@ -4373,6 +4417,10 @@ Označite jedan ili oba polja za potvrdu da biste poslali staking i/ili masterno
     <message>
         <source>Customize the internal wallet options</source>
         <translation>Prilagodite postavke internog novčanika</translation>
+    </message>
+    <message>
+        <source>Stake split threshold</source>
+        <translation>Prag podjele uloga</translation>
     </message>
     <message>
         <source>Spend unconfirmed change</source>
@@ -4795,6 +4843,10 @@ se nova sigurnosna kopija.
         <translation>Staking onemogućen</translation>
     </message>
     <message>
+        <source> %54 Synchronizing..</source>
+        <translation>%54 Sinkoniziram..</translation>
+    </message>
+    <message>
         <source>Light Theme</source>
         <translation>Svijetla tema</translation>
     </message>
@@ -4859,8 +4911,8 @@ se nova sigurnosna kopija.
         <translation>Novčanik je uspješno nadograđen, ali nije izrađena sigurnosna kopija.</translation>
     </message>
     <message>
-        <source>WARNING: remember to make a copy of your wallet.dat file!</source>
-        <translation>UPOZORENJE: ne zaboravite napraviti kopiju datoteke wallet.dat!</translation>
+        <source>WARNING: remember to make a copy of your wallet file!</source>
+        <translation>UPOZORENJE: ne zaboravite napraviti kopiju datoteke vašeg novčanika!</translation>
     </message>
     <message>
         <source>Upgrade Wallet Error</source>
@@ -4872,177 +4924,6 @@ se nova sigurnosna kopija.
     <message>
         <source>KB/s</source>
         <translation>KB/s</translation>
-    </message>
-</context>
-<context>
-    <name>TransactionDesc</name>
-    <message>
-        <source>Open until %1</source>
-        <translation>Otvoreno do %1</translation>
-    </message>
-    <message>
-        <source>conflicted</source>
-        <translation>sukobljena</translation>
-    </message>
-    <message>
-        <source>%1/offline</source>
-        <translation>%1/offline</translation>
-    </message>
-    <message>
-        <source>%1/unconfirmed</source>
-        <translation>%1/nepotvrđen</translation>
-    </message>
-    <message>
-        <source>%1 confirmations</source>
-        <translation>%1 potvrda</translation>
-    </message>
-    <message>
-        <source>%1/offline (verified via SwiftX)</source>
-        <translation>%1/offline (provjereno s SwiftX)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (verified via SwiftX)</source>
-        <translation>%1 / potvrđeno (potvrđeno putem usluge SwiftX)</translation>
-    </message>
-    <message>
-        <source>%1 confirmations (verified via SwiftX)</source>
-        <translation>Potvrde %1 (potvrđene putem SwiftX-a)</translation>
-    </message>
-    <message>
-        <source>%1/offline (SwiftX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1 / offline (SwiftX potvrda u tijeku - %2 od %3 potpisa)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (SwiftX verification in progress - %2 of %3 signatures )</source>
-        <translation>%1 / potvrđeno (provjera SwiftX u tijeku -%2 od %3 potpisa)</translation>
-    </message>
-    <message>
-        <source>%1 confirmations (SwiftX verification in progress - %2 of %3 signatures)</source>
-        <translation>Potvrde %1 (provjera SwiftX u tijeku -%2 od %3 potpisa)</translation>
-    </message>
-    <message>
-        <source>%1/offline (SwiftX verification failed)</source>
-        <translation>%1 / offline (SwiftX verifikacija nije uspjela)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (SwiftX verification failed)</source>
-        <translation>%1 / potvrđeno (nije uspjela SwiftX provjera)</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>Status</translation>
-    </message>
-    <message>
-        <source>, has not been successfully broadcast yet</source>
-        <translation>, još nije uspješno emitiran</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Datum</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation>Izvor</translation>
-    </message>
-    <message>
-        <source>Generated</source>
-        <translation>Kreirano</translation>
-    </message>
-    <message>
-        <source>From</source>
-        <translation>Oblik</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>nepoznato</translation>
-    </message>
-    <message>
-        <source>To</source>
-        <translation>Za</translation>
-    </message>
-    <message>
-        <source>own address</source>
-        <translation>vlastita adresa</translation>
-    </message>
-    <message>
-        <source>watch-only</source>
-        <translation>samo za gledanje</translation>
-    </message>
-    <message>
-        <source>label</source>
-        <translation>oznaka</translation>
-    </message>
-    <message>
-        <source>Credit</source>
-        <translation>Kredit</translation>
-    </message>
-    <message>
-        <source>not accepted</source>
-        <translation>nije prihvaćeno</translation>
-    </message>
-    <message>
-        <source>Debit</source>
-        <translation>Dugovanje</translation>
-    </message>
-    <message>
-        <source>Total debit</source>
-        <translation>Ukupan dug</translation>
-    </message>
-    <message>
-        <source>Total credit</source>
-        <translation>Ukupni kredit</translation>
-    </message>
-    <message>
-        <source>Transaction fee</source>
-        <translation>Naknada za transakciju</translation>
-    </message>
-    <message>
-        <source>Net amount</source>
-        <translation>Neto iznos</translation>
-    </message>
-    <message>
-        <source>Message</source>
-        <translation>Poruka</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation>Komentar</translation>
-    </message>
-    <message>
-        <source>Transaction ID</source>
-        <translation>Transakcijski ID</translation>
-    </message>
-    <message>
-        <source>Output index</source>
-        <translation>Izlazni indeks</translation>
-    </message>
-    <message>
-        <source>Merchant</source>
-        <translation>Trgovac</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Informacije o uklanjanju pogrešaka</translation>
-    </message>
-    <message>
-        <source>Transaction</source>
-        <translation>Transakcija</translation>
-    </message>
-    <message>
-        <source>Inputs</source>
-        <translation>Unosi</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Iznos</translation>
-    </message>
-    <message>
-        <source>true</source>
-        <translation>točno</translation>
-    </message>
-    <message>
-        <source>false</source>
-        <translation>netočno</translation>
     </message>
 </context>
 <context>
@@ -5062,10 +4943,6 @@ se nova sigurnosna kopija.
     <message>
         <source>Open until %1</source>
         <translation>Otvoreno do %1</translation>
-    </message>
-    <message>
-        <source>Offline</source>
-        <translation>Van mreže</translation>
     </message>
     <message>
         <source>Unconfirmed</source>
@@ -5088,10 +4965,6 @@ se nova sigurnosna kopija.
         <translation>Nedovršeno (potvrda %1, bit će dostupna nakon %2)</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Taj blok nije primljen od strane drugih čvorova i vjerojatno neće biti prihvaćeni!</translation>
-    </message>
-    <message>
         <source>Received with</source>
         <translation>Primljeno s</translation>
     </message>
@@ -5102,6 +4975,22 @@ se nova sigurnosna kopija.
     <message>
         <source>Received from</source>
         <translation>Zaprimljeno s</translation>
+    </message>
+    <message>
+        <source>%1 Stake</source>
+        <translation>%1 Stake</translation>
+    </message>
+    <message>
+        <source>z%1 Stake</source>
+        <translation>z%1 Stake</translation>
+    </message>
+    <message>
+        <source>%1 Cold Stake</source>
+        <translation>%1 Cold Stake</translation>
+    </message>
+    <message>
+        <source>%1 Stake on behalf of</source>
+        <translation>%1 Stake u korist</translation>
     </message>
     <message>
         <source>Stake delegation</source>
@@ -5357,7 +5246,7 @@ CARI temeljni novčanik</translation>
     </message>
 </context>
 <context>
-    <name>cari-core</name>
+    <name>pivx-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = zadržite metapodatke tx, npr. Vlasnika računa i podatke o zahtjevu za plaćanje, 2 = odbaci meta podataka tx)</translation>
@@ -5571,14 +5460,6 @@ CARI temeljni novčanik</translation>
         <translation>Upozorenje: Čini se da se ne slažemo s našim kolegama! Možda ćete morati nadograditi ili možda drugi node-ovi moraju nadograditi novčanik.</translation>
     </message>
     <message>
-        <source>Warning: error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
-        <translation>Upozorenje: pogreška u čitanju wallet.dat! Svi ključevi pravilno čitaju, ali podaci o transakciji ili unosi u adresaru možda nedostaju ili su netočni.</translation>
-    </message>
-    <message>
-        <source>Warning: wallet.dat corrupt, data salvaged! Original wallet.dat saved as wallet.{timestamp}.bak in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
-        <translation>Upozorenje: wallet.dat je oštećen, podaci su spašeni! Izvorni wallet.dat spremljen je kao lisnica. {Timestamp} .bak u %s; ako su vaša salda ili transakcije netočne, trebali biste ih vratiti iz sigurnosne kopije.</translation>
-    </message>
-    <message>
         <source>Whitelist peers connecting from the given netmask or IP address. Can be specified multiple times.</source>
         <translation>Dopuštene kolege koji se povezuju s određenom netmask ili IP adresa. Može se navesti više puta.</translation>
     </message>
@@ -5595,10 +5476,6 @@ CARI temeljni novčanik</translation>
         <translation>(default: %s)</translation>
     </message>
     <message>
-        <source>(default: 1)</source>
-        <translation>(default: 1)</translation>
-    </message>
-    <message>
         <source>Accept command line and JSON-RPC commands</source>
         <translation>Prihvatite naredbeni redak i JSON-RPC naredbe</translation>
     </message>
@@ -5611,10 +5488,6 @@ CARI temeljni novčanik</translation>
         <translation>Dodajte čvor za povezivanje i pokušajte zadržati vezu otvorenu</translation>
     </message>
     <message>
-        <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
-        <translation>Dopustite traženja DNS-a za -addnode, -seednode i -connect</translation>
-    </message>
-    <message>
         <source>Always query for peer addresses via DNS lookup (default: %u)</source>
         <translation>Uvijek se upita za peer adrese putem DNS pretraživanja (zadano: %u)</translation>
     </message>
@@ -5623,20 +5496,12 @@ CARI temeljni novčanik</translation>
         <translation>Dodajte komentar user agent stringu</translation>
     </message>
     <message>
-        <source>Attempt to recover private keys from a corrupt wallet.dat</source>
-        <translation>Pokušaj oporavka privatnih ključeva iz korumpirane wallet.dat</translation>
-    </message>
-    <message>
         <source>Automatically create Tor hidden service (default: %d)</source>
         <translation>Automatski izradite Tor skrivenu uslugu (zadano: %d)</translation>
     </message>
     <message>
         <source>Block creation options:</source>
         <translation>Opcije izrade blokova:</translation>
-    </message>
-    <message>
-        <source>Cannot downgrade wallet</source>
-        <translation>Nije moguće novčanik vratiti na nižu verziju</translation>
     </message>
     <message>
         <source>Connect through SOCKS5 proxy</source>
@@ -5684,10 +5549,6 @@ CARI temeljni novčanik</translation>
         <translation>Onemogućite obavijesti OS-a za dolazne transakcije (zadano: %u)</translation>
     </message>
     <message>
-        <source>Disable safemode, override a real safe mode event (default: %u)</source>
-        <translation>Onemogućivanje sigurnosnog modula, nadjačavanje sigurnog načina rada (zadano: %u)</translation>
-    </message>
-    <message>
         <source>Discover own IP address (default: 1 when listening and no -externalip)</source>
         <translation>Otkrijte vlastitu IP adresu (zadano: 1 prilikom slušanja i nije za vanjski ip)</translation>
     </message>
@@ -5728,18 +5589,6 @@ CARI temeljni novčanik</translation>
         <translation>Pogreška pri učitavanju baze podataka blokova</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat</source>
-        <translation>Pogreška prilikom učitavanja wallet.dat</translation>
-    </message>
-    <message>
-        <source>Error loading wallet.dat: Wallet corrupted</source>
-        <translation>Pogreška pri učitavanju wallet.dat: Novčanik oštećen</translation>
-    </message>
-    <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of CARI Core</source>
-        <translation>Pogreška prilikom učitavanja wallet.dat: Novčanik zahtijeva noviju verziju CARI jezgre</translation>
-    </message>
-    <message>
         <source>Error opening block database</source>
         <translation>Pogreška pri otvaranju baze podataka blokova</translation>
     </message>
@@ -5754,10 +5603,6 @@ CARI temeljni novčanik</translation>
     <message>
         <source>Error</source>
         <translation>Greška</translation>
-    </message>
-    <message>
-        <source>Error: </source>
-        <translation>Greška:</translation>
     </message>
     <message>
         <source>Error: A fatal internal error occured, see debug.log for details</source>
@@ -5852,8 +5697,8 @@ CARI temeljni novčanik</translation>
         <translation>Nevažeća mrežna maska specificirana u kategoriji -whitelist: '%s'</translation>
     </message>
     <message>
-        <source>Recalculating CARI supply...</source>
-        <translation>Preračunavanje CARI-a u optjecaju...</translation>
+        <source>Recalculating PIV supply...</source>
+        <translation>Preračunavanje PIV-a u optjecaju...</translation>
     </message>
     <message>
         <source>Reindexing zerocoin database...</source>
@@ -5876,24 +5721,8 @@ CARI temeljni novčanik</translation>
         <translation>Ovo je priprema za testiranje prije puštanja - upotrebljavajte na vlastiti rizik - nemojte ga koristiti za staking ili trgovinske aplikacije!</translation>
     </message>
     <message>
-        <source> mints deleted
-</source>
-        <translation>novčići izbrisani
-</translation>
-    </message>
-    <message>
-        <source> mints updated, </source>
-        <translation>novčići ažurirani,</translation>
-    </message>
-    <message>
-        <source> unconfirmed transactions removed
-</source>
-        <translation>uklonjene nepotvrđjene transakcije
-</translation>
-    </message>
-    <message>
-        <source>Disable all CARI specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Onemogući sve specifične funkcije CARI (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, zadano: %u)</translation>
+        <source>Disable all PIVX specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Onemogući sve specifične funkcije PIVX (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, zadano: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
@@ -5970,10 +5799,6 @@ CARI temeljni novčanik</translation>
     <message>
         <source>Error: No valid utxo!</source>
         <translation>Pogreška: Nema valjanog utxo!</translation>
-    </message>
-    <message>
-        <source>Failed to find Zerocoins in wallet.dat</source>
-        <translation>Neuspjelo pronalaženje Zerocoina u wallet.dat</translation>
     </message>
     <message>
         <source>Failed to parse public spend</source>
@@ -6092,10 +5917,6 @@ CARI temeljni novčanik</translation>
         <translation>Nije dostupno dovoljno deskriptora datoteka.</translation>
     </message>
     <message>
-        <source>Number of automatic wallet backups (default: 10)</source>
-        <translation>Broj automatskih sigurnosnih kopija novčanika (zadani: 10)</translation>
-    </message>
-    <message>
         <source>Number of custom location backups to retain (default: %d)</source>
         <translation>Broj sigurnosnih kopija prilagođenih lokacija za zadržavanje (zadano: %d)</translation>
     </message>
@@ -6152,12 +5973,26 @@ CARI temeljni novčanik</translation>
         <translation>Navedite lokaciju datoteke dnevnika za uklanjanje pogrešaka: to može biti apsolutna putanja ili putanja u odnosu na direktorij podataka (zadano: %s)</translation>
     </message>
     <message>
+        <source>Active Masternode not initialized.</source>
+        <translation>Aktivan Masternode nije inicijaliziran.</translation>
+    </message>
+    <message>
         <source>Cannot resolve -%s address: '%s'</source>
         <translation>Ne mogu riješiti -%s adresu: '%s'</translation>
     </message>
     <message>
-        <source>Cannot upgrade to HD wallet (already running HD support). Version: %d</source>
-        <translation>Nije moguće nadograditi na HD novčanik (već ima podršku za HD). Verzija: %d</translation>
+        <source>Error loading %s
+</source>
+        <translation>Greška pri učitavanju %s
+</translation>
+    </message>
+    <message>
+        <source>Error upgrading chainstate database</source>
+        <translation>Greška pri nadogradnji chainstate baze podataka</translation>
+    </message>
+    <message>
+        <source>Mining/Staking options:</source>
+        <translation>Rudarenje/Staking mogućnosti:</translation>
     </message>
     <message>
         <source>Need destination or change address because change is not exact</source>
@@ -6210,14 +6045,6 @@ CARI temeljni novčanik</translation>
     <message>
         <source>Rescanning...</source>
         <translation>Ponovno skeniranje...</translation>
-    </message>
-    <message>
-        <source>ResetMintZerocoin finished: </source>
-        <translation>Završeno ResetiranjeStvaranjaZerocoina:</translation>
-    </message>
-    <message>
-        <source>ResetSpentZerocoin finished: </source>
-        <translation>ResetSpentZerocoin završio: </translation>
     </message>
     <message>
         <source>Run a thread to flush wallet periodically (default: %u)</source>
@@ -6314,10 +6141,6 @@ CARI temeljni novčanik</translation>
     <message>
         <source>Spend unconfirmed change when sending transactions (default: %u)</source>
         <translation>Provedite nepotvrđene promjene prilikom slanja transakcija (zadano: %u)</translation>
-    </message>
-    <message>
-        <source>Staking options:</source>
-        <translation>Mogućnosti Stakinga:</translation>
     </message>
     <message>
         <source>Stop running after importing blocks from disk (default: %u)</source>
@@ -6420,10 +6243,6 @@ CARI temeljni novčanik</translation>
         <translation>Nije moguće vezati se na %s na ovom računalu (vezanje vraćene pogreške %s)</translation>
     </message>
     <message>
-        <source>Unable to generate initial key</source>
-        <translation>Nije moguće generiranje početnog ključa</translation>
-    </message>
-    <message>
         <source>Unable to generate keys</source>
         <translation>Nije moguće generiranje ključeva</translation>
     </message>
@@ -6450,14 +6269,6 @@ CARI temeljni novčanik</translation>
     <message>
         <source>Use UPnP to map the listening port (default: %u)</source>
         <translation>Koristite UPnP za mapiranje priključka za slušanje (zadano: %u)</translation>
-    </message>
-    <message>
-        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
-        <translation>Koristite UPnP za mapiranje porta za slušanje (zadano: 1 prilikom slušanja)</translation>
-    </message>
-    <message>
-        <source>Use a custom max chain reorganization depth (default: %u)</source>
-        <translation>Koristite prilagođenu maksimalnu dubinu reorganizacije lanca (zadano: %u)</translation>
     </message>
     <message>
         <source>Use the test network</source>
@@ -6543,10 +6354,6 @@ CARI temeljni novčanik</translation>
         <source>on startup</source>
         <translation>pri pokretanju</translation>
     </message>
-    <message>
-        <source>wallet.dat corrupt, salvage failed</source>
-        <translation>wallet.dat korumpiran, spašavanje nije uspjelo</translation>
-    </message>
 </context>
 <context>
     <name>send</name>
@@ -6559,12 +6366,12 @@ CARI temeljni novčanik</translation>
         <translation>Pošalji</translation>
     </message>
     <message>
-        <source>Send public coins (CARI)</source>
-        <translation>Pošalji javne novčiće (CARI)</translation>
+        <source>Send public coins (PIV)</source>
+        <translation>Pošalji javne novčiće (PIV)</translation>
     </message>
     <message>
-        <source>CARI address or contact label</source>
-        <translation>CARI adresa ili naziv kontakta</translation>
+        <source>PIVX address or contact label</source>
+        <translation>PIVX adresa ili naziv kontakta</translation>
     </message>
     <message>
         <source>Amount</source>

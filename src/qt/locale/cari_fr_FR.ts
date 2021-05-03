@@ -364,8 +364,8 @@ pour le staking</translation>
         <translation>ANNULER</translation>
     </message>
     <message>
-        <source>CARI will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your CARIs from being stolen by malware infecting your computer.</source>
-        <translation>CARI va maintenant se fermer pour finir le processus de cryptage. Notez que le cryptage de votre portefeuille ne peut pas complètement protéger vos CARIs d'un vol par un malware ayant infecté votre ordinateur. </translation>
+        <source>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
+        <translation>PIVX va maintenant se fermer pour finir le processus de cryptage. Notez que le cryptage de votre portefeuille ne peut pas complètement protéger vos PIVs d'un vol par un malware ayant infecté votre ordinateur. </translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -990,8 +990,8 @@ propriétaire</translation>
         <translation>Voir l'historique de votre compte</translation>
     </message>
     <message>
-        <source>How to get CARI</source>
-        <translation>Comment obtenir des CARI</translation>
+        <source>How to get PIV</source>
+        <translation>Comment obtenir des PIV</translation>
     </message>
     <message>
         <source>Sort by</source>
@@ -1014,8 +1014,8 @@ propriétaire</translation>
         <translation>Filtrer par</translation>
     </message>
     <message>
-        <source>Amount of CARI and zCARI staked.</source>
-        <translation>Le montant de CARI et de zCARI en staking</translation>
+        <source>Amount of PIV and zPIV staked.</source>
+        <translation>Le montant de PIV et de zPIV en staking</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -1560,8 +1560,8 @@ S'il vous plaît attendez quelques minutes de plus (le dépôt de garantie du ma
         <translation>Donnée masternode copiée vers le presse-papier</translation>
     </message>
     <message>
-        <source>Not enough balance to create a masternode, 1,000 %1 required.</source>
-        <translation>Fonds insuffisant pour créer un masternode, 1 000 %1 sont requis.</translation>
+        <source>Not enough balance to create a masternode, 10,000 %1 required.</source>
+        <translation>Fonds insuffisant pour créer un masternode, 10 000 %1 sont requis.</translation>
     </message>
     <message>
         <source>Remote Masternode Data</source>
@@ -2256,7 +2256,7 @@ Adresse : %4
         <source>Ping Time</source>
         <translation>Temps de réponse au Ping</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>QObject</name>
     <message>
@@ -2264,8 +2264,8 @@ Adresse : %4
         <translation>Montant</translation>
     </message>
     <message>
-        <source>Enter CARI address (e.g. %1)</source>
-        <translation>Entrez une adresse CARI (par ex. %1)</translation>
+        <source>Enter PIVX address (e.g. %1)</source>
+        <translation>Entrez une adresse PIVX (par ex. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2308,12 +2308,12 @@ Adresse : %4
         <translation>%1 ms</translation>
     </message>
     <message>
-        <source>A fatal error occurred. CARI can no longer continue safely and will quit.</source>
-        <translation>Une erreur fatale s'est produite. CARI Core ne peut plus poursuivre en toute sécurité et va quitter.</translation>
+        <source>A fatal error occurred. PIVX can no longer continue safely and will quit.</source>
+        <translation>Une erreur fatale s'est produite. PIVX Core ne peut plus poursuivre en toute sécurité et va quitter.</translation>
     </message>
     <message>
-        <source>CARI Core</source>
-        <translation>CARI Core</translation>
+        <source>PIVX Core</source>
+        <translation>PIVX Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
@@ -2332,8 +2332,8 @@ Adresse : %4
         <translation>Erreur de lecture du fichier de configuration Masternode: %1</translation>
     </message>
     <message>
-        <source>CARI Core didn't yet exit safely...</source>
-        <translation>CARI Core n'a pas encore quitté en toute sécurité ...</translation>
+        <source>PIVX Core didn't yet exit safely...</source>
+        <translation>PIVX Core n'a pas encore quitté en toute sécurité ...</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -2937,8 +2937,8 @@ Adresse : %4
         <translation>Aucune adresse</translation>
     </message>
     <message>
-        <source>Scan the QR code or copy the address to receive CARI</source>
-        <translation>Balayez le QR code ou copiez l'adresse pour recevoir les CARI</translation>
+        <source>Scan the QR code or copy the address to receive PIV</source>
+        <translation>Balayez le QR code ou copiez l'adresse pour recevoir les PIV</translation>
     </message>
     <message>
         <source>Add Label</source>
@@ -3071,8 +3071,8 @@ Adresse : %4
         <translation>CARI</translation>
     </message>
     <message>
-        <source>Instead of sharing only a CARI address, you can create a payment request, bundling up more information</source>
-        <translation>Plutôt que de ne partager qu'une adresse CARI, vous pouvez créer une demande de paiement, et  y ajouter des informations complémentaires</translation>
+        <source>Instead of sharing only a PIVX address, you can create a payment request, bundling up more information</source>
+        <translation>Plutôt que de ne partager qu'une adresse PIVX, vous pouvez créer une demande de paiement, et  y ajouter des informations complémentaires</translation>
     </message>
     <message>
         <source>D7VFR83SQbiezrW72hjcWJtcfip5krte2Z </source>
@@ -3477,9 +3477,9 @@ Souvenez vous de l'écrire et de la stocker en sécurité, autrement vous pourri
         <translation>Outil BIP38</translation>
     </message>
     <message>
-        <source>Encrypt your CARI addresses (key pair actually) using BIP38 encryption.
+        <source>Encrypt your PIVX addresses (key pair actually) using BIP38 encryption.
 Using this mechanism you can share your keys without middle-man risk, only need to store your passphrase safely</source>
-        <translation>Chiffrez vos adresses CARI (paire de clés) en utilisant le chiffrement BIP38.
+        <translation>Chiffrez vos adresses PIVX (paire de clés) en utilisant le chiffrement BIP38.
 En utilisant ce mécanisme, vous pouvez partager vos clés sans risque intermédiaire, il vous suffit de stocker votre phrase secrète en toute sécurité</translation>
     </message>
     <message>
@@ -3833,16 +3833,16 @@ Il y a eu une erreur de sauvegarde de la liste d'adresses vers %1. SVP rééssay
         <translation>Formulaire</translation>
     </message>
     <message>
-        <source>1) What is CARI?</source>
-        <translation>1) Qu'est ce que CARI?</translation>
+        <source>1) What is PIVX?</source>
+        <translation>1) Qu'est ce que PIVX?</translation>
     </message>
     <message>
-        <source>2) Why are my CARI unspendable?</source>
-        <translation>2) Pourquoi mes CARI ne peuvent pas être dépensés?</translation>
+        <source>2) Why are my PIV unspendable?</source>
+        <translation>2) Pourquoi mes PIV ne peuvent pas être dépensés?</translation>
     </message>
     <message>
-        <source>https://CARI.org/</source>
-        <translation>https://CARI.org/</translation>
+        <source>https://PIVX.org/</source>
+        <translation>https://PIVX.org/</translation>
     </message>
     <message>
         <source>1</source>
@@ -3913,12 +3913,12 @@ pour voir votre solde de monnaie dépensable sur le réseau.
         <translation>3</translation>
     </message>
     <message>
-        <source>How do I stake CARI?</source>
-        <translation>Comment staker des CARI?</translation>
+        <source>How do I stake PIV?</source>
+        <translation>Comment staker des PIV?</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;ol style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;"&gt;&lt;li align="justify" style=" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Make sure your wallet is completely synchronized and you are using the latest release. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;You must have a balance of CARI with a minimum of 600 confirmations. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Your wallet must stay online and be unlocked for staking purposes. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Once all those steps are followed staking should be enabled. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state &amp;quot;Staking Enabled&amp;quot; to indicate it is staking. Using the command line interface (cari-cli); the command &lt;span style=" font-style:italic;"&gt;getstakingstatus&lt;/span&gt; will confirm that staking is active. &lt;/li&gt;&lt;/ol&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;ol style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;"&gt;&lt;li align="justify" style=" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Assurez-vous que votre portefeuille est totalement synchronisé et que vous utilisez la dernière version logicielle. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Vous devez avoir une balance CARI avec un minimum de 600 confirmations. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Votre portefeuille doit rester en ligne et être débloqué aux fins de staking. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Une fois toutes ces étapes validées le staking devrait s'activer. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Vous pouvez voir l'état du staking dans votre portefeuille en passant votre souris sur l'icône cadeau située ne haut à droite de l'interface. La boîte cadeau devrait être active et indiquer &amp;quot;Staking Activé&amp;quot;. En utilisant l'interface en ligne de commande (cari-cli), la commande &lt;span style=" font-style:italic;"&gt;getstakingstatus&lt;/span&gt; vous confirmera si le staking est actif.&lt;/li&gt;&lt;/ol&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;ol style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;"&gt;&lt;li align="justify" style=" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Make sure your wallet is completely synchronized and you are using the latest release. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;You must have a balance of PIVX with a minimum of 600 confirmations. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Your wallet must stay online and be unlocked for staking purposes. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Once all those steps are followed staking should be enabled. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state &amp;quot;Staking Enabled&amp;quot; to indicate it is staking. Using the command line interface (pivx-cli); the command &lt;span style=" font-style:italic;"&gt;getstakingstatus&lt;/span&gt; will confirm that staking is active. &lt;/li&gt;&lt;/ol&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;ol style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;"&gt;&lt;li align="justify" style=" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Assurez-vous que votre portefeuille est totalement synchronisé et que vous utilisez la dernière version logicielle. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Vous devez avoir une balance PIVX avec un minimum de 600 confirmations. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Votre portefeuille doit rester en ligne et être débloqué aux fins de staking. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Une fois toutes ces étapes validées le staking devrait s'activer. &lt;/li&gt;&lt;li align="justify" style=" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Vous pouvez voir l'état du staking dans votre portefeuille en passant votre souris sur l'icône cadeau située ne haut à droite de l'interface. La boîte cadeau devrait être active et indiquer &amp;quot;Staking Activé&amp;quot;. En utilisant l'interface en ligne de commande (pivx-cli), la commande &lt;span style=" font-style:italic;"&gt;getstakingstatus&lt;/span&gt; vous confirmera si le staking est actif.&lt;/li&gt;&lt;/ol&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>4</source>
@@ -3940,20 +3940,20 @@ pour voir votre solde de monnaie dépensable sur le réseau.
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            We have support channels in most of our official chat groups, for example
-                           &lt;a style='color: #b088ff' href='https://discord.CARI.org'&gt;
+                           &lt;a style='color: #b088ff' href='https://discord.PIVX.org'&gt;
                            #support in our Discord&lt;/a&gt;.
                            If you prefer to submit a ticket, You can do so at
-                           &lt;a style='color: #b088ff' href='https://CARI.freshdesk.com'&gt;
+                           &lt;a style='color: #b088ff' href='https://PIVX.freshdesk.com'&gt;
                            our Freshdesk support site&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            We have support channels in most of our official chat groups, for example
-                           &lt;a style='color: #b088ff' href='https://discord.CARI.org'&gt;
+                           &lt;a style='color: #b088ff' href='https://discord.PIVX.org'&gt;
                            #support in our Discord&lt;/a&gt;.
                            If you prefer to submit a ticket, You can do so at
-                           &lt;a style='color: #b088ff' href='https://CARI.freshdesk.com'&gt;
+                           &lt;a style='color: #b088ff' href='https://PIVX.freshdesk.com'&gt;
                            our Freshdesk support site&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -3967,8 +3967,8 @@ pour voir votre solde de monnaie dépensable sur le réseau.
         <translation>10) Qu'est ce qu'un contrôleur de Masternode?</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 1,000 CARI collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt; Un contrôleur de masternode est un portefeuille dans lequel le dépôt de garantie de 1 000 CARI réside pendant la configuration d'un masternode contrôleur-distant. C'est un portefeuille qui peut activer le portefeuille masternode distant et vous permet de conserver le dépôt de garantie hors ligne tandis que le masternode restera en ligne.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 10,000 PIV collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt; Un contrôleur de masternode est un portefeuille dans lequel le dépôt de garantie de 10 000 PIV réside pendant la configuration d'un masternode contrôleur-distant. C'est un portefeuille qui peut activer le portefeuille masternode distant et vous permet de conserver le dépôt de garantie hors ligne tandis que le masternode restera en ligne.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>
@@ -4055,8 +4055,8 @@ Exigences:
         <translation>Foire Aux Questions</translation>
     </message>
     <message>
-        <source>3) How do I stake CARI?</source>
-        <translation>3) Comment staker des CARI?</translation>
+        <source>3) How do I stake PIV?</source>
+        <translation>3) Comment staker des PIV?</translation>
     </message>
     <message>
         <source>4) Where I should go if I need support?</source>
@@ -4942,33 +4942,13 @@ Confirmez-vous ?
         <source>Staking not active</source>
         <translation>Staking inactif</translation>
     </message>
-    <message numerus="yes">
-        <source>%n active connection(s)</source>
-        <translation><numerusform>%n connexion actives</numerusform><numerusform>%n connexions actives</numerusform></translation>
-    </message>
     <message>
         <source>Synchronized - Block: %1</source>
         <translation>Synchronisé - Bloc: %1</translation>
     </message>
-    <message numerus="yes">
-        <source>%n hour(s)</source>
-        <translation><numerusform>%n heure</numerusform><numerusform>%n heures</numerusform></translation>
-    </message>
-    <message numerus="yes">
-        <source>%n day(s)</source>
-        <translation><numerusform>%n jour</numerusform><numerusform>%n jours</numerusform></translation>
-    </message>
-    <message numerus="yes">
-        <source>%n week(s)</source>
-        <translation><numerusform>%n semaine</numerusform><numerusform>%n semaines</numerusform></translation>
-    </message>
     <message>
         <source>%1 and %2</source>
         <translation>%1 et %2</translation>
-    </message>
-    <message numerus="yes">
-        <source>%n year(s)</source>
-        <translation><numerusform>%n année</numerusform><numerusform>%n ans</numerusform></translation>
     </message>
     <message>
         <source>Wallet Upgrade</source>
@@ -5095,10 +5075,6 @@ sauvegarde sera créée.
         <translation>Portefeuille mis à jour avec succès, mais aucune sauvegarde créée.</translation>
     </message>
     <message>
-        <source>WARNING: remember to make a copy of your wallet.dat file!</source>
-        <translation>ATTENTION: pensez à faire une copie de votre fichier wallet.dat!</translation>
-    </message>
-    <message>
         <source>Upgrade Wallet Error</source>
         <translation>Erreur mise à jour portefeuille</translation>
     </message>
@@ -5108,189 +5084,6 @@ sauvegarde sera créée.
     <message>
         <source>KB/s</source>
         <translation>Ko/s</translation>
-    </message>
-</context>
-<context>
-    <name>TransactionDesc</name>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation><numerusform>Ouvert pour %n bloc supplémentaires</numerusform><numerusform>Ouvert pour %n blocs supplémentaires</numerusform></translation>
-    </message>
-    <message>
-        <source>Open until %1</source>
-        <translation>Ouvrir jusqu'à %1</translation>
-    </message>
-    <message>
-        <source>conflicted</source>
-        <translation>en conflit</translation>
-    </message>
-    <message>
-        <source>%1/offline</source>
-        <translation>%1/hors ligne</translation>
-    </message>
-    <message>
-        <source>%1/unconfirmed</source>
-        <translation>%1/non confirmé</translation>
-    </message>
-    <message>
-        <source>%1 confirmations</source>
-        <translation>%1 confirmations</translation>
-    </message>
-    <message>
-        <source>%1/offline (verified via SwiftX)</source>
-        <translation>%1/hors ligne (vérifié via SwiftX)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (verified via SwiftX)</source>
-        <translation>%1/confirmé (vérifié via SwiftX)</translation>
-    </message>
-    <message>
-        <source>%1 confirmations (verified via SwiftX)</source>
-        <translation>%1 confirmations (vérifié via SwiftX)</translation>
-    </message>
-    <message>
-        <source>%1/offline (SwiftX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1/hors ligne (Vérification SwiftX en cours - %2 de %3 signatures)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (SwiftX verification in progress - %2 of %3 signatures )</source>
-        <translation>%1/confirmé (vérification SwiftX en cours - %2 sur %3 signatures)</translation>
-    </message>
-    <message>
-        <source>%1 confirmations (SwiftX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1 confirmations (Vérification SwiftX en cours - %2 de %3 signatures)</translation>
-    </message>
-    <message>
-        <source>%1/offline (SwiftX verification failed)</source>
-        <translation>%1/hors ligne (Vérification SwiftX échouée)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (SwiftX verification failed)</source>
-        <translation>%1/confirmé (vérification SwiftX a échoué)</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>Statuts</translation>
-    </message>
-    <message>
-        <source>, has not been successfully broadcast yet</source>
-        <translation>, n'a pas encore été diffusé avec succès</translation>
-    </message>
-    <message numerus="yes">
-        <source>, broadcast through %n node(s)</source>
-        <translation><numerusform>, transmission à travers %n noeud</numerusform><numerusform>, transmission à travers %n noeuds</numerusform></translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Date</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation>Source</translation>
-    </message>
-    <message>
-        <source>Generated</source>
-        <translation>Généré</translation>
-    </message>
-    <message>
-        <source>From</source>
-        <translation>De</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>inconnu</translation>
-    </message>
-    <message>
-        <source>To</source>
-        <translation>À</translation>
-    </message>
-    <message>
-        <source>own address</source>
-        <translation>Adresse personnelle</translation>
-    </message>
-    <message>
-        <source>watch-only</source>
-        <translation>témoin seulement</translation>
-    </message>
-    <message>
-        <source>label</source>
-        <translation>libellé</translation>
-    </message>
-    <message>
-        <source>Credit</source>
-        <translation>Crédit</translation>
-    </message>
-    <message numerus="yes">
-        <source>matures in %n more block(s)</source>
-        <translation><numerusform>mature dans %n bloc supplémentaires</numerusform><numerusform>mature dans %n blocs supplémentaires</numerusform></translation>
-    </message>
-    <message>
-        <source>not accepted</source>
-        <translation>pas accepté</translation>
-    </message>
-    <message>
-        <source>Debit</source>
-        <translation>Débit</translation>
-    </message>
-    <message>
-        <source>Total debit</source>
-        <translation>Total débit</translation>
-    </message>
-    <message>
-        <source>Total credit</source>
-        <translation>Total crédit</translation>
-    </message>
-    <message>
-        <source>Transaction fee</source>
-        <translation>Frais de transaction</translation>
-    </message>
-    <message>
-        <source>Net amount</source>
-        <translation>Montant net</translation>
-    </message>
-    <message>
-        <source>Message</source>
-        <translation>Message</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation>Commentaire</translation>
-    </message>
-    <message>
-        <source>Transaction ID</source>
-        <translation>ID de transaction</translation>
-    </message>
-    <message>
-        <source>Output index</source>
-        <translation>Index de sortie</translation>
-    </message>
-    <message>
-        <source>Merchant</source>
-        <translation>Marchand</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Information de débug</translation>
-    </message>
-    <message>
-        <source>Transaction</source>
-        <translation>Transaction</translation>
-    </message>
-    <message>
-        <source>Inputs</source>
-        <translation>Entrées</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Montant</translation>
-    </message>
-    <message>
-        <source>true</source>
-        <translation>vrai</translation>
-    </message>
-    <message>
-        <source>false</source>
-        <translation>faux</translation>
     </message>
 </context>
 <context>
@@ -5307,17 +5100,9 @@ sauvegarde sera créée.
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
-    <message numerus="yes">
-        <source>Open for %n more block(s)</source>
-        <translation><numerusform>Ouvert pour %n bloc supplémentaires</numerusform><numerusform>Ouvert pour %n blocs supplémentaires</numerusform></translation>
-    </message>
     <message>
         <source>Open until %1</source>
         <translation>Ouvrir jusqu'à %1</translation>
-    </message>
-    <message>
-        <source>Offline</source>
-        <translation>Hors ligne</translation>
     </message>
     <message>
         <source>Unconfirmed</source>
@@ -5338,10 +5123,6 @@ sauvegarde sera créée.
     <message>
         <source>Immature (%1 confirmations, will be available after %2)</source>
         <translation>Immature (%1 confirmations, sera disponible après %2)</translation>
-    </message>
-    <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Ce bloc n'a été reçu par aucun autre noeud du réseau et sera probablement refusé!</translation>
     </message>
     <message>
         <source>Received with</source>
@@ -5658,7 +5439,7 @@ Portefeuille CARI Core</translation>
     </message>
 </context>
 <context>
-    <name>cari-core</name>
+    <name>pivx-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = conserve les métadonnées de transaction, par exemple le propriétaire du compte et les informations de demande de paiement, 2 = supprime les métadonnées)</translation>
@@ -5872,14 +5653,6 @@ Portefeuille CARI Core</translation>
         <translation>Attention: Il semble que nous soyons en désaccord avec nos pairs sur le réseau! Cela signifie que vous pourriez avoir besoin de mettre à jour votre CARI Core, ou que les autres noeuds aient besoin de se mettre à jour de leur côté.</translation>
     </message>
     <message>
-        <source>Warning: error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
-        <translation>Attention: erreur de lecture du fichier wallet.dat! Toutes les clés sont lues correctement, mais les données de transaction ou les entrées du carnet d'adresse pourraient être manquantes ou incorrectes.</translation>
-    </message>
-    <message>
-        <source>Warning: wallet.dat corrupt, data salvaged! Original wallet.dat saved as wallet.{timestamp}.bak in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
-        <translation>Attention: wallet.dat corrompu, données récupérées! Le wallet.dat original est enregistré en tant que wallet.{timestamp}.bak in %s; Si votre solde ou vos transactions sont incorrects, vous devez restaurer à partir de votre sauvegarde.</translation>
-    </message>
-    <message>
         <source>Whitelist peers connecting from the given netmask or IP address. Can be specified multiple times.</source>
         <translation>Mettre en liste blanche les pairs se connectant à partir du masque de réseau ou de l'adresse IP donnés. Peut être spécifié plusieurs fois.</translation>
     </message>
@@ -5896,10 +5669,6 @@ Portefeuille CARI Core</translation>
         <translation>(défaut: %s)</translation>
     </message>
     <message>
-        <source>(default: 1)</source>
-        <translation>(default: 1)</translation>
-    </message>
-    <message>
         <source>Accept command line and JSON-RPC commands</source>
         <translation>Accepter les lignes de commandes et les commandes JSON-RPC</translation>
     </message>
@@ -5912,10 +5681,6 @@ Portefeuille CARI Core</translation>
         <translation>Ajouter un noeud pour se connecter avec et essayer de garder la connection ouverte.</translation>
     </message>
     <message>
-        <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
-        <translation>Autoriser les recherches DNS pour -addnode, -seednode et -connect</translation>
-    </message>
-    <message>
         <source>Always query for peer addresses via DNS lookup (default: %u)</source>
         <translation>Toujours rechercher les adresses des pairs via une recherche DNS (par défaut: %u)</translation>
     </message>
@@ -5924,20 +5689,12 @@ Portefeuille CARI Core</translation>
         <translation>Ajouter un commentaire à la chaîne de l'Agent Utilisateur</translation>
     </message>
     <message>
-        <source>Attempt to recover private keys from a corrupt wallet.dat</source>
-        <translation>Essaye de restaurer les clés privées depuis un fichier wallet.dat corrompu</translation>
-    </message>
-    <message>
         <source>Automatically create Tor hidden service (default: %d)</source>
         <translation>Créer automatiquement un service Tor caché (défaut: %d)</translation>
     </message>
     <message>
         <source>Block creation options:</source>
         <translation>Options de création de bloc:</translation>
-    </message>
-    <message>
-        <source>Cannot downgrade wallet</source>
-        <translation>Ne peut pas rétrograder le portefeuille</translation>
     </message>
     <message>
         <source>Connect through SOCKS5 proxy</source>
@@ -5984,10 +5741,6 @@ Portefeuille CARI Core</translation>
         <translation>Désactiver les notifications de l'OS pour les transcation entrantes (défaut: %u)</translation>
     </message>
     <message>
-        <source>Disable safemode, override a real safe mode event (default: %u)</source>
-        <translation>Désactiver le mode sans échec , remplacer un événement en mode sans échec réel (par défaut: %u)</translation>
-    </message>
-    <message>
         <source>Discover own IP address (default: 1 when listening and no -externalip)</source>
         <translation>Découvrir sa propre adresse IP (par défaut: 1 lorsqu'en écoute et sans -externalip)</translation>
     </message>
@@ -6028,18 +5781,6 @@ Portefeuille CARI Core</translation>
         <translation>Erreur de chargement de la base de données des blocs</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat</source>
-        <translation>Erreur de chargement du fichier wallet.dat</translation>
-    </message>
-    <message>
-        <source>Error loading wallet.dat: Wallet corrupted</source>
-        <translation>Erreur de chargement du fichier wallet.dat: Portefeuille corrompu</translation>
-    </message>
-    <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of CARI Core</source>
-        <translation>Erreur de chargement du fichier wallet.dat: Le portefeuille nécessite une version plus récente du CARI core</translation>
-    </message>
-    <message>
         <source>Error opening block database</source>
         <translation>Erreur d'ouverture de la base de données des blocs</translation>
     </message>
@@ -6054,10 +5795,6 @@ Portefeuille CARI Core</translation>
     <message>
         <source>Error</source>
         <translation>Erreur</translation>
-    </message>
-    <message>
-        <source>Error: </source>
-        <translation>Erreur:</translation>
     </message>
     <message>
         <source>Error: A fatal internal error occured, see debug.log for details</source>
@@ -6152,8 +5889,8 @@ Portefeuille CARI Core</translation>
         <translation>Masque réseau incorrect spécifié dans -whitelist: '%s'</translation>
     </message>
     <message>
-        <source>Recalculating CARI supply...</source>
-        <translation>Recalcule de CARI émis...</translation>
+        <source>Recalculating PIV supply...</source>
+        <translation>Recalcule de PIV émis...</translation>
     </message>
     <message>
         <source>Reindexing zerocoin database...</source>
@@ -6176,25 +5913,8 @@ Portefeuille CARI Core</translation>
         <translation>Il s'agit d'une pré-version de test - à utiliser à vos risques et périls - ne pas utiliser pour le staking ni pour les applications marchandes!</translation>
     </message>
     <message>
-        <source> mints deleted
-</source>
-        <translation> Monnayes supprimées
-</translation>
-    </message>
-    <message>
-        <source> mints updated, </source>
-        <translation>Monnayes actualisé
-, </translation>
-    </message>
-    <message>
-        <source> unconfirmed transactions removed
-</source>
-        <translation>Transactions non confirmées supprimées
-</translation>
-    </message>
-    <message>
-        <source>Disable all CARI specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Désactiver toutes les fonctionnalités spécifiques à CARI (Masternodes, Zerocoin, SwiftX, Budgétisation) (0-1, défaut: %u)</translation>
+        <source>Disable all PIVX specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Désactiver toutes les fonctionnalités spécifiques à PIVX (Masternodes, Zerocoin, SwiftX, Budgétisation) (0-1, défaut: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
@@ -6271,10 +5991,6 @@ Portefeuille CARI Core</translation>
     <message>
         <source>Error: No valid utxo!</source>
         <translation>Erreur: UTXO invalide!</translation>
-    </message>
-    <message>
-        <source>Failed to find Zerocoins in wallet.dat</source>
-        <translation>Impossible de trouver un Zerocoin dans le portefeuille wallet.dat</translation>
     </message>
     <message>
         <source>Failed to parse public spend</source>
@@ -6393,10 +6109,6 @@ Portefeuille CARI Core</translation>
         <translation>Pas assez de descripteurs de fichiers disponibles.</translation>
     </message>
     <message>
-        <source>Number of automatic wallet backups (default: 10)</source>
-        <translation>Nombre de sauvegardes automatiques du portefeuille (par défaut: 10)</translation>
-    </message>
-    <message>
         <source>Number of custom location backups to retain (default: %d)</source>
         <translation>Nombre de sauvegardes à conserver (par défaut: %d)</translation>
     </message>
@@ -6445,10 +6157,6 @@ Portefeuille CARI Core</translation>
         <translation>Préparation à la resynchronistaion...</translation>
     </message>
     <message>
-        <source>Accept connections from outside (default: 1 if no -proxy or -connect/-noconnect)</source>
-        <translation>Accepter les connections depuis l'extérieur (défaut: 1 si pas de -proxy ou -connect)</translation>
-    </message>
-    <message>
         <source>Connect only to the specified node(s); -noconnect or -connect=0 alone to disable automatic connections</source>
         <translation>Connectez-vous uniquement aux nœud(s) spécifiés; -noconnect ou -connect = 0 seul pour désactiver les connexions automatiques</translation>
     </message>
@@ -6481,12 +6189,12 @@ Portefeuille CARI Core</translation>
         <translation>Les frais (en %s/Kb) inférieurs à cette valeur sont considérés comme des frais nuls pour la création de transaction (par défaut: %s)</translation>
     </message>
     <message>
-        <source>Minimum positive amount (in CARI) allowed by GUI and RPC for the stake split threshold (default: %s)</source>
-        <translation>Montant minimum positif (en CARI) autorisé par l'interface graphique et le RPC pour la division des mises du stake (par défaut: %s)</translation>
+        <source>Minimum positive amount (in PIV) allowed by GUI and RPC for the stake split threshold (default: %s)</source>
+        <translation>Montant minimum positif (en PIV) autorisé par l'interface graphique et le RPC pour la division des mises du stake (par défaut: %s)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong CARI Core will not work properly.</source>
-        <translation>SVP vérifiez que la date et l'heure de votre ordinateur sont correctes! Si votre horloge est incorrecte, CARI Core ne fonctionnera pas correctement.</translation>
+        <source>Please check that your computer's date and time are correct! If your clock is wrong PIVX Core will not work properly.</source>
+        <translation>SVP vérifiez que la date et l'heure de votre ordinateur sont correctes! Si votre horloge est incorrecte, PIVX Core ne fonctionnera pas correctement.</translation>
     </message>
     <message>
         <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect/-noconnect)</source>
@@ -6521,8 +6229,62 @@ Portefeuille CARI Core</translation>
         <translation>Impossible de résoudre -%s:  adresse: '%s'</translation>
     </message>
     <message>
-        <source>Cannot upgrade to HD wallet (already running HD support). Version: %d</source>
-        <translation>Impossible de mettre à niveau vers le portefeuille HD (exécutant déjà le support HD). Version: %d</translation>
+        <source>Change index out of range</source>
+        <translation>Changer l'index hors de portée</translation>
+    </message>
+    <message>
+        <source>Error: -listen must be true if -masternode is set.</source>
+        <translation>Erreur: -listen doit être égal à vrai si -masternode est paramétré.</translation>
+    </message>
+    <message>
+        <source>Error: -maxmempool must be at least %d MB</source>
+        <translation>Erreur: -maxmempool doit être au min à %d MB</translation>
+    </message>
+    <message>
+        <source>Error: Invalid port %d for running a masternode.</source>
+        <translation>Erreur: Port  %d incorrect pour activer un masternode.</translation>
+    </message>
+    <message>
+        <source>Failed to accept tx in the memory pool (reason: %s)
+</source>
+        <translation>Échec de la tx dans le memory pool (raison: %s)
+</translation>
+    </message>
+    <message>
+        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
+        <translation>Frais (en %s/kB) à ajouter aux transactions envoyées (défaut: %s)</translation>
+    </message>
+    <message>
+        <source>Invalid -masternodeaddr address: %s</source>
+        <translation>Adresse -masternodeaddr incorrecte: %s</translation>
+    </message>
+    <message>
+        <source>Invalid -masternodeaddr port %d, only %d is supported on %s-net.</source>
+        <translation>-masternodeaddr port %d incorrect, seul %d est supporté sur %s-net.</translation>
+    </message>
+    <message>
+        <source>Invalid port %d detected in masternode.conf</source>
+        <translation>Port incorrect %d détecté dans masternode.conf</translation>
+    </message>
+    <message>
+        <source>Invalid status error.</source>
+        <translation>Statut d'erreur incorrect.</translation>
+    </message>
+    <message>
+        <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
+        <translation>Gardez le pool de mémoire de transaction en dessous de &lt;n&gt;mégabytes (par défaut: %u)</translation>
+    </message>
+    <message>
+        <source>Keypool ran out, please call keypoolrefill first, or unlock the wallet.</source>
+        <translation>Keypool est épuisé, veuillez d'abord taper keypoolrefill ou déverrouillez le portefeuille.</translation>
+    </message>
+    <message>
+        <source>Limit size of signature cache to &lt;n&gt; MiB (default: %u)</source>
+        <translation>Limiter la taille du cache de signatures à &lt;n&gt; MiB (par défaut: %u)</translation>
+    </message>
+    <message>
+        <source>Masternodes are required to run on port %d for %s-net</source>
+        <translation>Les Masternodes doivent fonctionner le sur le port %d pour le %s-net</translation>
     </message>
     <message>
         <source>Change index out of range</source>
@@ -6639,14 +6401,6 @@ Portefeuille CARI Core</translation>
         <translation>Rescanning...</translation>
     </message>
     <message>
-        <source>ResetMintZerocoin finished: </source>
-        <translation>ResetMintZerocoin terminé:</translation>
-    </message>
-    <message>
-        <source>ResetSpentZerocoin finished: </source>
-        <translation>ResetSpentZerocoin terminé:</translation>
-    </message>
-    <message>
         <source>Run a thread to flush wallet periodically (default: %u)</source>
         <translation>Exécuter un fil pour vider le portefeuille périodiquement (par défaut: %u)</translation>
     </message>
@@ -6743,10 +6497,6 @@ Portefeuille CARI Core</translation>
         <translation>Dépenser la monnaie non confirmée lors de l'envoi de transactions (par défaut: %u)</translation>
     </message>
     <message>
-        <source>Staking options:</source>
-        <translation>Options de staking:</translation>
-    </message>
-    <message>
         <source>Stop running after importing blocks from disk (default: %u)</source>
         <translation>Arrêter l'exécution après l'importation des blocs du disque (défaut: %u)</translation>
     </message>
@@ -6777,6 +6527,10 @@ Portefeuille CARI Core</translation>
     <message>
         <source>Syncing zCARI wallet...</source>
         <translation>Synchronisation du portefeuille zCARI ...</translation>
+    </message>
+    <message>
+        <source>The threshold value cannot be less than %s</source>
+        <translation>La valeur limite ne doit pas êre inférieur à %s</translation>
     </message>
     <message>
         <source>The threshold value cannot be less than %s</source>
@@ -6855,10 +6609,6 @@ Portefeuille CARI Core</translation>
         <translation>Impossible de joindre %s sur cet ordinateur (la liaison a retourné l'erreur %s)</translation>
     </message>
     <message>
-        <source>Unable to generate initial key</source>
-        <translation>Impossible de générer la clé initiale</translation>
-    </message>
-    <message>
         <source>Unable to generate keys</source>
         <translation>Impossible de générer les clés</translation>
     </message>
@@ -6885,14 +6635,6 @@ Portefeuille CARI Core</translation>
     <message>
         <source>Use UPnP to map the listening port (default: %u)</source>
         <translation>Utiliser UPnP pour mapper le port d'écoute (par défaut: %u)</translation>
-    </message>
-    <message>
-        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
-        <translation>Utiliser UPnP pour mapper le port d'écoute (par défaut: 1 lorsqu'en écoute)</translation>
-    </message>
-    <message>
-        <source>Use a custom max chain reorganization depth (default: %u)</source>
-        <translation>Utiliser une profondeur de réorganisation de chaîne maximale personnalisée (par défaut: %u)</translation>
     </message>
     <message>
         <source>Use the test network</source>
@@ -6978,10 +6720,6 @@ Portefeuille CARI Core</translation>
         <source>on startup</source>
         <translation>au démarrage</translation>
     </message>
-    <message>
-        <source>wallet.dat corrupt, salvage failed</source>
-        <translation>wallet.dat corrompu, le sauvetage a échoué</translation>
-    </message>
 </context>
 <context>
     <name>send</name>
@@ -6994,12 +6732,12 @@ Portefeuille CARI Core</translation>
         <translation>Envoyer</translation>
     </message>
     <message>
-        <source>Send public coins (CARI)</source>
-        <translation>Envoyer des monnaies publiques (CARI)</translation>
+        <source>Send public coins (PIV)</source>
+        <translation>Envoyer des monnaies publiques (PIV)</translation>
     </message>
     <message>
-        <source>CARI address or contact label</source>
-        <translation>Adresse CARI ou nom du contact</translation>
+        <source>PIVX address or contact label</source>
+        <translation>Adresse PIVX ou nom du contact</translation>
     </message>
     <message>
         <source>Amount</source>

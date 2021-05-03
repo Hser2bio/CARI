@@ -106,7 +106,6 @@ SET(QT_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/paymentrequestplus.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/paymentserver.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/recentrequeststablemodel.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/transactiondesc.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/transactionfilterproxy.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/transactionrecord.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/transactiontablemodel.cpp
@@ -217,16 +216,17 @@ add_custom_target(translations_target ALL DEPENDS ${QM})
 QT5_ADD_RESOURCES(QRC_RESOURCE cari.qrc)
 QT5_ADD_RESOURCES(QRC_LOCALE_RESOURCE cari_locale.qrc)
 
-add_executable(cari-qt cari.cpp ${QM} ${QRC_RESOURCE} ${QRC_LOCALE_RESOURCE})
-add_dependencies(cari-qt translations_target libunivalue libsecp256k1 leveldb leveldb_sse42 memenv)
-target_include_directories(cari-qt PUBLIC ${ENDIAN_INCLUDES})
-target_link_libraries(cari-qt
+add_executable(pivx-qt pivx.cpp ${QM} ${QRC_RESOURCE} ${QRC_LOCALE_RESOURCE})
+add_dependencies(pivx-qt translations_target libunivalue libsecp256k1 libzcashrust leveldb crc32c)
+target_include_directories(pivx-qt PUBLIC ${ENDIAN_INCLUDES})
+target_link_libraries(pivx-qt
         qt_stuff
         univalue
-        SERVER_A UTIL_A WALLET_A CLI_A COMMON_A BITCOIN_CRYPTO_A ZEROCOIN_A
-        leveldb leveldb_sse42 memenv secp256k1
+        SERVER_A UTIL_A WALLET_A CLI_A COMMON_A BITCOIN_CRYPTO_A ZEROCOIN_A SAPLING_A
+        leveldb crc32c secp256k1 rustzcash
         ${BerkeleyDB_LIBRARIES} ${OPENSSL_LIBRARIES} ${Boost_LIBRARIES} ${PROTOBUF_LIBRARIES} ${LIBEVENT_LIB}
-        pthread
+        ${sodium_LIBRARY_RELEASE}
+        -ldl pthread
         )
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     target_link_libraries(cari-qt "-framework Cocoa")

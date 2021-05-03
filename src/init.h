@@ -18,8 +18,6 @@ namespace boost
 class thread_group;
 } // namespace boost
 
-extern CzCARIWallet* zwalletMain;
-
 void StartShutdown();
 bool ShutdownRequested();
 /** Interrupt threads */

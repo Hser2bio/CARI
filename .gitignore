@@ -88,6 +88,11 @@ cari-qt
 CARI-Qt.app
 background.tiff*
 
+# Rust
+.cargo/.configured-for-*
+.cargo/config
+target/
+
 # Unit-tests
 Makefile.test
 cari-qt_test

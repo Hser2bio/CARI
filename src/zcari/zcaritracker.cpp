@@ -449,7 +449,7 @@ std::set<CMintMeta> CzCARITracker::ListMints(bool fUnusedOnly, bool fMatureOnly,
         for (auto& dMint : listDeterministicDB) {
             if (fExcludeV1 && dMint.GetVersion() < 2)
                 continue;
-            Add(dMint, false, false, wallet->zwalletMain);
+            Add(dMint, false, false, wallet->getZWallet());
         }
         LogPrint(BCLog::LEGACYZC, "%s: added %d dzcari from DB\n", __func__, listDeterministicDB.size());
     }

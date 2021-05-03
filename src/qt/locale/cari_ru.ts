@@ -363,8 +363,8 @@ for staking</source>
         <translation>ОТМЕНА</translation>
     </message>
     <message>
-        <source>CARI will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your CARIs from being stolen by malware infecting your computer.</source>
-        <translation>CARI сейчас закроется, чтобы завершить процесс шифрования. Помните, что шифрование вашего кошелька не может полностью защитить ваши CARI от кражи с использованием вредоносного ПО.</translation>
+        <source>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
+        <translation>PIVX сейчас закроется, чтобы завершить процесс шифрования. Помните, что шифрование вашего кошелька не может полностью защитить ваши PIVX от кражи с использованием вредоносного ПО.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -988,8 +988,8 @@ address</source>
         <translation>Обзор истории вашего аккаунта</translation>
     </message>
     <message>
-        <source>How to get CARI</source>
-        <translation>Как получить CARI</translation>
+        <source>How to get PIV</source>
+        <translation>Как получить PIV</translation>
     </message>
     <message>
         <source>Sort by</source>
@@ -1012,8 +1012,8 @@ address</source>
         <translation>Сортировать по</translation>
     </message>
     <message>
-        <source>Amount of CARI and zCARI staked.</source>
-        <translation>Сумма добытых CARI и zCARI</translation>
+        <source>Amount of PIV and zPIV staked.</source>
+        <translation>Сумма добытых PIV и zPIV</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -1554,8 +1554,8 @@ Please wait few more minutes (masternode collaterals require %1 confirmations).<
         <translation>Данные Мастерноды скопированы в буфер обмена.</translation>
     </message>
     <message>
-        <source>Not enough balance to create a masternode, 1,000 %1 required.</source>
-        <translation>Недостаточно баланса для создания мастерноды, требуется 1000 %1.</translation>
+        <source>Not enough balance to create a masternode, 10,000 %1 required.</source>
+        <translation>Недостаточно баланса для создания мастерноды, требуется 10000 %1.</translation>
     </message>
     <message>
         <source>Remote Masternode Data</source>
@@ -2252,7 +2252,7 @@ Address: %4
         <source>Ping Time</source>
         <translation>Время отклика</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>QObject</name>
     <message>
@@ -2260,8 +2260,8 @@ Address: %4
         <translation>Сумма</translation>
     </message>
     <message>
-        <source>Enter CARI address (e.g. %1)</source>
-        <translation>Введите адрес CARI (например, %1)</translation>
+        <source>Enter PIVX address (e.g. %1)</source>
+        <translation>Введите адрес PIVX (например, %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2304,12 +2304,12 @@ Address: %4
         <translation>%1 мс</translation>
     </message>
     <message>
-        <source>A fatal error occurred. CARI can no longer continue safely and will quit.</source>
-        <translation>Произошла фатальная ошибка. CARI больше не может безопасно продолжать работу и завершит работу.</translation>
+        <source>A fatal error occurred. PIVX can no longer continue safely and will quit.</source>
+        <translation>Произошла фатальная ошибка. PIVX больше не может безопасно продолжать работу и завершит работу.</translation>
     </message>
     <message>
-        <source>CARI Core</source>
-        <translation>CARI Core</translation>
+        <source>PIVX Core</source>
+        <translation>PIVX Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
@@ -2328,11 +2328,11 @@ Address: %4
         <translation>Ошибка чтения файла конфигурации мастерноды: %1</translation>
     </message>
     <message>
-        <source>CARI Core didn't yet exit safely...</source>
-        <translation>CARI Core еще не вышел безопасно...</translation>
+        <source>All</source>
+        <translation>все</translation>
     </message>
     <message>
-        <source>Contact</source>
+        <source>Contacts</source>
         <translation>Контакты</translation>
     </message>
     <message>
@@ -2364,12 +2364,12 @@ Address: %4
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <source>All</source>
-        <translation>все</translation>
+        <source>Date desc</source>
+        <translation>Дата по убыванию</translation>
     </message>
     <message>
-        <source>Contacts</source>
-        <translation>Контакты</translation>
+        <source>Date asc</source>
+        <translation>Дата по возрастанию</translation>
     </message>
     <message>
         <source>Staking Contacts</source>
@@ -2934,8 +2934,8 @@ Address: %4
         <translation>Нет адресов</translation>
     </message>
     <message>
-        <source>Scan the QR code or copy the address to receive CARI</source>
-        <translation>Сканируйте QR-код или скопируйте адрес для получения CARI</translation>
+        <source>Scan the QR code or copy the address to receive PIV</source>
+        <translation>Сканируйте QR-код или скопируйте адрес для получения PIV</translation>
     </message>
     <message>
         <source>Add Label</source>
@@ -3068,8 +3068,8 @@ Address: %4
         <translation>CARI</translation>
     </message>
     <message>
-        <source>Instead of sharing only a CARI address, you can create a payment request, bundling up more information</source>
-        <translation>Вместо того, чтобы делиться только адресом CARI, вы можете создать запрос на оплату, связывая больше информации</translation>
+        <source>Instead of sharing only a PIVX address, you can create a payment request, bundling up more information</source>
+        <translation>Вместо того, чтобы делиться только адресом PIVX, вы можете создать запрос на оплату, связывая больше информации</translation>
     </message>
     <message>
         <source>D7VFR83SQbiezrW72hjcWJtcfip5krte2Z </source>
@@ -3474,9 +3474,9 @@ Remember to write it down and store it safely, otherwise you might lose access t
         <translation>Инструмент BIP38</translation>
     </message>
     <message>
-        <source>Encrypt your CARI addresses (key pair actually) using BIP38 encryption.
+        <source>Encrypt your PIVX addresses (key pair actually) using BIP38 encryption.
 Using this mechanism you can share your keys without middle-man risk, only need to store your passphrase safely</source>
-        <translation>Зашифруйте свои адреса CARI (фактически, пару ключей), используя шифрование BIP38.
+        <translation>Зашифруйте свои адреса PIVX (фактически, пару ключей), используя шифрование BIP38.
 С помощью этого механизма вы можете делиться своими ключами без риска посредника, вам нужно только безопасно хранить вашу парольную фразу</translation>
     </message>
     <message>
@@ -3829,16 +3829,16 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <translation>Вид</translation>
     </message>
     <message>
-        <source>1) What is CARI?</source>
-        <translation>1) Что такое CARI?</translation>
+        <source>1) What is PIVX?</source>
+        <translation>1) Что такое PIVX?</translation>
     </message>
     <message>
-        <source>2) Why are my CARI unspendable?</source>
-        <translation>2) Почему мои CARI невозможно потратить?</translation>
+        <source>2) Why are my PIV unspendable?</source>
+        <translation>2) Почему мои PIV невозможно потратить?</translation>
     </message>
     <message>
-        <source>https://CARI.org/</source>
-        <translation>https://CARI.org/</translation>
+        <source>https://PIVX.org/</source>
+        <translation>https://PIVX.org/</translation>
     </message>
     <message>
         <source>1</source>
@@ -3908,8 +3908,8 @@ CARI использует консенсус PoS (Proof of Stake), позвол�
         <translation>3</translation>
     </message>
     <message>
-        <source>How do I stake CARI?</source>
-        <translation>Как мне запустить стекинг CARI?</translation>
+        <source>How do I stake PIV?</source>
+        <translation>Как мне запустить стекинг PIV?</translation>
     </message>
     <message>
         <source>4</source>
@@ -4010,8 +4010,8 @@ CARI использует консенсус PoS (Proof of Stake), позвол�
         <translation>Часто задаваемые вопросы</translation>
     </message>
     <message>
-        <source>3) How do I stake CARI?</source>
-        <translation>3) Как мне запустить стекинг CARI?</translation>
+        <source>3) How do I stake PIV?</source>
+        <translation>3) Как мне запустить стекинг PIV?</translation>
     </message>
     <message>
         <source>4) Where I should go if I need support?</source>
@@ -5030,10 +5030,6 @@ backup will be created.
         <translation>Кошелек успешно обновлен, но резервная копия не создана.</translation>
     </message>
     <message>
-        <source>WARNING: remember to make a copy of your wallet.dat file!</source>
-        <translation>НАПОМИНАНИЕ: не забудьте сделать копию своего файла wallet.dat!</translation>
-    </message>
-    <message>
         <source>Upgrade Wallet Error</source>
         <translation>Ошибка обновления кошелька</translation>
     </message>
@@ -5043,177 +5039,6 @@ backup will be created.
     <message>
         <source>KB/s</source>
         <translation>КБ/с</translation>
-    </message>
-</context>
-<context>
-    <name>TransactionDesc</name>
-    <message>
-        <source>Open until %1</source>
-        <translation>Открыть до %1</translation>
-    </message>
-    <message>
-        <source>conflicted</source>
-        <translation>противоречивый</translation>
-    </message>
-    <message>
-        <source>%1/offline</source>
-        <translation>%1/ не в сети</translation>
-    </message>
-    <message>
-        <source>%1/unconfirmed</source>
-        <translation>%1/ неподтвержденный</translation>
-    </message>
-    <message>
-        <source>%1 confirmations</source>
-        <translation>%1 подтверждения</translation>
-    </message>
-    <message>
-        <source>%1/offline (verified via SwiftX)</source>
-        <translation>%1 / офлайн (проверено через SwiftX)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (verified via SwiftX)</source>
-        <translation>%1 / подтверждено (проверено через SwiftX)</translation>
-    </message>
-    <message>
-        <source>%1 confirmations (verified via SwiftX)</source>
-        <translation>%1 подтверждений (проверено через SwiftX)</translation>
-    </message>
-    <message>
-        <source>%1/offline (SwiftX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1 / офлайн (проверка SwiftX - %2 %3 подписей)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (SwiftX verification in progress - %2 of %3 signatures )</source>
-        <translation>%1 / подтверждено (выполняется проверка SwiftX - %2 %3 подписей)</translation>
-    </message>
-    <message>
-        <source>%1 confirmations (SwiftX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1 подтверждений (Проверка SwiftX в процессе - %2 %3 подписи)</translation>
-    </message>
-    <message>
-        <source>%1/offline (SwiftX verification failed)</source>
-        <translation>%1 / офлайн (проверка SwiftX не выполнена)</translation>
-    </message>
-    <message>
-        <source>%1/confirmed (SwiftX verification failed)</source>
-        <translation>%1 / подтверждено (проверка SwiftX не выполнена)</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>Состояние</translation>
-    </message>
-    <message>
-        <source>, has not been successfully broadcast yet</source>
-        <translation>, еще не была успешно передана</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Дата</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation>Источник</translation>
-    </message>
-    <message>
-        <source>Generated</source>
-        <translation>Сформировано</translation>
-    </message>
-    <message>
-        <source>From</source>
-        <translation>От</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>неизвестно</translation>
-    </message>
-    <message>
-        <source>To</source>
-        <translation>Кому</translation>
-    </message>
-    <message>
-        <source>own address</source>
-        <translation>собственный адрес</translation>
-    </message>
-    <message>
-        <source>watch-only</source>
-        <translation>смотреть только</translation>
-    </message>
-    <message>
-        <source>label</source>
-        <translation>метка</translation>
-    </message>
-    <message>
-        <source>Credit</source>
-        <translation>Кредит</translation>
-    </message>
-    <message>
-        <source>not accepted</source>
-        <translation>не принимаются</translation>
-    </message>
-    <message>
-        <source>Debit</source>
-        <translation>Дебит</translation>
-    </message>
-    <message>
-        <source>Total debit</source>
-        <translation>Общий дебет</translation>
-    </message>
-    <message>
-        <source>Total credit</source>
-        <translation>Общий кредит</translation>
-    </message>
-    <message>
-        <source>Transaction fee</source>
-        <translation>Комиссия за транзакцию</translation>
-    </message>
-    <message>
-        <source>Net amount</source>
-        <translation>Чистая сумма</translation>
-    </message>
-    <message>
-        <source>Message</source>
-        <translation>Сообщение</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation>Комментарий</translation>
-    </message>
-    <message>
-        <source>Transaction ID</source>
-        <translation>Номер транзакции</translation>
-    </message>
-    <message>
-        <source>Output index</source>
-        <translation>Выходной индекс</translation>
-    </message>
-    <message>
-        <source>Merchant</source>
-        <translation>коммерсант</translation>
-    </message>
-    <message>
-        <source>Debug information</source>
-        <translation>Отладочная информация</translation>
-    </message>
-    <message>
-        <source>Transaction</source>
-        <translation>Транзакция</translation>
-    </message>
-    <message>
-        <source>Inputs</source>
-        <translation>входы</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Сумма</translation>
-    </message>
-    <message>
-        <source>true</source>
-        <translation>истина</translation>
-    </message>
-    <message>
-        <source>false</source>
-        <translation>ложь</translation>
     </message>
 </context>
 <context>
@@ -5235,10 +5060,6 @@ backup will be created.
         <translation>Открыть до %1</translation>
     </message>
     <message>
-        <source>Offline</source>
-        <translation>не в сети</translation>
-    </message>
-    <message>
         <source>Unconfirmed</source>
         <translation>неподтвержденный</translation>
     </message>
@@ -5257,10 +5078,6 @@ backup will be created.
     <message>
         <source>Immature (%1 confirmations, will be available after %2)</source>
         <translation>Незрелые (%1 подтверждения будут доступны после %2)</translation>
-    </message>
-    <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Этот блок не был принят никакими другими узлами и, вероятно, не будет принят!</translation>
     </message>
     <message>
         <source>Received with</source>
@@ -5577,7 +5394,7 @@ CARI Core Wallet</source>
     </message>
 </context>
 <context>
-    <name>cari-core</name>
+    <name>pivx-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = сохранить tx метаданные, например, владельца учетной записи и информацию о запросе платежа, 2 = удалить tx метаданные)</translation>
@@ -5791,14 +5608,6 @@ CARI Core Wallet</source>
         <translation>Предупреждение: Мы, похоже, не полностью согласны с нашими сверстниками! Возможно, вам потребуется обновить или другие узлы, возможно, потребуется обновить.</translation>
     </message>
     <message>
-        <source>Warning: error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
-        <translation>Предупреждение: ошибка чтения wallet.dat! Все ключи читаются правильно, но данные транзакции или записи адресной книги могут отсутствовать или некорректны.</translation>
-    </message>
-    <message>
-        <source>Warning: wallet.dat corrupt, data salvaged! Original wallet.dat saved as wallet.{timestamp}.bak in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
-        <translation>Предупреждение: wallet.dat поврежден, данные спасены! Исходный wallet.dat сохранен как кошелек. {Timestamp} .bak в %s; если ваш баланс или транзакции неверны, вам следует восстановить резервную копию.</translation>
-    </message>
-    <message>
         <source>Whitelist peers connecting from the given netmask or IP address. Can be specified multiple times.</source>
         <translation>Список белых списков, соединяющихся с данной сетевой маской или IP-адресом. Может быть указано несколько раз.</translation>
     </message>
@@ -5815,10 +5624,6 @@ CARI Core Wallet</source>
         <translation>(неуплата: %s)</translation>
     </message>
     <message>
-        <source>(default: 1)</source>
-        <translation>(неуплата: 1)</translation>
-    </message>
-    <message>
         <source>Accept command line and JSON-RPC commands</source>
         <translation>Принять командную строку и команды JSON-RPC</translation>
     </message>
@@ -5831,10 +5636,6 @@ CARI Core Wallet</source>
         <translation>Добавьте узел для подключения и попытку сохранить соединение открытым</translation>
     </message>
     <message>
-        <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
-        <translation>Разрешить поиск в DNS для -addnode, -seednode и -connect</translation>
-    </message>
-    <message>
         <source>Always query for peer addresses via DNS lookup (default: %u)</source>
         <translation>Всегда запрашивать одноранговые адреса через DNS-поиск (по умолчанию: %u)</translation>
     </message>
@@ -5843,20 +5644,12 @@ CARI Core Wallet</source>
         <translation>Добавить комментарий к строке агента пользователя</translation>
     </message>
     <message>
-        <source>Attempt to recover private keys from a corrupt wallet.dat</source>
-        <translation>Попытка восстановить секретные ключи из поврежденного файла wallet.dat</translation>
-    </message>
-    <message>
         <source>Automatically create Tor hidden service (default: %d)</source>
         <translation>Автоматически создавать скрытую службу Tor (по умолчанию: %d)</translation>
     </message>
     <message>
         <source>Block creation options:</source>
         <translation>Варианты создания блока:</translation>
-    </message>
-    <message>
-        <source>Cannot downgrade wallet</source>
-        <translation>Нельзя понизить кошелек</translation>
     </message>
     <message>
         <source>Connect through SOCKS5 proxy</source>
@@ -5903,10 +5696,6 @@ CARI Core Wallet</source>
         <translation>Отключить уведомления ОС для входящих транзакций (по умолчанию: %u)</translation>
     </message>
     <message>
-        <source>Disable safemode, override a real safe mode event (default: %u)</source>
-        <translation>Отключить безопасный режим, переопределить реальное событие безопасного режима (по умолчанию: %u)</translation>
-    </message>
-    <message>
         <source>Discover own IP address (default: 1 when listening and no -externalip)</source>
         <translation>Откройте собственный IP-адрес (по умолчанию: 1 при прослушивании и без -externalip)</translation>
     </message>
@@ -5947,18 +5736,6 @@ CARI Core Wallet</source>
         <translation>Ошибка загрузки базы данных блоков</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat</source>
-        <translation>Ошибка при загрузке wallet.dat</translation>
-    </message>
-    <message>
-        <source>Error loading wallet.dat: Wallet corrupted</source>
-        <translation>Ошибка при загрузке wallet.dat: Кошелек поврежден</translation>
-    </message>
-    <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of CARI Core</source>
-        <translation>Ошибка загрузки wallet.dat: Кошелек требует более новой версии CARI Core</translation>
-    </message>
-    <message>
         <source>Error opening block database</source>
         <translation>Ошибка открытия базы данных блоков</translation>
     </message>
@@ -5973,10 +5750,6 @@ CARI Core Wallet</source>
     <message>
         <source>Error</source>
         <translation>Ошибка</translation>
-    </message>
-    <message>
-        <source>Error: </source>
-        <translation>Ошибка:</translation>
     </message>
     <message>
         <source>Error: A fatal internal error occured, see debug.log for details</source>
@@ -6071,8 +5844,8 @@ CARI Core Wallet</source>
         <translation>Недопустимая сетевая маска, указанная в -whitelist: '%s'</translation>
     </message>
     <message>
-        <source>Recalculating CARI supply...</source>
-        <translation>Перерасчет предложения CARI...</translation>
+        <source>Recalculating PIV supply...</source>
+        <translation>Перерасчет предложения PIV...</translation>
     </message>
     <message>
         <source>Reindexing zerocoin database...</source>
@@ -6095,24 +5868,8 @@ CARI Core Wallet</source>
         <translation>Это предварительная версия сборки - используйте на свой страх и риск - не используйте для ставок или коммерческих приложений!</translation>
     </message>
     <message>
-        <source> mints deleted
-</source>
-        <translation>удалены монеты
-</translation>
-    </message>
-    <message>
-        <source> mints updated, </source>
-        <translation>монеты обновлены,</translation>
-    </message>
-    <message>
-        <source> unconfirmed transactions removed
-</source>
-        <translation>удалены неподтвержденные транзакции
-</translation>
-    </message>
-    <message>
-        <source>Disable all CARI specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Отключите все специфические функции CARI (Masternodes, Zerocoin, SwiftX, Бюджетирование) (0-1, по умолчанию: %u)</translation>
+        <source>Disable all PIVX specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Отключите все специфические функции PIVX (Masternodes, Zerocoin, SwiftX, Бюджетирование) (0-1, по умолчанию: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
@@ -6189,10 +5946,6 @@ CARI Core Wallet</source>
     <message>
         <source>Error: No valid utxo!</source>
         <translation>Ошибка: нет действительного utxo!</translation>
-    </message>
-    <message>
-        <source>Failed to find Zerocoins in wallet.dat</source>
-        <translation>Не удалось найти Zerocoins в файле wallet.dat</translation>
     </message>
     <message>
         <source>Failed to parse public spend</source>
@@ -6311,10 +6064,6 @@ CARI Core Wallet</source>
         <translation>Недостаточно доступных дескрипторов файлов.</translation>
     </message>
     <message>
-        <source>Number of automatic wallet backups (default: 10)</source>
-        <translation>Количество резервных копий автоматического кошелька (по умолчанию: 10)</translation>
-    </message>
-    <message>
         <source>Number of custom location backups to retain (default: %d)</source>
         <translation>Количество резервных копий пользовательского местоположения для сохранения (по умолчанию: %d)</translation>
     </message>
@@ -6363,10 +6112,6 @@ CARI Core Wallet</source>
         <translation>Подготовка к повторной синхронизации ...</translation>
     </message>
     <message>
-        <source>Accept connections from outside (default: 1 if no -proxy or -connect/-noconnect)</source>
-        <translation>Принимать подключения извне (по умолчанию: 1, если нет -proxy или -connect / -noconnect)</translation>
-    </message>
-    <message>
         <source>Connect only to the specified node(s); -noconnect or -connect=0 alone to disable automatic connections</source>
         <translation>Подключаться только к указанному узлу(ам); -noconnect или -connect = 0 отдельно для отключения автоматического соединения</translation>
     </message>
@@ -6399,12 +6144,12 @@ CARI Core Wallet</source>
         <translation>Комиссия (в %s/Кбайт) меньше этого значения считается с нулевой комиссией за создание транзакции (по умолчанию: %s)</translation>
     </message>
     <message>
-        <source>Minimum positive amount (in CARI) allowed by GUI and RPC for the stake split threshold (default: %s)</source>
-        <translation>Минимальная положительная сумма (в CARI), разрешенная GUI и RPC для порога разделения стекинга (по умолчанию: %s)</translation>
+        <source>Minimum positive amount (in PIV) allowed by GUI and RPC for the stake split threshold (default: %s)</source>
+        <translation>Минимальная положительная сумма (в PIV), разрешенная GUI и RPC для порога разделения стекинга (по умолчанию: %s)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong CARI Core will not work properly.</source>
-        <translation>Пожалуйста, проверьте правильность даты и времени на вашем компьютере! Если ваши часы не точны, CARI Core не будет работать должным образом.</translation>
+        <source>Please check that your computer's date and time are correct! If your clock is wrong PIVX Core will not work properly.</source>
+        <translation>Пожалуйста, проверьте правильность даты и времени на вашем компьютере! Если ваши часы не точны, PIVX Core не будет работать должным образом.</translation>
     </message>
     <message>
         <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect/-noconnect)</source>
@@ -6439,8 +6184,58 @@ CARI Core Wallet</source>
         <translation>Не удается разрешить -%s адрес: '%s'</translation>
     </message>
     <message>
-        <source>Cannot upgrade to HD wallet (already running HD support). Version: %d</source>
-        <translation>Невозможно обновить до HD-кошелька (поддержка HD уже работает). Версия: %d</translation>
+        <source>Change index out of range</source>
+        <translation>Изменить индекс вне диапазона</translation>
+    </message>
+    <message>
+        <source>Error: -listen must be true if -masternode is set.</source>
+        <translation>Ошибка: -listen должен быть истинным, если установлена -masternode.</translation>
+    </message>
+    <message>
+        <source>Error: -maxmempool must be at least %d MB</source>
+        <translation>Ошибка: -maxmempool должен быть не менее %d МБ</translation>
+    </message>
+    <message>
+        <source>Error: Invalid port %d for running a masternode.</source>
+        <translation>Ошибка: неверный порт %d для запуска мастерноды.</translation>
+    </message>
+    <message>
+        <source>Failed to accept tx in the memory pool (reason: %s)
+</source>
+        <translation>Не удалось принять tx в пул памяти (причина: %s)
+</translation>
+    </message>
+    <message>
+        <source>Fee (in %s/kB) to add to transactions you send (default: %s)</source>
+        <translation>Комиссия (в %s/кБ) для добавления к отправляемым транзакциям (по умолчанию: %s)</translation>
+    </message>
+    <message>
+        <source>Invalid -masternodeaddr address: %s</source>
+        <translation>Неверный адрес -masternodeaddr: %s</translation>
+    </message>
+    <message>
+        <source>Invalid port %d detected in masternode.conf</source>
+        <translation>В masternode.conf обнаружен неверный порт %d</translation>
+    </message>
+    <message>
+        <source>Invalid status error.</source>
+        <translation>Неверная ошибка статуса.</translation>
+    </message>
+    <message>
+        <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
+        <translation>Хранить пул памяти транзакций ниже &lt;n&gt; мегабайтов (по умолчанию: %u)</translation>
+    </message>
+    <message>
+        <source>Keypool ran out, please call keypoolrefill first, or unlock the wallet.</source>
+        <translation>Keypool закончился, пожалуйста, сначала позвоните в keypoolrefill или разблокируйте кошелек.</translation>
+    </message>
+    <message>
+        <source>Limit size of signature cache to &lt;n&gt; MiB (default: %u)</source>
+        <translation>Ограничить размер кэша подписи до &lt;n&gt; МБ (по умолчанию: %u)</translation>
+    </message>
+    <message>
+        <source>Masternodes are required to run on port %d for %s-net</source>
+        <translation>Мастерноды должны работать на порте %d для %s-net</translation>
     </message>
     <message>
         <source>Change index out of range</source>
@@ -6553,14 +6348,6 @@ CARI Core Wallet</source>
         <translation>Повторное сканирование ...</translation>
     </message>
     <message>
-        <source>ResetMintZerocoin finished: </source>
-        <translation>ResetMintZerocoin завершен:</translation>
-    </message>
-    <message>
-        <source>ResetSpentZerocoin finished: </source>
-        <translation>ResetSpentZerocoin завершен:</translation>
-    </message>
-    <message>
         <source>Run a thread to flush wallet periodically (default: %u)</source>
         <translation>Запустите поток, чтобы периодически очищать кошелек (по умолчанию: %u)</translation>
     </message>
@@ -6657,10 +6444,6 @@ CARI Core Wallet</source>
         <translation>Проводить неподтвержденные изменения при отправке транзакций (по умолчанию: %u)</translation>
     </message>
     <message>
-        <source>Staking options:</source>
-        <translation>Варианты ставок:</translation>
-    </message>
-    <message>
         <source>Stop running after importing blocks from disk (default: %u)</source>
         <translation>Прекратить работу после импорта блоков с диска (по умолчанию: %u)</translation>
     </message>
@@ -6691,6 +6474,10 @@ CARI Core Wallet</source>
     <message>
         <source>Syncing zCARI wallet...</source>
         <translation>Синхронизация zCARI кошелька ...</translation>
+    </message>
+    <message>
+        <source>The threshold value cannot be less than %s</source>
+        <translation>Пороговое значение не может быть меньше, чем %s</translation>
     </message>
     <message>
         <source>The threshold value cannot be less than %s</source>
@@ -6769,10 +6556,6 @@ CARI Core Wallet</source>
         <translation>Невозможно связать %s на этом компьютере (связать возвращенную ошибку %s)</translation>
     </message>
     <message>
-        <source>Unable to generate initial key</source>
-        <translation>Невозможно сгенерировать первоначальный ключ</translation>
-    </message>
-    <message>
         <source>Unable to generate keys</source>
         <translation>Невозможно сгенерировать ключи</translation>
     </message>
@@ -6799,14 +6582,6 @@ CARI Core Wallet</source>
     <message>
         <source>Use UPnP to map the listening port (default: %u)</source>
         <translation>Используйте UPnP для отображения порта прослушивания (по умолчанию: %u)</translation>
-    </message>
-    <message>
-        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
-        <translation>Используйте UPnP для отображения порта прослушивания (по умолчанию: 1 при прослушивании)</translation>
-    </message>
-    <message>
-        <source>Use a custom max chain reorganization depth (default: %u)</source>
-        <translation>Используйте настраиваемую максимальную глубину реорганизации цепочки (по умолчанию: %u)</translation>
     </message>
     <message>
         <source>Use the test network</source>
@@ -6892,10 +6667,6 @@ CARI Core Wallet</source>
         <source>on startup</source>
         <translation>на старте</translation>
     </message>
-    <message>
-        <source>wallet.dat corrupt, salvage failed</source>
-        <translation>wallet.dat коррумпирован, сбор не выполнен</translation>
-    </message>
 </context>
 <context>
     <name>send</name>
@@ -6908,12 +6679,12 @@ CARI Core Wallet</source>
         <translation>Отправить</translation>
     </message>
     <message>
-        <source>Send public coins (CARI)</source>
-        <translation>Отправить монеты (CARI)</translation>
+        <source>Send public coins (PIV)</source>
+        <translation>Отправить монеты (PIV)</translation>
     </message>
     <message>
-        <source>CARI address or contact label</source>
-        <translation>CARI адрес или лейбл контакта</translation>
+        <source>PIVX address or contact label</source>
+        <translation>PIVX адрес или лейбл контакта</translation>
     </message>
     <message>
         <source>Amount</source>

@@ -34,10 +34,10 @@ bool TransactionRecord::decomposeCoinStake(const CWallet* wallet, const CWalletT
     const uint256& hash = wtx.GetHash();
     TransactionRecord sub(hash, wtx.GetTxTime(), wtx.GetTotalSize());
 
-    if (wtx.HasZerocoinSpendInputs() && (fZSpendFromMe || wallet->zcariTracker->HasMintTx(hash))) {
-        //zCARI stake reward
+    if (wtx.HasZerocoinSpendInputs() && (fZSpendFromMe || wallet->zpivTracker->HasMintTx(hash))) {
+        //zPIV stake reward
         sub.involvesWatchAddress = false;
-        sub.type = TransactionRecord::StakeZCARI;
+        sub.type = TransactionRecord::StakeZPIV;
         sub.address = getValueOrReturnEmpty(wtx.mapValue, "zerocoinmint");
         sub.credit = 0;
         for (const CTxOut& out : wtx.vout) {
@@ -53,7 +53,7 @@ bool TransactionRecord::decomposeCoinStake(const CWallet* wallet, const CWalletT
             sub.debit = -nDebit;
             loadHotOrColdStakeOrContract(wallet, wtx, sub);
         } else {
-            // CARI stake reward
+            // PIV stake reward
             CTxDestination address;
             if (!ExtractDestination(wtx.vout[1].scriptPubKey, address))
                 return true;
@@ -106,7 +106,7 @@ bool TransactionRecord::decomposeZcSpendTx(const CWallet* wallet, const CWalletT
             isminetype mine = wallet->IsMine(txout);
             TransactionRecord sub(hash, nTime, wtx.GetTotalSize());
             sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
-            sub.type = TransactionRecord::ZerocoinSpend_Change_zCari;
+            sub.type = TransactionRecord::ZerocoinSpend_Change_zPiv;
             sub.address = getValueOrReturnEmpty(wtx.mapValue, "zerocoinmint");
             if (!fFeeAssigned) {
                 sub.debit -= (wtx.GetZerocoinSpent() - wtx.GetValueOut());
@@ -192,7 +192,7 @@ bool TransactionRecord::decomposeCreditTransaction(const CWallet* wallet, const 
             sub.credit = txout.nValue;
             sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
             if (ExtractDestination(txout.scriptPubKey, address) && IsMine(*wallet, address)) {
-                // Received by CARI Address
+                // Received by PIVX Address
                 sub.type = TransactionRecord::RecvWithAddress;
                 sub.address = EncodeDestination(address);
             } else {
@@ -237,6 +237,7 @@ bool TransactionRecord::decomposeSendToSelfTransaction(const CWalletTx& wtx, con
 }
 
 /**
+ * Decompose wtx outputs in records.
  */
 bool TransactionRecord::decomposeDebitTransaction(const CWallet* wallet, const CWalletTx& wtx,
                                                   const CAmount& nDebit, bool involvesWatchAddress,
@@ -272,7 +273,7 @@ bool TransactionRecord::decomposeDebitTransaction(const CWallet* wallet, const C
             //private keys that the change was sent to. Do not display a "sent to" here.
             if (wtx.HasZerocoinMintOutputs())
                 continue;
-            // Sent to CARI Address
+            // Sent to PIVX Address
             sub.type = TransactionRecord::SendToAddress;
             sub.address = EncodeDestination(address);
         } else if (txout.IsZerocoinMint()){
@@ -309,7 +310,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
     bool fZSpendFromMe = false;
 
     if (wtx.HasZerocoinSpendInputs()) {
-        libzerocoin::CoinSpend zcspend = wtx.HasZerocoinPublicSpendInputs() ? ZCARIModule::parseCoinSpend(wtx.vin[0]) : TxInToZerocoinSpend(wtx.vin[0]);
+        libzerocoin::CoinSpend zcspend = wtx.HasZerocoinPublicSpendInputs() ? ZPIVModule::parseCoinSpend(wtx.vin[0]) : TxInToZerocoinSpend(wtx.vin[0]);
         fZSpendFromMe = wallet->IsMyZerocoinSpend(zcspend.getCoinSerialNumber());
     }
 
@@ -520,7 +521,6 @@ void TransactionRecord::updateStatus(const CWalletTx& wtx)
     bool fConflicted = false;
     int depth = 0;
     bool isTrusted = wtx.IsTrusted(depth, fConflicted);
-    const bool isOffline = (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0);
     int nBlocksToMaturity = (wtx.IsCoinBase() || wtx.IsCoinStake()) ? std::max(0, (Params().GetConsensus().nCoinbaseMaturity + 1) - depth) : 0;
 
     status.countsForBalance = isTrusted && !(nBlocksToMaturity > 0);
@@ -549,11 +549,7 @@ void TransactionRecord::updateStatus(const CWalletTx& wtx)
             status.status = TransactionStatus::Immature;
             status.matures_in = nBlocksToMaturity;
 
-            if (status.depth >= 0 && !fConflicted) {
-                // Check if the block was requested by anyone
-                if (isOffline)
-                    status.status = TransactionStatus::MaturesWarning;
-            } else {
+            if (status.depth < 0 || fConflicted) {
                 status.status = TransactionStatus::NotAccepted;
             }
         } else {
@@ -563,8 +559,6 @@ void TransactionRecord::updateStatus(const CWalletTx& wtx)
     } else {
         if (status.depth < 0 || fConflicted) {
             status.status = TransactionStatus::Conflicted;
-        } else if (isOffline) {
-            status.status = TransactionStatus::Offline;
         } else if (status.depth == 0) {
             status.status = TransactionStatus::Unconfirmed;
         } else if (status.depth < RecommendedNumConfirmations) {
@@ -611,8 +605,6 @@ bool TransactionRecord::isNull() const
 
 std::string TransactionRecord::statusToString(){
     switch (status.status){
-        case TransactionStatus::MaturesWarning:
-            return "Abandoned (not mature because no nodes have confirmed)";
         case TransactionStatus::Confirmed:
             return "Confirmed";
         case TransactionStatus::OpenUntilDate:

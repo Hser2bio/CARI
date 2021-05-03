@@ -15,6 +15,8 @@
 
 #include <boost/test/unit_test.hpp>
 
+std::unique_ptr<CConnman> g_connman;
+
 CClientUIInterface uiInterface;
 
 uint256 insecure_rand_seed = GetRandHash();
@@ -35,6 +37,7 @@ BasicTestingSetup::BasicTestingSetup()
 BasicTestingSetup::~BasicTestingSetup()
 {
         ECC_Stop();
+        g_connman.reset();
 }
 
 TestingSetup::TestingSetup()
@@ -55,6 +58,8 @@ TestingSetup::TestingSetup()
         nScriptCheckThreads = 3;
         for (int i=0; i < nScriptCheckThreads-1; i++)
             threadGroup.create_thread(&ThreadScriptCheck);
+        g_connman = std::unique_ptr<CConnman>(new CConnman(0x1337, 0x1337)); // Deterministic randomness for tests.
+        connman = g_connman.get();
         RegisterNodeSignals(GetNodeSignals());
 }
 
@@ -77,7 +82,7 @@ CTxMemPoolEntry TestMemPoolEntryHelper::FromTx(CMutableTransaction &tx, CTxMemPo
     CAmount inChainValue = hasNoDependencies ? txn.GetValueOut() : 0;
 
     return CTxMemPoolEntry(txn, nFee, nTime, dPriority, nHeight,
-                           hasNoDependencies, inChainValue, spendsCoinbaseOrCoinstake);
+                           hasNoDependencies, inChainValue, spendsCoinbaseOrCoinstake, sigOpCount);
 }
 
 [[noreturn]] void Shutdown(void* parg)

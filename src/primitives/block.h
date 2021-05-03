@@ -88,7 +88,6 @@ public:
     std::vector<unsigned char> vchBlockSig;
 
     // memory only
-    mutable CScript payee;
     mutable bool fChecked;
 
     CBlock()
@@ -117,7 +116,6 @@ public:
         CBlockHeader::SetNull();
         vtx.clear();
         fChecked = false;
-        payee = CScript();
         vchBlockSig.clear();
     }
 
@@ -143,13 +141,6 @@ public:
     bool IsProofOfWork() const
     {
         return !IsProofOfStake();
-    }
-
-    bool IsZerocoinStake() const;
-
-    std::pair<COutPoint, unsigned int> GetProofOfStake() const
-    {
-        return IsProofOfStake()? std::make_pair(vtx[1].vin[0].prevout, nTime) : std::make_pair(COutPoint(), (unsigned int)0);
     }
 
     std::string ToString() const;
