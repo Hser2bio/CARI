@@ -37,7 +37,7 @@ bool TransactionRecord::decomposeCoinStake(const CWallet* wallet, const CWalletT
     if (wtx.HasZerocoinSpendInputs() && (fZSpendFromMe || wallet->zpivTracker->HasMintTx(hash))) {
         //zPIV stake reward
         sub.involvesWatchAddress = false;
-        sub.type = TransactionRecord::StakeZPIV;
+        sub.type = TransactionRecord::StakeZCARI;
         sub.address = getValueOrReturnEmpty(wtx.mapValue, "zerocoinmint");
         sub.credit = 0;
         for (const CTxOut& out : wtx.vout) {
@@ -106,7 +106,7 @@ bool TransactionRecord::decomposeZcSpendTx(const CWallet* wallet, const CWalletT
             isminetype mine = wallet->IsMine(txout);
             TransactionRecord sub(hash, nTime, wtx.GetTotalSize());
             sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
-            sub.type = TransactionRecord::ZerocoinSpend_Change_zPiv;
+            sub.type = TransactionRecord::ZerocoinSpend_Change_zCari;
             sub.address = getValueOrReturnEmpty(wtx.mapValue, "zerocoinmint");
             if (!fFeeAssigned) {
                 sub.debit -= (wtx.GetZerocoinSpent() - wtx.GetValueOut());
@@ -310,7 +310,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
     bool fZSpendFromMe = false;
 
     if (wtx.HasZerocoinSpendInputs()) {
-        libzerocoin::CoinSpend zcspend = wtx.HasZerocoinPublicSpendInputs() ? ZPIVModule::parseCoinSpend(wtx.vin[0]) : TxInToZerocoinSpend(wtx.vin[0]);
+        libzerocoin::CoinSpend zcspend = wtx.HasZerocoinPublicSpendInputs() ? ZCARIModule::parseCoinSpend(wtx.vin[0]) : TxInToZerocoinSpend(wtx.vin[0]);
         fZSpendFromMe = wallet->IsMyZerocoinSpend(zcspend.getCoinSerialNumber());
     }
 

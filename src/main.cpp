@@ -2062,7 +2062,7 @@ DisconnectResult DisconnectBlock(CBlock& block, CBlockIndex* pindex, CCoinsViewC
     }
 
     //Track zPIV money supply
-    if (!UpdateZPIVSupplyDisconnect(block, pindex)) {
+    if (!UpdateZCARISupplyDisconnect(block, pindex)) {
         error("%s: Failed to calculate new zPIV supply", __func__);
         return DISCONNECT_FAILED;
     }
@@ -6035,12 +6035,6 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-    if (sporkManager.IsSporkActive(SPORK_35_NEW_PROTOCOL_ENFORCEMENT_5)) return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_5;
-    if (sporkManager.IsSporkActive(SPORK_34_NEW_PROTOCOL_ENFORCEMENT_4)) return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_4;
-    if (sporkManager.IsSporkActive(SPORK_33_NEW_PROTOCOL_ENFORCEMENT_3)) return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_3;
-    if (sporkManager.IsSporkActive(SPORK_32_NEW_PROTOCOL_ENFORCEMENT_2)) return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_2;
-    if (sporkManager.IsSporkActive(SPORK_31_NEW_PROTOCOL_ENFORCEMENT_1)) return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_1;
-
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 }
 

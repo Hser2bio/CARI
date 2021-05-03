@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(zerocoin_spend_test)
 
     bool fFirstRun;
     pwalletMain->LoadWallet(fFirstRun);
-    pwalletMain->zcariTracker = std::unique_ptr<CzCARITracker>(new CzCARITracker(pwalletMain));
+    pwalletMain->zpivTracker = std::unique_ptr<CzCARITracker>(new CzCARITracker(pwalletMain));
     CMutableTransaction tx;
     CWalletTx* wtx = new CWalletTx(pwalletMain, tx);
     std::vector<CZerocoinSpend> vSpends;

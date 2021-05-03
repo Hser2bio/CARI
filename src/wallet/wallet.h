@@ -21,7 +21,7 @@
 #include "primitives/block.h"
 #include "primitives/transaction.h"
 #include "sapling/address.hpp"
-#include "zpiv/zerocoin.h"
+#include "zcari/zerocoin.h"
 #include "guiinterface.h"
 #include "util.h"
 #include "util/memory.h"
@@ -287,7 +287,7 @@ private:
     bool IsKeyUsed(const CPubKey& vchPubKey);
 
     // Zerocoin wallet
-    CzPIVWallet* zwallet{nullptr};
+    CzCARIWallet* zwallet{nullptr};
 
 public:
 
@@ -739,9 +739,9 @@ public:
     std::map<libzerocoin::CoinDenomination, CAmount> GetMyZerocoinDistribution() const;
 
     // zPIV wallet
-    std::unique_ptr<CzPIVTracker> zpivTracker{nullptr};
-    void setZWallet(CzPIVWallet* zwallet);
-    CzPIVWallet* getZWallet();
+    std::unique_ptr<CzCARITracker> zpivTracker{nullptr};
+    void setZWallet(CzCARIWallet* zwallet);
+    CzCARIWallet* getZWallet();
     bool IsMyZerocoinSpend(const CBigNum& bnSerial) const;
     bool IsMyMint(const CBigNum& bnValue) const;
     void ReconsiderZerocoins(std::list<CZerocoinMint>& listMintsRestored, std::list<CDeterministicMint>& listDMintsRestored);

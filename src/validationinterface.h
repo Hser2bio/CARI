@@ -20,6 +20,9 @@ class CValidationInterface;
 class CValidationState;
 class uint256;
 
+#include <functional>
+using namespace boost::placeholders;
+
 // These functions dispatch to one or all registered wallets
 
 /** Register a wallet to receive updates from core */

@@ -1490,7 +1490,7 @@ int CWallet::ScanForWalletTransactions(CBlockIndex* pindexStart, bool fUpdate, b
     int64_t nNow = GetTime();
     bool fCheckZCARI = GetBoolArg("-zapwallettxes", false);
     if (fCheckZCARI)
-        zcariTracker->Init();
+        zpivTracker->Init();
 
     const Consensus::Params& consensus = Params().GetConsensus();
 
@@ -2043,7 +2043,7 @@ bool CWallet::AvailableCoins(std::vector<COutput>* pCoins,      // --> populates
             for (unsigned int i = 0; i < pcoin->vout.size(); i++) {
 
                 // Check for only 10k utxo
-                if (nCoinType == ONLY_10000 && pcoin->vout[i].nValue != 10000 * COIN) continue;
+                if (nCoinType == ONLY_COLLATERAL && pcoin->vout[i].nValue != 10000 * COIN) continue;
 
                 // Check for stakeable utxo
                 if (nCoinType == STAKEABLE_COINS && pcoin->vout[i].IsZerocoinMint()) continue;
@@ -2060,7 +2060,7 @@ bool CWallet::AvailableCoins(std::vector<COutput>* pCoins,      // --> populates
                 if (mine == ISMINE_WATCH_ONLY && coinControl && !coinControl->fAllowWatchOnly) continue;
 
                 // Skip locked utxo
-                if (IsLockedCoin((*it).first, i) && nCoinType != ONLY_10000) continue;
+                if (IsLockedCoin((*it).first, i) && nCoinType != ONLY_COLLATERAL) continue;
 
                 // Check if we should include zero value utxo
                 if (pcoin->vout[i].nValue <= 0) continue;
@@ -2705,7 +2705,7 @@ bool CWallet::CreateCoinStake(
     bool fKernelFound = false;
     int nAttempts = 0;
     for (const COutput &out : *availableCoins) {
-        CPivStake stakeInput;
+        CCariStake stakeInput;
         stakeInput.SetPrevout((CTransaction) *out.tx, out.i);
 
         //new block came in, move on
@@ -2715,7 +2715,7 @@ bool CWallet::CreateCoinStake(
         if (IsLocked() || ShutdownRequested()) return false;
 
         // This should never happen
-        if (stakeInput.IsZPIV()) {
+        if (stakeInput.IsZCARI()) {
             LogPrintf("%s: ERROR - zPOS is disabled\n", __func__);
             continue;
         }
@@ -3789,7 +3789,7 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
     // Forced upgrade
     const bool fLegacyWallet = GetBoolArg("-legacywallet", false);
     if (GetBoolArg("-upgradewallet", fFirstRun && !fLegacyWallet)) {
-        if (prev_version <= FEATURE_PRE_PIVX && walletInstance->IsLocked()) {
+        if (prev_version <= FEATURE_PRE_CARI && walletInstance->IsLocked()) {
             // Cannot upgrade a locked wallet
             UIError("Cannot upgrade a locked wallet.");
             return nullptr;
@@ -3840,7 +3840,7 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
             }
             // Create legacy wallet
             LogPrintf("Creating Pre-HD Wallet\n");
-            walletInstance->SetMaxVersion(FEATURE_PRE_PIVX);
+            walletInstance->SetMaxVersion(FEATURE_PRE_CARI);
         }
 
         // Top up the keypool
@@ -3855,7 +3855,7 @@ CWallet* CWallet::CreateWalletFromFile(const std::string walletFile)
 
     LogPrintf("Wallet completed loading in %15dms\n", GetTimeMillis() - nStart);
 
-    CzPIVWallet* zwalletInstance = new CzPIVWallet(walletInstance);
+    CzCARIWallet* zwalletInstance = new CzCARIWallet(walletInstance);
     walletInstance->setZWallet(zwalletInstance);
 
     RegisterValidationInterface(walletInstance);

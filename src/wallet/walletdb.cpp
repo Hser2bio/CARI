@@ -23,7 +23,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/thread.hpp>
 #include <fstream>
-
+#include <experimental/filesystem>
 
 static uint64_t nAccountingEntryNumber = 0;
 
@@ -1155,16 +1155,14 @@ bool AttemptBackupWallet(const CWallet& wallet, const fs::path& pathSrc, const f
             LogPrintf("cannot backup to wallet source file %s\n", pathDest.string());
             return false;
         }
-#if BOOST_VERSION >= 105800 /* BOOST_LIB_VERSION 1_58 */
-        fs::copy_file(pathSrc.c_str(), pathDest, fs::copy_option::overwrite_if_exists);
-#else
+
         std::ifstream src(pathSrc.c_str(),  std::ios::binary | std::ios::in);
         std::ofstream dst(pathDest.c_str(), std::ios::binary | std::ios::out | std::ios::trunc);
         dst << src.rdbuf();
         dst.flush();
         src.close();
         dst.close();
-#endif
+
         strMessage = strprintf("copied %s to %s\n", wallet.strWalletFile, pathDest.string());
         LogPrintf("%s : %s\n", __func__, strMessage);
         retStatus = true;

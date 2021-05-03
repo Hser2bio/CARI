@@ -120,7 +120,7 @@ bool CheckForDuplicatedSerials(const CTransaction& tx, const Consensus::Params& 
                     libzerocoin::ZerocoinParams* params = consensus.Zerocoin_Params(false);
                     PublicCoinSpend publicSpend(params);
                     CValidationState state;
-                    if (!ZPIVModule::ParseZerocoinPublicSpend(txIn, tx, state, publicSpend)){
+                    if (!ZCARIModule::ParseZerocoinPublicSpend(txIn, tx, state, publicSpend)){
                         throw std::runtime_error("Invalid public spend parse");
                     }
                     spend = &publicSpend;

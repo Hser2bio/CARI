@@ -234,11 +234,11 @@ extern UniValue importzerocoins(const JSONRPCRequest& request);
 extern UniValue exportzerocoins(const JSONRPCRequest& request);
 extern UniValue reconsiderzerocoins(const JSONRPCRequest& request);
 extern UniValue getspentzerocoinamount(const JSONRPCRequest& request);
-extern UniValue setzpivseed(const JSONRPCRequest& request);
-extern UniValue getzpivseed(const JSONRPCRequest& request);
+extern UniValue setzcariseed(const JSONRPCRequest& request);
+extern UniValue getzcariseed(const JSONRPCRequest& request);
 extern UniValue generatemintlist(const JSONRPCRequest& request);
-extern UniValue searchdzpiv(const JSONRPCRequest& request);
-extern UniValue dzpivstate(const JSONRPCRequest& request);
+extern UniValue searchdzcari(const JSONRPCRequest& request);
+extern UniValue dzcaristate(const JSONRPCRequest& request);
 
 extern UniValue getrawtransaction(const JSONRPCRequest& request); // in rpc/rawtransaction.cpp
 extern UniValue createrawtransaction(const JSONRPCRequest& request);

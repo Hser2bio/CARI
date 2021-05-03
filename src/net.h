@@ -555,8 +555,6 @@ public:
 
     RecursiveMutex cs_sendProcessing;
 
-    RecursiveMutex cs_sendProcessing;
-
     std::deque<CInv> vRecvGetData;
     uint64_t nRecvBytes;
     std::atomic<int> nRecvVersion;
