@@ -3,6 +3,8 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "zcari/zpos.h"
+
+#include "validation.h"
 #include "zcarichain.h"
 
 
@@ -41,7 +43,7 @@ bool CLegacyZCariStake::InitFromTxIn(const CTxIn& txin)
     return true;
 }
 
-CLegacyZCariStake::CLegacyZCariStake(const libzerocoin::CoinSpend& spend)
+CLegacyZCariStake::CLegacyZCariStake(const libzerocoin::CoinSpend& spend) : CStakeInput(nullptr)
 {
     this->nChecksum = spend.getAccumulatorChecksum();
     this->denom = spend.getDenomination();
@@ -49,7 +51,7 @@ CLegacyZCariStake::CLegacyZCariStake(const libzerocoin::CoinSpend& spend)
     this->hashSerial = Hash(nSerial.begin(), nSerial.end());
 }
 
-CBlockIndex* CLegacyZCariStake::GetIndexFrom()
+const CBlockIndex* CLegacyZCariStake::GetIndexFrom() const
 {
     // First look in the legacy database
     int nHeightChecksum = 0;

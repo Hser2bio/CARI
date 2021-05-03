@@ -386,6 +386,7 @@ QPushButton[cssClass="btn-check-cold-staking"]:checked {
     color: #8fa68d;
 }
 
+
 *[cssClass="btn-nav-master-active"] {
     qproperty-icon:url("://ic-nav-master-active");
     qproperty-iconSize: 24px 30px;
@@ -458,6 +459,11 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     font-size:22px;
 }
 
+*[cssClass="amount-small-popup"] {
+    color:#FFFFFF;
+    font-size:17px;
+}
+
 *[cssClass="container-qr"] {
     border-radius: 2px;
     background-color: #bb1d3d1a;
@@ -465,6 +471,18 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 QPushButton[cssClass="btn-qr"] {
     qproperty-icon: url("://ic-arrow-drop-down-white");
+    qproperty-iconSize: 24px 24px;
+    background-color:transparent;
+}
+
+QPushButton[cssClass="btn-info"] {
+    qproperty-icon: url("://ic-information");
+    qproperty-iconSize: 24px 24px;
+    background-color:transparent;
+}
+
+QPushButton[cssClass="btn-info"]:hover {
+    qproperty-icon: url("://ic-information-hover");
     qproperty-iconSize: 24px 24px;
     background-color:transparent;
 }
@@ -967,6 +985,11 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 *[cssClass="text-list-amount-send"] {
     color:#f84444;
     font-size:16px;
+}
+
+*[cssClass="text-list-amount-send-small"] {
+    color:#f84444;
+    font-size:15px;
 }
 
 *[cssClass="text-list-amount-unconfirmed"] {
@@ -1732,6 +1755,13 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     color: #FFFFFF;
 }
 
+*[cssClass="edit-primary-no-border"] {
+    border: 0px;
+    background-color:#0f0b16;
+    font-size:15px;
+    color: #B3FFFFFF;
+}
+
 QPushButton[cssClass="btn-expand"] {
     background-image: url("://ic-expand");
     background-position:center;
@@ -2468,6 +2498,11 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     border:1px solid #91ff87;
 }
 
+*[cssClass="container-popup"] {
+    background-color:#0f0b16;
+    border-radius:14px;
+    border:1px solid #b088ff;
+}
 
 *[cssClass="text-title-dialog"] {
     color:#91ff87;
@@ -2547,6 +2582,27 @@ QLineEdit[cssClass="edit-primary-dialog-error"] {
     border-radius: 2px;
     padding:8px;
     color: #FFFFFF;
+}
+
+QTextEdit[cssClass="edit-text-dialog"] {
+    border:  1px solid #bababa;
+    background-color:#0f0b16;
+    font-size:16px;
+    border-radius: 2px;
+    padding:8px;
+    color: #FFFFFF;
+}
+
+QTextEdit[cssClass="edit-text-dialog"]:focus {
+    border: 1px solid #b088ff;
+}
+
+QTextEdit[cssClass="edit-text-dialog"]:focus:hover {
+    border: 1px solid #b088ff;
+}
+
+QTextEdit[cssClass="edit-text-dialog"]:hover {
+    border: 1px solid #FFFFFF;
 }
 
 QLabel[cssClass="label-subtitle-dialog"] {

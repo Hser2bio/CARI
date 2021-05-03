@@ -3,9 +3,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "test/test_pivx.h"
+#include "test/test_cari.h"
 
-#include "sapling/util.h"
+#include "sapling/sapling_util.h"
 #include "sapling/zip32.h"
 #include <boost/test/unit_test.hpp>
 

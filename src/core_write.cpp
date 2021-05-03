@@ -9,6 +9,7 @@
 #include "primitives/transaction.h"
 #include "script/script.h"
 #include "script/standard.h"
+#include "sapling/sapling_core_write.h"
 #include "serialize.h"
 #include "streams.h"
 #include <univalue.h>
@@ -154,13 +155,22 @@ void ScriptPubKeyToUniv(const CScript& scriptPubKey,
     out.pushKV("addresses", a);
 }
 
+static void SpecialTxToJSON(const CTransaction& tx, UniValue& entry)
+{
+    if (tx.IsSpecialTx()) {
+        entry.pushKV("extraPayloadSize", (int)tx.extraPayload->size());
+        entry.pushKV("extraPayload", HexStr(*(tx.extraPayload)));
+    }
+}
+
 void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
 {
     entry.pushKV("txid", tx.GetHash().GetHex());
     entry.pushKV("version", tx.nVersion);
+    entry.pushKV("type", tx.nType);
     entry.pushKV("size", (int)::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION));
     entry.pushKV("locktime", (int64_t)tx.nLockTime);
-    entry.pushKV("powalternative", (bool)tx.fPoWAlternative);
+    //entry.pushKV("powalternative", (bool)tx.fPoWAlternative);
 
     UniValue vin(UniValue::VARR);
     for (const CTxIn& txin : tx.vin) {
@@ -196,6 +206,12 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
         vout.push_back(out);
     }
     entry.pushKV("vout", vout);
+
+    // Sapling
+    TxSaplingToJSON(tx, entry);
+
+    // Special Txes
+    SpecialTxToJSON(tx, entry);
 
     if (!hashBlock.IsNull())
         entry.pushKV("blockhash", hashBlock.GetHex());

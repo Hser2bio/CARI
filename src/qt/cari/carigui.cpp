@@ -16,7 +16,6 @@
 #include "guiinterface.h"
 #include "qt/cari/qtutils.h"
 #include "qt/cari/defaultdialog.h"
-#include "qt/cari/settings/settingsfaqwidget.h"
 
 #include "init.h"
 #include "masternodelist.h"
@@ -61,12 +60,12 @@ CARIGUI::CARIGUI(const NetworkStyle* networkStyle, QWidget* parent) :
 
 #ifdef ENABLE_WALLET
     /* if compiled with wallet support, -disablewallet can still disable the wallet */
-    enableWallet = !GetBoolArg("-disablewallet", false);
+    enableWallet = !gArgs.GetBoolArg("-disablewallet", false);
 #else
     enableWallet = false;
 #endif // ENABLE_WALLET
 
-    QString windowTitle = QString::fromStdString(GetArg("-windowtitle", ""));
+    QString windowTitle = QString::fromStdString(gArgs.GetArg("-windowtitle", ""));
     if (windowTitle.isEmpty()) {
         windowTitle = tr("CARI Core") + " - ";
         windowTitle += ((enableWallet) ? tr("Wallet") : tr("Node"));
@@ -246,9 +245,9 @@ void CARIGUI::handleRestart(QStringList args)
 }
 
 
-void CARIGUI::setClientModel(ClientModel* clientModel)
+void CARIGUI::setClientModel(ClientModel* _clientModel)
 {
-    this->clientModel = clientModel;
+    this->clientModel = _clientModel;
     if (this->clientModel) {
         // Create system tray menu (or setup the dock menu) that late to prevent users from calling actions,
         // while the client has not yet fully loaded
@@ -261,6 +260,9 @@ void CARIGUI::setClientModel(ClientModel* clientModel)
 
         // Receive and report messages from client model
         connect(clientModel, &ClientModel::message, this, &CARIGUI::message);
+        connect(clientModel, &ClientModel::alertsChanged, [this](const QString& _alertStr) {
+            message(tr("Alert!"), _alertStr, CClientUIInterface::MSG_WARNING);
+        });
         connect(topBar, &TopBar::walletSynced, dashboard, &DashboardWidget::walletSynced);
         connect(topBar, &TopBar::walletSynced, coldStakingWidget, &ColdStakingWidget::walletSynced);
 
@@ -598,11 +600,11 @@ int CARIGUI::getNavWidth()
     return this->navMenu->width();
 }
 
-void CARIGUI::openFAQ(int section)
+void CARIGUI::openFAQ(SettingsFaqWidget::Section section)
 {
     showHide(true);
     SettingsFaqWidget* dialog = new SettingsFaqWidget(this);
-    if (section > 0) dialog->setSection(section);
+    dialog->setSection(section);
     openDialogWithOpaqueBackgroundFullScreen(dialog, this);
     dialog->deleteLater();
 }

@@ -6,7 +6,6 @@
 #define CARI_CONSENSUS_ZEROCOIN_VERIFY_H
 
 #include "consensus/consensus.h"
-#include "main.h"
 #include "script/interpreter.h"
 #include "zcarichain.h"
 
@@ -20,7 +19,5 @@ int CurrentPublicCoinSpendVersion();
 bool CheckPublicCoinSpendVersion(int version);
 bool ContextualCheckZerocoinSpend(const CTransaction& tx, const libzerocoin::CoinSpend* spend, int nHeight, const uint256& hashBlock);
 bool ContextualCheckZerocoinSpendNoSerialCheck(const CTransaction& tx, const libzerocoin::CoinSpend* spend, int nHeight, const uint256& hashBlock);
-bool RecalculateCARISupply(int nHeightStart, bool fSkipZcari = true);
-CAmount GetInvalidUTXOValue();
 
 #endif //CARI_CONSENSUS_ZEROCOIN_VERIFY_H

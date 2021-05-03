@@ -25,6 +25,7 @@ QT_FORMS_UI = \
   qt/cari/forms/lockunlock.ui \
   qt/cari/forms/expandablebutton.ui \
   qt/cari/forms/receivedialog.ui \
+  qt/cari/forms/balancebubble.ui \
   qt/cari/forms/topbar.ui \
   qt/cari/forms/txrow.ui \
   qt/cari/forms/dashboardwidget.ui \
@@ -37,10 +38,10 @@ QT_FORMS_UI = \
   qt/cari/forms/masternodeswidget.ui \
   qt/cari/forms/myaddressrow.ui \
   qt/cari/forms/csrow.ui \
+  qt/cari/forms/sendmemodialog.ui \
   qt/cari/forms/sendchangeaddressdialog.ui \
   qt/cari/forms/sendconfirmdialog.ui \
   qt/cari/forms/sendcustomfeedialog.ui \
-  qt/cari/forms/sendchangeaddressdialog.ui \
   qt/cari/forms/sendmultirow.ui \
   qt/cari/forms/send.ui \
   qt/cari/forms/addnewaddressdialog.ui \
@@ -129,7 +130,7 @@ QT_MOC_CPP = \
   qt/cari/moc_sendchangeaddressdialog.cpp \
   qt/cari/moc_sendconfirmdialog.cpp \
   qt/cari/moc_sendcustomfeedialog.cpp \
-  qt/cari/moc_sendchangeaddressdialog.cpp \
+  qt/cari/moc_sendmemodialog.cpp \
   qt/cari/moc_sendmultirow.cpp \
   qt/cari/moc_send.cpp \
   qt/cari/moc_addnewaddressdialog.cpp \
@@ -231,6 +232,7 @@ BITCOIN_QT_H = \
   qt/cari/txviewholder.h \
   qt/cari/qtutils.h \
   qt/cari/expandablebutton.h \
+  qt/cari/balancebubble.h \
   qt/cari/topbar.h \
   qt/cari/txrow.h \
   qt/cari/addressholder.h \
@@ -251,7 +253,7 @@ BITCOIN_QT_H = \
   qt/cari/sendchangeaddressdialog.h \
   qt/cari/sendconfirmdialog.h \
   qt/cari/sendcustomfeedialog.h \
-  qt/cari/sendchangeaddressdialog.h \
+  qt/cari/sendmemodialog.h \
   qt/cari/sendmultirow.h \
   qt/cari/send.h \
   qt/cari/addnewaddressdialog.h \
@@ -313,7 +315,6 @@ RES_ICONS = \
   qt/cari/res/img/ic-wallet-status-unlocked.svg \
   qt/cari/res/img/ic-check-peers.svg \
   qt/cari/res/img/ic-nav-master-active.svg \
-  qt/cari/res/img/ic-nav-masterlist-active.svg \
   qt/cari/res/img/ic-watch-password-white.svg \
   qt/cari/res/img/bg-welcome-container.jpg \
   qt/cari/res/img/bg-welcome-container.png \
@@ -322,7 +323,6 @@ RES_ICONS = \
   qt/cari/res/img/bg-welcome-container@3x.png \
   qt/cari/res/img/ic-check-staking-off.svg \
   qt/cari/res/img/ic-nav-master-hover.svg \
-  qt/cari/res/img/ic-nav-masterlist-hover.svg \
   qt/cari/res/img/ic-watch-password.svg \
   qt/cari/res/img/bg-welcome.jpg \
   qt/cari/res/img/bg-welcome.svg \
@@ -331,7 +331,6 @@ RES_ICONS = \
   qt/cari/res/img/bg-welcome.png \
   qt/cari/res/img/ic-check-staking.svg \
   qt/cari/res/img/ic-nav-master.svg \
-  qt/cari/res/img/ic-nav-masterlist.svg \
   qt/cari/res/img/img-dashboard-banner.jpg \
   qt/cari/res/img/btn-radio-active.svg \
   qt/cari/res/img/ic-check-sync-off.svg \
@@ -371,6 +370,7 @@ RES_ICONS = \
   qt/cari/res/img/img-empty-dark-transactions.svg \
   qt/cari/res/img/ic-address-book-white.svg \
   qt/cari/res/img/ic-chevron-right.svg \
+  qt/cari/res/img/ic-chevron-right-liliac.svg \
   qt/cari/res/img/ic-nav-send.svg \
   qt/cari/res/img/img-empty-error.svg \
   qt/cari/res/img/ic-address-book.svg \
@@ -498,10 +498,10 @@ RES_ICONS = \
   qt/cari/res/img/ic-transaction-cs-contract.svg \
   qt/cari/res/img/ic-transaction-cs-contract-inactive.svg \
   qt/cari/res/img/ic-check-box-indeterminate.svg \
+  qt/cari/res/img/ic-information.svg \
+  qt/cari/res/img/ic-information-hover.svg \
   qt/cari/res/img/ani-loading-dark.gif \
   qt/cari/res/img/ani-loading.gif
-
-
 
 BITCOIN_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
@@ -556,6 +556,7 @@ BITCOIN_QT_WALLET_CPP = \
   qt/cari/txviewholder.cpp \
   qt/cari/qtutils.cpp \
   qt/cari/expandablebutton.cpp \
+  qt/cari/balancebubble.cpp \
   qt/cari/topbar.cpp \
   qt/cari/txrow.cpp \
   qt/cari/addressholder.cpp \
@@ -576,7 +577,7 @@ BITCOIN_QT_WALLET_CPP = \
   qt/cari/sendchangeaddressdialog.cpp \
   qt/cari/sendconfirmdialog.cpp \
   qt/cari/sendcustomfeedialog.cpp \
-  qt/cari/sendchangeaddressdialog.cpp \
+  qt/cari/sendmemodialog.cpp \
   qt/cari/sendmultirow.cpp \
   qt/cari/send.cpp \
   qt/cari/addnewaddressdialog.cpp \
@@ -703,7 +704,7 @@ $(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(P
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name cari $< | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
-CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_cari_locale.qrc
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/cari/*.gcda qt/cari/*.gcno qt/cari/settings/*.gcda qt/cari/settings/*.gcno qt/temp_cari_locale.qrc
 
 CLEANFILES += $(CLEAN_QT)
 

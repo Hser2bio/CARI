@@ -21,12 +21,11 @@ static const int INIT_PROTO_VERSION = 209;
 static const int GETHEADERS_VERSION = 70077;
 
 //! disconnect from peers older than this proto version
-static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT  = 70900;
-static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_1 = 70910;
-static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_2 = 70920;
-static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_3 = 70930;
-static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_4 = 70940;
-static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_5 = 70950;
+static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = 70919;
+static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 70921;
+
+//! peers with version older than this, could relay invalid (stale) mn pings
+static const int MIN_PEER_CACHEDVERSION = 70921;
 
 //! masternodes older than this proto version use old strMessage format for mnannounce
 static const int MIN_PEER_MNANNOUNCE = 70913;

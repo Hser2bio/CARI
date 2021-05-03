@@ -221,15 +221,6 @@ extern const char* REJECT;
  */
 extern const char* SENDHEADERS;
 /**
- * The ix message transmits a single SwiftX transaction
- */
-extern const char* IX;
-/**
- * The ixlockvote message is used to reach consensus for SwiftX
- * transaction locks
- */
-extern const char* IXLOCKVOTE;
-/**
  * The spork message is used to send spork values to connected
  * peers
  */
@@ -357,7 +348,6 @@ class CInv
 public:
     CInv();
     CInv(int typeIn, const uint256& hashIn);
-    CInv(const std::string& strType, const uint256& hashIn);
 
     ADD_SERIALIZE_METHODS;
 
@@ -372,13 +362,15 @@ public:
 
     bool IsKnownType() const;
     bool IsMasterNodeType() const;
-    const char* GetCommand() const;
     std::string ToString() const;
 
     // TODO: make private (improves encapsulation)
 public:
     int type;
     uint256 hash;
+
+private:
+    const char* GetCommand() const;
 };
 
 enum {
@@ -387,8 +379,8 @@ enum {
     // Nodes may always request a MSG_FILTERED_BLOCK in a getdata, however,
     // MSG_FILTERED_BLOCK should not appear in any invs except as a part of getdata.
     MSG_FILTERED_BLOCK,
-    MSG_TXLOCK_REQUEST,
-    MSG_TXLOCK_VOTE,
+    MSG_TXLOCK_REQUEST,     // Deprecated
+    MSG_TXLOCK_VOTE,        // Deprecated
     MSG_SPORK,
     MSG_MASTERNODE_WINNER,
     MSG_MASTERNODE_SCANNING_ERROR,

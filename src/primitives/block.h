@@ -31,6 +31,7 @@ public:
     uint32_t nBits;
     uint32_t nNonce;
     uint256 nAccumulatorCheckpoint;             // only for version 4, 5 and 6.
+    uint256 hashFinalSaplingRoot;               // only for version 8
 
     CBlockHeader()
     {
@@ -51,6 +52,10 @@ public:
         //zerocoin active, header changes to include accumulator checksum
         if(nVersion > 3 && nVersion < 7)
             READWRITE(nAccumulatorCheckpoint);
+
+        // Sapling active
+        if (nVersion >= 8)
+            READWRITE(hashFinalSaplingRoot);
     }
 
     void SetNull()
@@ -62,6 +67,7 @@ public:
         nBits = 0;
         nNonce = 0;
         nAccumulatorCheckpoint.SetNull();
+        hashFinalSaplingRoot.SetNull();
     }
 
     bool IsNull() const
@@ -82,12 +88,13 @@ class CBlock : public CBlockHeader
 {
 public:
     // network and disk
-    std::vector<CTransaction> vtx;
+    std::vector<CTransactionRef> vtx;
 
     // ppcoin: block signature - signed by one of the coin base txout[N]'s owner
     std::vector<unsigned char> vchBlockSig;
 
     // memory only
+    mutable CScript payee;
     mutable bool fChecked;
 
     CBlock()
@@ -107,8 +114,8 @@ public:
     inline void SerializationOp(Stream& s, Operation ser_action) {
         READWRITE(*(CBlockHeader*)this);
         READWRITE(vtx);
-	if(vtx.size() > 1 && vtx[1].IsCoinStake())
-		READWRITE(vchBlockSig);
+        if(vtx.size() > 1 && vtx[1]->IsCoinStake())
+            READWRITE(vchBlockSig);
     }
 
     void SetNull()
@@ -116,6 +123,7 @@ public:
         CBlockHeader::SetNull();
         vtx.clear();
         fChecked = false;
+        payee = CScript();
         vchBlockSig.clear();
     }
 
@@ -130,12 +138,14 @@ public:
         block.nNonce         = nNonce;
         if(nVersion > 3 && nVersion < 7)
             block.nAccumulatorCheckpoint = nAccumulatorCheckpoint;
+        if (nVersion >= 8)
+            block.hashFinalSaplingRoot   = hashFinalSaplingRoot;
         return block;
     }
 
     bool IsProofOfStake() const
     {
-        return (vtx.size() > 1 && vtx[1].IsCoinStake());
+        return (vtx.size() > 1 && vtx[1]->IsCoinStake());
     }
 
     bool IsProofOfWork() const

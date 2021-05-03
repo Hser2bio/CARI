@@ -136,7 +136,7 @@ SettingsWidget::SettingsWidget(CARIGUI* parent) :
 
     // Help
     connect(ui->pushButtonHelp, &QPushButton::clicked, this, &SettingsWidget::onHelpClicked);
-    connect(ui->pushButtonHelp1, &QPushButton::clicked, window, &CARIGUI::openFAQ);
+    connect(ui->pushButtonHelp1, &QPushButton::clicked, [this](){window->openFAQ();});
     connect(ui->pushButtonHelp2, &QPushButton::clicked, this, &SettingsWidget::onAboutClicked);
 
     // Get restart command-line parameters and handle restart
@@ -164,6 +164,8 @@ SettingsWidget::SettingsWidget(CARIGUI* parent) :
 
     connect(settingsWalletOptionsWidget, &SettingsWalletOptionsWidget::saveSettings, this, &SettingsWidget::onSaveOptionsClicked);
     connect(settingsWalletOptionsWidget, &SettingsWalletOptionsWidget::discardSettings, this, &SettingsWidget::onDiscardChanges);
+
+    connect(settingsConsoleWidget, &SettingsConsoleWidget::message,this, &SettingsWidget::message);
 
     /* Widget-to-option mapper */
     mapper = new QDataWidgetMapper(this);

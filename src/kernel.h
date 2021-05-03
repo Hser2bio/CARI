@@ -8,7 +8,6 @@
 #ifndef CARI_KERNEL_H
 #define CARI_KERNEL_H
 
-#include "main.h"
 #include "stakeinput.h"
 
 class CStakeKernel {

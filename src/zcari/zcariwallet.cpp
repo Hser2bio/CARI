@@ -202,7 +202,7 @@ void CzCARIWallet::SyncWithChain(bool fGenerateMintPool)
             if (ShutdownRequested())
                 return;
 
-            if (wallet->zpivTracker->HasPubcoinHash(pMint.first)) {
+            if (wallet->zcariTracker->HasPubcoinHash(pMint.first)) {
                 mintPool.Remove(pMint.first);
                 continue;
             }
@@ -339,8 +339,8 @@ bool CzCARIWallet::SetMintSeen(const CBigNum& bnValue, const int& nHeight, const
         wallet->AddToWallet(wtx);
     }
 
-    // Add to zpivTracker which also adds to database
-    wallet->zpivTracker->Add(dMint, true);
+    // Add to zcariTracker which also adds to database
+    wallet->zcariTracker->Add(dMint, true);
 
     //Update the count if it is less than the mint's count
     if (nCountLastUsed < pMint.second) {
