@@ -783,33 +783,23 @@ double ConvertBitsToDouble(unsigned int nBits)
 
 CAmount GetBlockValue(int nHeight)
 {
-    // Fixed block value on regtest
-    if (Params().IsRegTestNet()) {
-        return 250 * COIN;
-    }
-    // Testnet high-inflation blocks [2, 200] with value 250k PIV
-    const bool isTestnet = Params().NetworkID() == CBaseChainParams::TESTNET;
-    if (isTestnet && nHeight < 201 && nHeight > 1) {
-        return 250000 * COIN;
-    }
-    // Mainnet/Testnet block reward reduction schedule
-    const int nLast = Params().GetConsensus().vUpgrades[Consensus::UPGRADE_ZC_V2].nActivationHeight;
-    if (nHeight > nLast)   return 5    * COIN;
-    if (nHeight > 648000)  return 4.5  * COIN;
-    if (nHeight > 604800)  return 9    * COIN;
-    if (nHeight > 561600)  return 13.5 * COIN;
-    if (nHeight > 518400)  return 18   * COIN;
-    if (nHeight > 475200)  return 22.5 * COIN;
-    if (nHeight > 432000)  return 27   * COIN;
-    if (nHeight > 388800)  return 31.5 * COIN;
-    if (nHeight > 345600)  return 36   * COIN;
-    if (nHeight > 302400)  return 40.5 * COIN;
-    if (nHeight > 151200)  return 45   * COIN;
-    if (nHeight > 86400)   return 225  * COIN;
-    if (nHeight !=1)       return 250  * COIN;
-    // Premine for 6 masternodes at block 1
-    return 60001 * COIN;
+    int64_t nSubsidy = 0;
+
+         if (nHeight >=       1 && nHeight <=    5000) {nSubsidy = 20.00 * COIN;}
+    else if (nHeight >=    5001 && nHeight <=  530600) {nSubsidy =  0.20 * COIN;}
+    else if (nHeight >=  530601 && nHeight <= 1056200) {nSubsidy =  1.00 * COIN;}
+    else if (nHeight >= 1056201 && nHeight <= 1581800) {nSubsidy =  2.00 * COIN;}
+    else if (nHeight >= 1581801 && nHeight <= 2107400) {nSubsidy =  3.00 * COIN;}
+    else if (nHeight >= 2107401 && nHeight <= 2633000) {nSubsidy =  4.00 * COIN;}
+    else if (nHeight >= 2633001 && nHeight <= 3158600) {nSubsidy =  4.50 * COIN;}
+    else if (nHeight >= 3158601 && nHeight <= 3684200) {nSubsidy =  2.00 * COIN;}
+    else if (nHeight >= 3684201 && nHeight <= 4209800) {nSubsidy =  1.50 * COIN;}
+    else if (nHeight >= 4209801 && nHeight <= 4735400) {nSubsidy =  1.00 * COIN;}
+    else nSubsidy = 0;
+
+    return nSubsidy;
 }
+
 
 int64_t GetMasternodePayment(int nHeight)
 {
@@ -2767,10 +2757,10 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
         // that this block is invalid, so don't issue an outright ban.
         if (nHeight != 0 && !IsInitialBlockDownload()) {
             // Last output of Cold-Stake is not abused
-            if (IsPoS && !CheckColdStakeFreeOutput(*(block.vtx[1]), nHeight)) {
-                mapRejectedBlocks.emplace(block.GetHash(), GetTime());
-                return state.DoS(0, false, REJECT_INVALID, "bad-p2cs-outs", false, "invalid cold-stake output");
-            }
+            //if (IsPoS && !CheckColdStakeFreeOutput(*(block.vtx[1]), nHeight)) {
+            //    mapRejectedBlocks.emplace(block.GetHash(), GetTime());
+            //    return state.DoS(0, false, REJECT_INVALID, "bad-p2cs-outs", false, "invalid cold-stake output");
+            //}
 
             // set Cold Staking Spork
             fColdStakingActive = !sporkManager.IsSporkActive(SPORK_19_COLDSTAKING_MAINTENANCE);
@@ -4078,7 +4068,13 @@ void static CheckBlockIndex()
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-    return PROTOCOL_VERSION;
+    if (sporkManager.IsSporkActive(SPORK_35_NEW_PROTOCOL_ENFORCEMENT_5)) return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_5;
+    if (sporkManager.IsSporkActive(SPORK_34_NEW_PROTOCOL_ENFORCEMENT_4)) return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_4;
+    if (sporkManager.IsSporkActive(SPORK_33_NEW_PROTOCOL_ENFORCEMENT_3)) return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_3;
+    if (sporkManager.IsSporkActive(SPORK_32_NEW_PROTOCOL_ENFORCEMENT_2)) return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_2;
+    if (sporkManager.IsSporkActive(SPORK_31_NEW_PROTOCOL_ENFORCEMENT_1)) return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT_1;
+
+    return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 }
 
 std::string CBlockFileInfo::ToString() const
