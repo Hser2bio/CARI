@@ -162,6 +162,7 @@ UniValue listmasternodes(const JSONRPCRequest& request)
 
         obj.pushKV("rank", (strStatus == "ENABLED" ? pos : 0));
         obj.pushKV("network", strNetwork);
+        obj.pushKV("ipaddress", strHost);
         obj.pushKV("txhash", strTxHash);
         obj.pushKV("outidx", (uint64_t)oIdx);
         obj.pushKV("pubkey", HexStr(mn.pubKeyMasternode));
