@@ -187,7 +187,7 @@ border:none;</string>
              </spacer>
             </item>
             <item alignment="Qt::AlignTop">
-             <widget class="QLabel" name="labelAmountTopShieldedPiv">
+             <widget class="QLabel" name="labelAmountTopShieldedCari">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -195,7 +195,7 @@ border:none;</string>
                </size>
               </property>
               <property name="text">
-               <string notr="true">1.000 PIV</string>
+               <string notr="true">1.000 CARI</string>
               </property>
              </widget>
             </item>
@@ -472,9 +472,9 @@ border:none;</string>
               </layout>
              </item>
              <item>
-              <widget class="QLabel" name="labelAmountPiv">
+              <widget class="QLabel" name="labelAmountCari">
                <property name="text">
-                <string notr="true">480.0685 PIV</string>
+                <string notr="true">480.0685 CARI</string>
                </property>
               </widget>
              </item>
