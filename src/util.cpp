@@ -382,7 +382,7 @@ static fs::path ZC_GetBaseParamsDir()
     // Windows < Vista: C:\Documents and Settings\Username\Application Data\PIVXParams
     // Windows >= Vista: C:\Users\Username\AppData\Roaming\PIVXParams
     // Mac: ~/Library/Application Support/PIVXParams
-    // Unix: ~/.pivx-params
+    // Unix: ~/.cari-params
 #ifdef WIN32
     // Windows
     return GetSpecialFolderPath(CSIDL_APPDATA) / "PIVXParams";
@@ -400,7 +400,7 @@ static fs::path ZC_GetBaseParamsDir()
     return pathRet / "PIVXParams";
 #else
     // Unix
-    return pathRet / ".pivx-params";
+    return pathRet / ".cari-params";
 #endif
 #endif
 }

@@ -15,7 +15,7 @@ else
     if [[ "$OSTYPE" == "darwin"* ]]; then
         PARAMS_DIR="$HOME/Library/Application Support/PIVXParams"
     else
-        PARAMS_DIR="$HOME/.pivx-params"
+        PARAMS_DIR="$HOME/.cari-params"
     fi
 fi
 

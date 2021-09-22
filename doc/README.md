@@ -16,7 +16,7 @@ Unpack the files into a directory and run:
 - `bin/cari-qt` (GUI) or
 - `bin/carid` (headless)
 
-If this is the first time running PIVX Core (since v5.0.0), you'll need to install the sapling params by running the included `install-params.sh` script, which copies the two params files to `$HOME/.pivx-params`
+If this is the first time running PIVX Core (since v5.0.0), you'll need to install the sapling params by running the included `install-params.sh` script, which copies the two params files to `$HOME/.cari-params`
 
 ### Windows
 
