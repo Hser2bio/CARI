@@ -1,0 +1,14 @@
+name: Delete all artifacts linked to a specific workflow run
+on: repository_dispatch
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Delete artifacts
+      if: github.event.action == 'delete_artifacts'
+      uses: christian-korneck/delete-run-artifacts-action@v1
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      with:
+        parent_runid: ${{github.event.client_payload.parent_runid}}
+        parent_repo: ${{github.event.client_payload.parent_repo}}
