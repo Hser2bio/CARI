@@ -1,0 +1,233 @@
+name: CARI wallet release
+on: 
+  push:
+    tags:
+    - 'CARIv*'
+env:
+  BUILDER_URL: "https://raw.githubusercontent.com/Carbon-Reduction-Initiative/cari-builder/main/cari-builder.sh"
+  DEBUG_BUILD_ARG: "${{ endsWith(github.ref, '-DEBUG') && '-d' || '' }}"
+  DEBUG_SNAP_ARG: "${{ endsWith(github.ref, '-DEBUG') && '-e' || '' }}"
+  DEBUG_SUFFIX: "${{ endsWith(github.ref, '-DEBUG') && '-DEBUG' || '' }}"
+  TMP_FOLDER: "${{github.workspace}}/tmp-cari-builder"
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  set-vars:
+    runs-on: ubuntu-20.04
+    outputs:
+      tag_name: ${{steps.vars.outputs.tag_name}}
+      wallet_no: ${{steps.vars.outputs.wallet_no}}
+    steps:
+    - id: vars
+      run: |
+        echo "::set-output name=tag_name::${GITHUB_REF##*/}"
+        
+        wallet_no=$(echo -n "${GITHUB_REF##*/}" | sed -E 's/^CARIv//')
+        
+        if [[ -n "${{env.DEBUG_BUILD_ARG}}" && ! $wallet_no =~ "-DEBUG"$ ]]; then
+            wallet_no+="-DEBUG"
+        fi
+        
+        echo "::set-output name=wallet_no::$wallet_no"
+
+  get-snapshot:
+    runs-on: ubuntu-20.04
+    needs: set-vars
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
+        fetch-depth: 0
+    - name: Get a snapshot of the CARI blockchain
+      run: |
+        [[ ! -e cari-builder.sh ]] && wget "${{env.BUILDER_URL}}"
+        bash cari-builder.sh -m linux_x86_64 -p . -v "${{needs.set-vars.outputs.tag_name}}" -d -s ${{env.DEBUG_SNAP_ARG}}
+    - name: Upload the snapshot
+      uses: actions/upload-artifact@v2
+      with:
+        name: snapshot-files
+        if-no-files-found: error
+        path: |
+          ${{env.TMP_FOLDER}}/cari-snapshot-*.zip
+          ${{env.TMP_FOLDER}}/SHA256SUMS-cari-snapshot.txt
+
+  build-linux-arm64:
+    runs-on: ubuntu-20.04
+    needs: set-vars
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
+        fetch-depth: 0
+    - name: Build wallet binaries and create archives for Linux ARM64
+      run: |
+        [[ ! -e cari-builder.sh ]] && wget "${{env.BUILDER_URL}}"
+        bash cari-builder.sh -m linux_arm64 -n -p . -t -v "${{needs.set-vars.outputs.tag_name}}" ${{env.DEBUG_BUILD_ARG}}
+    - name: Upload files for Linux ARM64
+      uses: actions/upload-artifact@v2
+      with:
+        name: linux-arm64-files
+        if-no-files-found: error
+        path: |
+          ${{env.TMP_FOLDER}}/cari-${{needs.set-vars.outputs.wallet_no}}-linux-arm64.zip
+          ${{env.TMP_FOLDER}}/SHA256SUMS-cari-${{needs.set-vars.outputs.wallet_no}}-linux-arm64.txt
+
+  build-linux-x86-64:
+    runs-on: ubuntu-20.04
+    needs: set-vars
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
+        fetch-depth: 0
+    - name: Build wallet binaries and create archives for Linux 64-bit
+      run: |
+        [[ ! -e cari-builder.sh ]] && wget "${{env.BUILDER_URL}}"
+        bash cari-builder.sh -m linux_x86_64 -p . -t -v "${{needs.set-vars.outputs.tag_name}}" ${{env.DEBUG_BUILD_ARG}}
+    - name: Upload files for Linux 64-bit
+      uses: actions/upload-artifact@v2
+      with:
+        name: linux-x86-64-files
+        if-no-files-found: error
+        path: |
+          ${{env.TMP_FOLDER}}/cari-${{needs.set-vars.outputs.wallet_no}}-linux-x86-64.zip
+          ${{env.TMP_FOLDER}}/SHA256SUMS-cari-${{needs.set-vars.outputs.wallet_no}}-linux-x86-64.txt
+
+  build-windows-x86-64:
+    runs-on: ubuntu-20.04
+    needs: set-vars
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
+        fetch-depth: 0
+    - name: Build wallet binaries and create archives for Windows 64-bit
+      run: |
+        [[ ! -e cari-builder.sh ]] && wget "${{env.BUILDER_URL}}"
+        bash cari-builder.sh -m windows_x86_64 -n -p . -t -v "${{needs.set-vars.outputs.tag_name}}" ${{env.DEBUG_BUILD_ARG}}
+    - name: Upload files for Windows 64-bit
+      uses: actions/upload-artifact@v2
+      with:
+        name: windows-x86-64-files
+        if-no-files-found: error
+        path: |
+          ${{env.TMP_FOLDER}}/cari-${{needs.set-vars.outputs.wallet_no}}-windows-x86-64.zip
+          ${{env.TMP_FOLDER}}/SHA256SUMS-cari-${{needs.set-vars.outputs.wallet_no}}-windows-x86-64.txt
+
+  release:
+    runs-on: ubuntu-20.04
+    needs: [set-vars, get-snapshot, build-linux-arm64, build-linux-x86-64, build-windows-x86-64]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
+        fetch-depth: 0
+    - name: Create a temporary working folder
+      run: |
+        mkdir -p "${{env.TMP_FOLDER}}"
+    - name: Download files
+      uses: actions/download-artifact@v2
+      with:
+        path: ${{env.TMP_FOLDER}}
+    - name: Create a new release on GitHub
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      run: |
+        # Variables
+        
+        snapshot_pattern="${{env.TMP_FOLDER}}/snapshot-files/cari-snapshot-*.zip"
+        snapshot_files=($snapshot_pattern)
+        snapshot_file=${snapshot_files[0]##*/}
+        
+        declare -A assets=(
+            [linux-arm64]="linux-arm64-files/cari-${{needs.set-vars.outputs.wallet_no}}-linux-arm64.zip"
+            [linux-x86-64]="linux-x86-64-files/cari-${{needs.set-vars.outputs.wallet_no}}-linux-x86-64.zip"
+            [windows-x86-64]="windows-x86-64-files/cari-${{needs.set-vars.outputs.wallet_no}}-windows-x86-64.zip"
+            [changelog]="CHANGELOG-cari-${{needs.set-vars.outputs.wallet_no}}.txt"
+            [hashes]="SHA256SUMS-cari-${{needs.set-vars.outputs.wallet_no}}.txt"
+            [snapshot]="snapshot-files/$snapshot_file"
+        )
+        declare -A labels=(
+            [linux-arm64]="CARI wallet for Linux ARM64 (zip)"
+            [linux-x86-64]="CARI wallet for Linux 64-bit (zip)"
+            [windows-x86-64]="CARI wallet for Windows 64-bit (zip)"
+            [changelog]="Changelog (txt)"
+            [hashes]="SHA256SUMS (txt)"
+            [snapshot]="Snapshot of the CARI blockchain (zip)"
+        )
+        
+        prev_tag_name=$(git tag --sort=-committerdate | awk "/^${{needs.set-vars.outputs.tag_name}}$/{getline; print}")
+        
+        release_title="CARI wallet v${{needs.set-vars.outputs.wallet_no}}"
+        release_desc="The \"Assets\" section below lists archives available according to your operating system:"$'\n'
+        release_desc+=$'\n'
+        release_desc+="- Windows 64-bit (\`x86_64\`)"$'\n'
+        release_desc+="- Linux 64-bit (\`x86_64\`)"$'\n'
+        release_desc+="- Linux ARM64 (\`aarch64\`)"$'\n'
+        release_desc+=$'\n'
+        release_desc+="Each archive contains binaries for the GUI (user interface) wallet and for the command line (CLI and daemon) wallet. If you want to have a wallet on your computer with a user interface, you only need to run the QT binary (\`cari-qt\` or \`cari-qt.exe\`)."$'\n'
+        release_desc+=$'\n'
+        release_desc+="For a list of modifications since the previous release, see the changelog."$'\n'
+        release_desc+=$'\n'
+        release_desc+="For archive hashes, see the file SHA256SUMS."$'\n'
+        release_desc+=$'\n'
+        release_desc+="For a recent snapshot of the CARI blockchain, see the snapshot archive."$'\n'
+        
+        # Debug info
+        echo "Contents of the temporary folder \"${{env.TMP_FOLDER}}\":"
+        ls -ahlR "${{env.TMP_FOLDER}}"
+        echo "-----"
+        
+        # Log file
+        log_title="Changelog for the CARI wallet v${{needs.set-vars.outputs.wallet_no}}"
+        title_sep=$(printf "=%.0s" $(seq "${#log_title}"))
+        echo "$log_title"$'\n'"$title_sep"$'\n' > "${{env.TMP_FOLDER}}/${assets[changelog]}"
+        git log --pretty=reference "$prev_tag_name..${{needs.set-vars.outputs.tag_name}}" >> "${{env.TMP_FOLDER}}/${assets[changelog]}"
+        echo "Contents of the log file \"${{env.TMP_FOLDER}}/${assets[changelog]}\" between the previous tag \"$prev_tag_name\" and the current tag \"${{needs.set-vars.outputs.tag_name}}\":"
+        cat "${{env.TMP_FOLDER}}/${assets[changelog]}"
+        echo "-----"
+        
+        # Hashes file
+        cat "${{env.TMP_FOLDER}}/linux-arm64-files/SHA256SUMS-cari-${{needs.set-vars.outputs.wallet_no}}-linux-arm64.txt" \
+            "${{env.TMP_FOLDER}}/linux-x86-64-files/SHA256SUMS-cari-${{needs.set-vars.outputs.wallet_no}}-linux-x86-64.txt" \
+            "${{env.TMP_FOLDER}}/windows-x86-64-files/SHA256SUMS-cari-${{needs.set-vars.outputs.wallet_no}}-windows-x86-64.txt" \
+            "${{env.TMP_FOLDER}}/snapshot-files/SHA256SUMS-cari-snapshot.txt" \
+            > "${{env.TMP_FOLDER}}/${assets[hashes]}"
+        echo "Contents of the hashes file \"${{env.TMP_FOLDER}}/${assets[hashes]}\":"
+        cat "${{env.TMP_FOLDER}}/${assets[hashes]}"
+        echo "-----"
+        
+        # Release
+        hub release create \
+          -a "${{env.TMP_FOLDER}}/${assets[windows-x86-64]}#${labels[windows-x86-64]}" \
+          -a "${{env.TMP_FOLDER}}/${assets[linux-x86-64]}#${labels[linux-x86-64]}" \
+          -a "${{env.TMP_FOLDER}}/${assets[linux-arm64]}#${labels[linux-arm64]}" \
+          -a "${{env.TMP_FOLDER}}/${assets[hashes]}#${labels[hashes]}" \
+          -a "${{env.TMP_FOLDER}}/${assets[changelog]}#${labels[changelog]}" \
+          -a "${{env.TMP_FOLDER}}/${assets[snapshot]}#${labels[snapshot]}" \
+          -m "$release_title" \
+          -m "$release_desc" \
+          "${{needs.set-vars.outputs.tag_name}}"
+
+  clean:
+    runs-on: ubuntu-20.04
+    needs: release
+    if: always()
+    steps:
+    - name: Delete artifacts (webhook call)
+      env:
+        FOR_WEBHOOKS_SECRET: ${{secrets.FOR_WEBHOOKS_SECRET}}
+      run: |
+        echo "::add-mask::$FOR_WEBHOOKS_SECRET"
+        curl -fLSv -X POST "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/vnd.github.everest-preview+json" \
+          -H "Authorization: token $FOR_WEBHOOKS_SECRET" \
+          --data-raw "{ \"event_type\": \"delete_artifacts\", \"client_payload\": {\"parent_runid\": \"$GITHUB_RUN_ID\", \"parent_repo\": \"$GITHUB_REPOSITORY\"} }"
