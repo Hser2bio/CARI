@@ -11,3 +11,8 @@ Always verify the signatures and checksums.
 See doc/build-*.md for instructions on building carid,
 the intended-for-services, no-graphical-interface, reference
 implementation of CARI.
+
+Alternatively, see "CARI Builder", a dedicated Bash script
+to cross-compile the CARI wallet:
+
+https://github.com/Carbon-Reduction-Initiative/cari-builder
