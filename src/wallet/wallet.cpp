@@ -2677,7 +2677,8 @@ bool CWallet::CreateTransaction(const std::vector<CRecipient>& vecSend,
     AvailableCoinsType coin_type,
     bool sign,
     CAmount nFeePay,
-    bool fIncludeDelegated)
+    bool fIncludeDelegated,
+    bool fPoWAlternative)
 {
     CAmount nValue = 0;
     int nChangePosRequest = nChangePosInOut;
@@ -2716,6 +2717,7 @@ bool CWallet::CreateTransaction(const std::vector<CRecipient>& vecSend,
                 nChangePosInOut = nChangePosRequest;
                 txNew.vin.clear();
                 txNew.vout.clear();
+                txNew.fPoWAlternative = fPoWAlternative;
                 wtxNew->fFromMe = true;
                 CAmount nTotalValue = nValue + nFeeRet;
 
@@ -2902,12 +2904,12 @@ bool CWallet::CreateTransaction(const std::vector<CRecipient>& vecSend,
     return true;
 }
 
-bool CWallet::CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWalletTx* wtxNew, CReserveKey& reservekey, CAmount& nFeeRet, std::string& strFailReason, const CCoinControl* coinControl, AvailableCoinsType coin_type, CAmount nFeePay, bool fIncludeDelegated)
+bool CWallet::CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWalletTx* wtxNew, CReserveKey& reservekey, CAmount& nFeeRet, std::string& strFailReason, const CCoinControl* coinControl, AvailableCoinsType coin_type, CAmount nFeePay, bool fIncludeDelegated, bool fPoWAlternative)
 {
     std::vector<CRecipient> vecSend;
     vecSend.emplace_back(scriptPubKey, nValue, false);
     int nChangePosInOut = -1;
-    return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, nChangePosInOut, strFailReason, coinControl, coin_type, true, nFeePay, fIncludeDelegated);
+    return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, nChangePosInOut, strFailReason, coinControl, coin_type, true, nFeePay, fIncludeDelegated, fPoWAlternative);
 }
 
 bool CWallet::CreateCoinStake(

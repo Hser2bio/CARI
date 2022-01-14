@@ -137,7 +137,7 @@ size_t CTransaction::DynamicMemoryUsage() const
 
 CTransaction::CTransaction() : nVersion(CTransaction::CURRENT_VERSION), nType(TxType::NORMAL), vin(), vout(), nLockTime(0), fPoWAlternative(false) {}
 
-CTransaction::CTransaction(const CMutableTransaction &tx) : nVersion(tx.nVersion), nType(tx.nType), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime), sapData(tx.sapData), extraPayload(tx.extraPayload) {
+CTransaction::CTransaction(const CMutableTransaction &tx) : nVersion(tx.nVersion), nType(tx.nType), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime), fPoWAlternative(tx.fPoWAlternative), sapData(tx.sapData), extraPayload(tx.extraPayload) {
     UpdateHash();
 }
 
