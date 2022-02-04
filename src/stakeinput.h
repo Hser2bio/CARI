@@ -33,17 +33,17 @@ public:
 };
 
 
-class CCariStake : public CStakeInput
+class CPivStake : public CStakeInput
 {
 private:
     const CTxOut outputFrom;
     const COutPoint outpointFrom;
 
 public:
-    CCariStake(const CTxOut& _from, const COutPoint& _outPointFrom, const CBlockIndex* _pindexFrom) :
+    CPivStake(const CTxOut& _from, const COutPoint& _outPointFrom, const CBlockIndex* _pindexFrom) :
             CStakeInput(_pindexFrom), outputFrom(_from), outpointFrom(_outPointFrom) {}
 
-    static CCariStake* NewCariStake(const CTxIn& txin);
+    static CPivStake* NewPivStake(const CTxIn& txin);
 
     bool InitFromTxIn(const CTxIn& txin) override { return pindexFrom; }
     const CBlockIndex* GetIndexFrom() const override;

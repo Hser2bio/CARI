@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2020 The PIVX Core developers
+# Copyright (c) 2020 The CARI Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,6 @@ from test_framework.test_framework import PivxTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
-    sync_mempools,
 )
 
 from decimal import Decimal
@@ -33,7 +32,7 @@ class SaplingMempoolTest(PivxTestFramework):
         # Sanity-check the test harness
         assert_equal([x.getblockcount() for x in self.nodes], [120] * self.num_nodes)
 
-        # miner sends a 10 PIV note to Alice
+        # miner sends a 10 CARI note to Alice
         self.log.info("Shielding some coins for Alice...")
         alice_zaddr = alice.getnewshieldaddress()
         miner.shieldsendmany("from_transparent", [{"address": alice_zaddr, "amount": Decimal('10.00')}], 1, fee)
@@ -53,7 +52,7 @@ class SaplingMempoolTest(PivxTestFramework):
 
         # Miner receives tx_B and accepts it in the mempool
         assert (txid_B in alice.getrawmempool())
-        sync_mempools(self.nodes)
+        self.sync_mempools()
         assert(txid_B in miner.getrawmempool())
         self.log.info("tx_B accepted in the memory pool.")
 
@@ -73,7 +72,7 @@ class SaplingMempoolTest(PivxTestFramework):
                                 alice.sendrawtransaction, rawTx_hex)
         self.log.info("tx_A NOT accepted in the mempool. Good.")
 
-        # miner sends another 10 PIV note to Alice
+        # miner sends another 10 CARI note to Alice
         self.log.info("Shielding some more coins for Alice...")
         miner.shieldsendmany("from_transparent", [{"address": alice_zaddr, "amount": Decimal('10.00')}], 1, fee)
         miner.generate(1)
@@ -87,7 +86,7 @@ class SaplingMempoolTest(PivxTestFramework):
         txid_C = alice.sendrawtransaction(txC_hex)
 
         # Miner receives tx_C and accepts it in the mempool
-        sync_mempools(self.nodes)
+        self.sync_mempools()
         assert(txid_C in miner.getrawmempool())
         self.log.info("tx_C accepted in the memory pool.")
 

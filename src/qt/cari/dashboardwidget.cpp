@@ -52,9 +52,9 @@ DashboardWidget::DashboardWidget(CARIGUI* parent) :
 
     // Staking Information
     setCssSubtitleScreen(ui->labelMessage);
-    setCssProperty(ui->labelSquareCari, "square-chart-cari");
-    setCssProperty(ui->labelSquarezCari, "square-chart-zcari");
-    setCssProperty(ui->labelCari, "text-chart-cari");
+    setCssProperty(ui->labelSquarePiv, "square-chart-cari");
+    setCssProperty(ui->labelSquarezPiv, "square-chart-zcari");
+    setCssProperty(ui->labelPiv, "text-chart-cari");
     setCssProperty(ui->labelZcari, "text-chart-zcari");
 
     // Staking Amount
@@ -62,7 +62,7 @@ DashboardWidget::DashboardWidget(CARIGUI* parent) :
     fontBold.setWeight(QFont::Bold);
 
     setCssProperty(ui->labelChart, "legend-chart");
-    setCssProperty(ui->labelAmountCari, "text-stake-cari-disable");
+    setCssProperty(ui->labelAmountPiv, "text-stake-cari-disable");
     setCssProperty(ui->labelAmountZcari, "text-stake-zcari-disable");
 
     setCssProperty({ui->pushButtonAll,  ui->pushButtonMonth, ui->pushButtonYear}, "btn-check-time");
@@ -181,19 +181,18 @@ void DashboardWidget::loadWalletModel()
         filter->setSortCaseSensitivity(Qt::CaseInsensitive);
         filter->setFilterCaseSensitivity(Qt::CaseInsensitive);
         filter->setSortRole(Qt::EditRole);
-        filter->setSourceModel(txModel);
 
         // Read filter settings
         QSettings settings;
-        int filterByType = settings.value("transactionType", TransactionFilterProxy::ALL_TYPES).toInt();
-
-        filter->setTypeFilter(filterByType); // Set filter
+        quint32 filterByType = settings.value("transactionType", TransactionFilterProxy::ALL_TYPES).toInt();
         int filterIndex = ui->comboBoxSortType->findData(filterByType); // Find index
+        filterByType = (filterIndex == -1) ? TransactionFilterProxy::ALL_TYPES : filterByType;
+        filter->setTypeFilter(filterByType); // Set filter
         ui->comboBoxSortType->setCurrentIndex(filterIndex); // Set item in ComboBox
-
         // Read sort settings
         changeSort(settings.value("transactionSort", SortTx::DATE_DESC).toInt());
 
+        filter->setSourceModel(txModel);
         txHolder->setFilter(filter);
         ui->listTransactions->setModel(filter);
         ui->listTransactions->setModelColumn(TransactionTableModel::ToAddress);
@@ -212,15 +211,9 @@ void DashboardWidget::loadWalletModel()
         // Notification pop-up for new transaction
         connect(txModel, &TransactionTableModel::rowsInserted, this, &DashboardWidget::processNewTransaction);
 #ifdef USE_QTCHARTS
-        // chart filter
-        stakesFilter = new TransactionFilterProxy();
-        stakesFilter->setDynamicSortFilter(true);
-        stakesFilter->setOnlyStakes(true);
-        stakesFilter->setSourceModel(txModel);
-        hasStakes = stakesFilter->rowCount() > 0;
-
         onHideChartsChanged(walletModel->getOptionsModel()->isHideCharts());
-        connect(walletModel->getOptionsModel(), &OptionsModel::hideChartsChanged, this, &DashboardWidget::onHideChartsChanged);
+        connect(walletModel->getOptionsModel(), &OptionsModel::hideChartsChanged, this,
+                &DashboardWidget::onHideChartsChanged);
 #endif
     }
     // update the display unit, to not use the default ("CARI")
@@ -230,10 +223,11 @@ void DashboardWidget::loadWalletModel()
 void DashboardWidget::onTxArrived(const QString& hash, const bool& isCoinStake, const bool& isCSAnyType)
 {
     showList();
+    if (!isVisible()) return;
 #ifdef USE_QTCHARTS
     if (isCoinStake) {
         // Update value if this is our first stake
-        if (!hasStakes)
+        if (!hasStakes && stakesFilter)
             hasStakes = stakesFilter->rowCount() > 0;
         tryChartRefresh();
     }
@@ -307,7 +301,6 @@ void DashboardWidget::changeSort(int nSortIndex)
 
     ui->comboBoxSort->setCurrentIndex(nSortIndex);
     filter->sort(nColumnIndex, order);
-    ui->listTransactions->update();
 
     // Store settings
     QSettings settings;
@@ -341,6 +334,7 @@ void DashboardWidget::walletSynced(bool sync)
         this->isSync = sync;
         ui->layoutWarning->setVisible(!this->isSync);
 #ifdef USE_QTCHARTS
+        if (!isVisible()) return;
         tryChartRefresh();
 #endif
     }
@@ -367,7 +361,9 @@ void DashboardWidget::tryChartRefresh()
         } else {
             // Check for min update time to not reload the UI so often if the node is syncing.
             int64_t now = GetTime();
-            if (lastRefreshTime + CHART_LOAD_MIN_TIME_INTERVAL < now) {
+            int chartLoadIntervalTime = CHART_LOAD_MIN_TIME_INTERVAL;
+            if (clientModel->inInitialBlockDownload()) chartLoadIntervalTime *= 6; // 90 seconds update
+            if (lastRefreshTime + chartLoadIntervalTime < now) {
                 lastRefreshTime = now;
                 refreshChart();
             }
@@ -415,7 +411,7 @@ void DashboardWidget::loadChart()
 
 void DashboardWidget::showHideEmptyChart(bool showEmpty, bool loading, bool forceView)
 {
-    if (stakesFilter->rowCount() > SHOW_EMPTY_CHART_VIEW_THRESHOLD || forceView) {
+    if ((stakesFilter && stakesFilter->rowCount() > SHOW_EMPTY_CHART_VIEW_THRESHOLD) || forceView) {
         ui->layoutChart->setVisible(!showEmpty);
         ui->emptyContainerChart->setVisible(showEmpty);
     }
@@ -487,6 +483,7 @@ void DashboardWidget::changeChartColors()
 
 void DashboardWidget::updateStakeFilter()
 {
+    if (!stakesFilter) return;
     if (chartShow != ALL) {
         bool filterByMonth = false;
         if (monthFilter != 0 && chartShow == MONTH) {
@@ -524,7 +521,10 @@ void DashboardWidget::updateStakeFilter()
 // pair CARI, zCARI
 const QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
 {
-    updateStakeFilter();
+    if (filterUpdateNeeded) {
+        filterUpdateNeeded = false;
+        updateStakeFilter();
+    }
     const int size = stakesFilter->rowCount();
     QMap<int, std::pair<qint64, qint64>> amountBy;
     // Get all of the stakes
@@ -532,7 +532,7 @@ const QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
         QModelIndex modelIndex = stakesFilter->index(i, TransactionTableModel::ToAddress);
         qint64 amount = llabs(modelIndex.data(TransactionTableModel::AmountRole).toLongLong());
         QDate date = modelIndex.data(TransactionTableModel::DateRole).toDateTime().date();
-        bool isCari = modelIndex.data(TransactionTableModel::TypeRole).toInt() != TransactionRecord::StakeZCARI;
+        bool isPiv = modelIndex.data(TransactionTableModel::TypeRole).toInt() != TransactionRecord::StakeZCARI;
 
         int time = 0;
         switch (chartShow) {
@@ -553,12 +553,12 @@ const QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
                 return amountBy;
         }
         if (amountBy.contains(time)) {
-            if (isCari) {
+            if (isPiv) {
                 amountBy[time].first += amount;
             } else
                 amountBy[time].second += amount;
         } else {
-            if (isCari) {
+            if (isPiv) {
                 amountBy[time] = std::make_pair(amount, 0);
             } else {
                 amountBy[time] = std::make_pair(0, amount);
@@ -596,14 +596,14 @@ bool DashboardWidget::loadChartData(bool withMonthNames)
             std::pair <qint64, qint64> pair = chartData->amountsByCache[num];
             cari = (pair.first != 0) ? pair.first / 100000000 : 0;
             zcari = (pair.second != 0) ? pair.second / 100000000 : 0;
-            chartData->totalCari += pair.first;
+            chartData->totalPiv += pair.first;
             chartData->totalZcari += pair.second;
         }
 
         chartData->xLabels << ((withMonthNames) ? monthsNames[num - 1] : QString::number(num));
 
-        chartData->valuesCari.append(cari);
-        chartData->valueszCari.append(zcari);
+        chartData->valuesPiv.append(cari);
+        chartData->valueszPiv.append(zcari);
 
         int max = std::max(cari, zcari);
         if (max > chartData->maxValue) {
@@ -620,6 +620,7 @@ void DashboardWidget::onChartYearChanged(const QString& yearStr)
         int newYear = yearStr.toInt();
         if (newYear != yearFilter) {
             yearFilter = newYear;
+            filterUpdateNeeded = true;
             refreshChart();
         }
     }
@@ -631,6 +632,7 @@ void DashboardWidget::onChartMonthChanged(const QString& monthStr)
         int newMonth = ui->comboBoxMonths->currentData().toInt();
         if (newMonth != monthFilter) {
             monthFilter = newMonth;
+            filterUpdateNeeded = true;
             refreshChart();
 #ifndef Q_OS_MAC
         // quick hack to re paint the chart view.
@@ -674,20 +676,20 @@ void DashboardWidget::onChartRefreshed()
     series->attachAxis(axisX);
     series->attachAxis(axisY);
 
-    set0->append(chartData->valuesCari);
-    set1->append(chartData->valueszCari);
+    set0->append(chartData->valuesPiv);
+    set1->append(chartData->valueszPiv);
 
     // Total
     nDisplayUnit = walletModel->getOptionsModel()->getDisplayUnit();
-    if (chartData->totalCari > 0 || chartData->totalZcari > 0) {
-        setCssProperty(ui->labelAmountCari, "text-stake-cari");
+    if (chartData->totalPiv > 0 || chartData->totalZcari > 0) {
+        setCssProperty(ui->labelAmountPiv, "text-stake-cari");
         setCssProperty(ui->labelAmountZcari, "text-stake-zcari");
     } else {
-        setCssProperty(ui->labelAmountCari, "text-stake-cari-disable");
+        setCssProperty(ui->labelAmountPiv, "text-stake-cari-disable");
         setCssProperty(ui->labelAmountZcari, "text-stake-zcari-disable");
     }
-    forceUpdateStyle({ui->labelAmountCari, ui->labelAmountZcari});
-    ui->labelAmountCari->setText(GUIUtil::formatBalance(chartData->totalCari, nDisplayUnit));
+    forceUpdateStyle({ui->labelAmountPiv, ui->labelAmountZcari});
+    ui->labelAmountPiv->setText(GUIUtil::formatBalance(chartData->totalPiv, nDisplayUnit));
     ui->labelAmountZcari->setText(GUIUtil::formatBalance(chartData->totalZcari, nDisplayUnit, true));
 
     series->append(set0);
@@ -823,7 +825,7 @@ void DashboardWidget::onChartArrowClicked(bool goLeft)
             }
         }
     }
-
+    filterUpdateNeeded = true;
     refreshChart();
     //Check if data end day is current date and monthfilter is current month
     bool fEndDayisCurrent = dataenddate  == currentDate.day() && monthFilter == currentDate.month();
@@ -874,6 +876,23 @@ void DashboardWidget::windowResizeEvent(QResizeEvent* event)
 void DashboardWidget::onHideChartsChanged(bool fHide)
 {
     fShowCharts = !fHide;
+
+    if (fShowCharts) {
+        if (!stakesFilter) {
+            stakesFilter = new TransactionFilterProxy(this);
+            stakesFilter->setDynamicSortFilter(false);
+            stakesFilter->setSortCaseSensitivity(Qt::CaseInsensitive);
+            stakesFilter->setFilterCaseSensitivity(Qt::CaseInsensitive);
+            stakesFilter->setOnlyStakes(true);
+        }
+        stakesFilter->setSourceModel(txModel);
+        hasStakes = stakesFilter->rowCount() > 0;
+    } else {
+        if (stakesFilter) {
+            stakesFilter->setSourceModel(nullptr);
+        }
+    }
+
     // Hide charts if requested
     ui->right->setVisible(fShowCharts);
     if (fShowCharts) tryChartRefresh();

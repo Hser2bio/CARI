@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or https://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_SAPLING_OPERATION_H
-#define PIVX_SAPLING_OPERATION_H
+#ifndef CARI_SAPLING_OPERATION_H
+#define CARI_SAPLING_OPERATION_H
 
 #include "amount.h"
 #include "sapling/transaction_builder.h"
@@ -104,7 +104,8 @@ public:
     SaplingOperation* setCoinControl(const CCoinControl* _coinControl) { coinControl = _coinControl; return this; }
 
     CAmount getFee() { return fee; }
-    CTransaction getFinalTx() { return finalTx; }
+    CTransaction getFinalTx() { return *finalTx; }
+    CTransactionRef getFinalTxRef() { return finalTx; }
 
 private:
     FromAddress fromAddress;
@@ -124,7 +125,7 @@ private:
 
     // Builder
     TransactionBuilder txBuilder;
-    CTransaction finalTx;
+    CTransactionRef finalTx;
 
     OperationResult loadUtxos(TxValues& values);
     OperationResult loadUtxos(TxValues& txValues, const std::vector<COutput>& selectedUTXO, const CAmount selectedUTXOAmount);
@@ -136,4 +137,4 @@ OperationResult GetMemoFromString(const std::string& s, std::array<unsigned char
 
 OperationResult CheckTransactionSize(std::vector<SendManyRecipient>& recipients, bool fromTaddr);
 
-#endif //PIVX_SAPLING_OPERATION_H
+#endif //CARI_SAPLING_OPERATION_H

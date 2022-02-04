@@ -111,67 +111,67 @@ SET(QT_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/transactiontablemodel.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/walletmodel.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/walletmodeltransaction.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/pivxgui.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/loadingdialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/pwidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/focuseddialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/guitransactionsutils.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/snackbar.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/navmenuwidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/lockunlock.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/receivedialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/furabstractlistitemdelegate.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/txviewholder.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/qtutils.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/balancebubble.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/expandablebutton.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/topbar.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/txrow.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/addressfilterproxymodel.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/dashboardwidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/addresslabelrow.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/contactdropdownrow.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/contactsdropdown.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/optionbutton.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/mninfodialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/coldstakingmodel.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/mnmodel.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/masternodewizarddialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/mnrow.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/masternodeswidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/sendchangeaddressdialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/sendconfirmdialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/sendcustomfeedialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/sendmemodialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/sendmultirow.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/send.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/addnewaddressdialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/addnewcontactdialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/requestdialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/receivewidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/myaddressrow.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/csrow.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/addressholder.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/tooltipmenu.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/addresseswidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/defaultdialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/coldstakingwidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingsbackupwallet.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingsbittoolwidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingsconsolewidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingsdisplayoptionswidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingsfaqwidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingsinformationwidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingsmainoptionswidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingsmultisenddialog.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingsmultisendwidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingssignmessagewidgets.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingswalletoptionswidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingswalletrepairwidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingsexportcsv.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/settings/settingswidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/welcomecontentwidget.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/pivx/splash.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/carigui.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/loadingdialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/pwidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/focuseddialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/guitransactionsutils.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/snackbar.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/navmenuwidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/lockunlock.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/receivedialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/furabstractlistitemdelegate.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/txviewholder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/qtutils.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/balancebubble.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/expandablebutton.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/topbar.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/txrow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/addressfilterproxymodel.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/dashboardwidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/addresslabelrow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/contactdropdownrow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/contactsdropdown.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/optionbutton.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/mninfodialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/coldstakingmodel.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/mnmodel.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/masternodewizarddialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/mnrow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/masternodeswidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/sendchangeaddressdialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/sendconfirmdialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/sendcustomfeedialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/sendmemodialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/sendmultirow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/send.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/addnewaddressdialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/addnewcontactdialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/requestdialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/receivewidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/myaddressrow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/csrow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/addressholder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/tooltipmenu.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/addresseswidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/defaultdialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/coldstakingwidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingsbackupwallet.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingsbittoolwidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingsconsolewidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingsdisplayoptionswidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingsfaqwidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingsinformationwidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingsmainoptionswidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingsmultisenddialog.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingsmultisendwidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingssignmessagewidgets.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingswalletoptionswidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingswalletrepairwidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingsexportcsv.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/settings/settingswidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/welcomecontentwidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cari/splash.cpp
         )
 
 # Workaround until the old rpcconsole UI window is fully removed
@@ -216,10 +216,10 @@ add_custom_target(translations_target ALL DEPENDS ${QM})
 QT5_ADD_RESOURCES(QRC_RESOURCE cari.qrc)
 QT5_ADD_RESOURCES(QRC_LOCALE_RESOURCE cari_locale.qrc)
 
-add_executable(pivx-qt pivx.cpp ${QM} ${QRC_RESOURCE} ${QRC_LOCALE_RESOURCE})
-add_dependencies(pivx-qt translations_target libunivalue libsecp256k1 libzcashrust leveldb crc32c)
-target_include_directories(pivx-qt PUBLIC ${ENDIAN_INCLUDES})
-target_link_libraries(pivx-qt
+add_executable(cari-qt cari.cpp ${QM} ${QRC_RESOURCE} ${QRC_LOCALE_RESOURCE})
+add_dependencies(cari-qt translations_target libunivalue libsecp256k1 libzcashrust leveldb crc32c)
+target_include_directories(cari-qt PUBLIC ${ENDIAN_INCLUDES})
+target_link_libraries(cari-qt
         qt_stuff
         univalue
         SERVER_A WALLET_A COMMON_A ZEROCOIN_A UTIL_A SAPLING_A BITCOIN_CRYPTO_A CLI_A

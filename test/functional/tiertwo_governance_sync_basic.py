@@ -56,7 +56,7 @@ class MasternodeGovernanceBasicTest(PivxTier2TestFramework):
             assert(len(votesInfo) > 0)
             found = False
             for voteInfo in votesInfo:
-                if (voteInfo["mnId"] == mnCollateralHash) :
+                if (voteInfo["mnId"].split("-")[0] == mnCollateralHash) :
                     assert_equal(voteInfo["Vote"], voteType)
                     found = True
             assert_true(found, "Error checking vote existence in node " + str(i))
@@ -101,7 +101,7 @@ class MasternodeGovernanceBasicTest(PivxTier2TestFramework):
         # Prepare the proposal
         self.log.info("preparing budget proposal..")
         firstProposalName = "super-cool"
-        firstProposalLink = "https://forum.pivx.org/t/test-proposal"
+        firstProposalLink = "https://forum.cari.org/t/test-proposal"
         firstProposalCycles = 2
         firstProposalAddress = self.miner.getnewaddress()
         firstProposalAmountPerCycle = 300

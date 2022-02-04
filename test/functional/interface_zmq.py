@@ -8,7 +8,7 @@ import os
 import struct
 import time
 
-from test_framework.test_framework import CariTestFramework, SkipTest
+from test_framework.test_framework import PivxTestFramework, SkipTest
 from test_framework.mininode import CTransaction
 from test_framework.util import (assert_equal,
                                  bytes_to_hex_str,
@@ -35,7 +35,7 @@ class ZMQSubscriber:
         return body
 
 
-class ZMQTest (CariTestFramework):
+class ZMQTest (PivxTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
 
@@ -110,7 +110,7 @@ class ZMQTest (CariTestFramework):
 
             # Should receive the generated raw block.
             block = self.rawblock.receive()
-            assert_equal(genhashes[x], bytes_to_hex_str(hash256(block[:112])))
+            assert_equal(genhashes[x], bytes_to_hex_str(hash256(block[:80])))
 
         self.log.info("Wait for tx from second node")
         payment_txid = self.nodes[1].sendtoaddress(self.nodes[0].getnewaddress(), 1.0)

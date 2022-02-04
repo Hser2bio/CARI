@@ -8,17 +8,17 @@
 #include "stakeinput.h"
 #include "txdb.h"
 
-class CLegacyZCariStake : public CStakeInput
+class CLegacyZPivStake : public CStakeInput
 {
 private:
-    uint32_t nChecksum;
-    libzerocoin::CoinDenomination denom;
-    uint256 hashSerial;
+    uint32_t nChecksum{0};
+    libzerocoin::CoinDenomination denom{libzerocoin::ZQ_ERROR};
+    uint256 hashSerial{UINT256_ZERO};
 
 public:
-    CLegacyZCariStake() : CStakeInput(nullptr) {}
+    CLegacyZPivStake() : CStakeInput(nullptr) {}
 
-    explicit CLegacyZCariStake(const libzerocoin::CoinSpend& spend);
+    explicit CLegacyZPivStake(const libzerocoin::CoinSpend& spend);
     bool InitFromTxIn(const CTxIn& txin) override;
     bool IsZCARI() const override { return true; }
     uint32_t GetChecksum() const { return nChecksum; }

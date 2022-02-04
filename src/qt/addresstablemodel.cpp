@@ -46,14 +46,19 @@ struct AddressTableEntry {
     };
 
     Type type;
-    QString label;
-    QString address;
-    QString pubcoin;
-    uint creationTime;
+    QString label{};
+    QString address{};
+    QString pubcoin{};
+    uint creationTime{0};
 
-    AddressTableEntry() {}
-    AddressTableEntry(Type type, const QString &pubcoin):    type(type), pubcoin(pubcoin) {}
-    AddressTableEntry(Type type, const QString& label, const QString& address, const uint _creationTime) : type(type), label(label), address(address), creationTime(_creationTime) {}
+    AddressTableEntry() = delete;   // need to specify a type
+    AddressTableEntry(Type _type, const QString& _pubcoin):    type(_type), pubcoin(_pubcoin) {}
+    AddressTableEntry(Type _type, const QString& _label, const QString& _address, const uint _creationTime) :
+        type(_type),
+        label(_label),
+        address(_address),
+        creationTime(_creationTime)
+    {}
 };
 
 struct AddressTableEntryLessThan {
@@ -483,7 +488,7 @@ void AddressTableModel::updateEntry(const QString& address,
     const QString& purpose,
     int status)
 {
-    // Update address book model from Cari core
+    // Update address book model from Pivx core
     priv->updateEntry(address, label, isMine, purpose, status);
 }
 

@@ -10,6 +10,7 @@
 
 #include "qt/guiutil.h"
 #include "clientmodel.h"
+#include "interfaces/handler.h"
 #include "optionsmodel.h"
 #include "networkstyle.h"
 #include "notificator.h"
@@ -18,8 +19,6 @@
 #include "qt/cari/defaultdialog.h"
 
 #include "init.h"
-#include "masternodelist.h"
-#include "guiinterface.h"
 #include "util.h"
 
 #include <QApplication>
@@ -126,7 +125,6 @@ CARIGUI::CARIGUI(const NetworkStyle* networkStyle, QWidget* parent) :
         receiveWidget = new ReceiveWidget(this);
         addressesWidget = new AddressesWidget(this);
         masterNodesWidget = new MasterNodesWidget(this);
-        masternodeListWidget = new MasternodeList(this);
         coldStakingWidget = new ColdStakingWidget(this);
         settingsWidget = new SettingsWidget(this);
 
@@ -136,7 +134,6 @@ CARIGUI::CARIGUI(const NetworkStyle* networkStyle, QWidget* parent) :
         stackedContainer->addWidget(receiveWidget);
         stackedContainer->addWidget(addressesWidget);
         stackedContainer->addWidget(masterNodesWidget);
-        stackedContainer->addWidget(masternodeListWidget);
         stackedContainer->addWidget(coldStakingWidget);
         stackedContainer->addWidget(settingsWidget);
         stackedContainer->setCurrentWidget(dashboard);
@@ -203,8 +200,6 @@ void CARIGUI::connectActions()
     connect(addressesWidget, &AddressesWidget::showHide, this, &CARIGUI::showHide);
     connect(masterNodesWidget, &MasterNodesWidget::showHide, this, &CARIGUI::showHide);
     connect(masterNodesWidget, &MasterNodesWidget::execDialog, this, &CARIGUI::execDialog);
-    connect(masternodeListWidget, &MasternodeList::showHide, this, &CARIGUI::showHide);
-    connect(masternodeListWidget, &MasternodeList::execDialog, this, &CARIGUI::execDialog);
     connect(coldStakingWidget, &ColdStakingWidget::showHide, this, &CARIGUI::showHide);
     connect(coldStakingWidget, &ColdStakingWidget::execDialog, this, &CARIGUI::execDialog);
     connect(settingsWidget, &SettingsWidget::execDialog, this, &CARIGUI::execDialog);
@@ -425,7 +420,7 @@ void CARIGUI::message(const QString& title, const QString& message, unsigned int
         // Append title to "CARI - "
         if (!msgType.isEmpty())
             strTitle += " - " + msgType;
-        notificator->notify((Notificator::Class) nNotifyIcon, strTitle, message);
+        notificator->notify(static_cast<Notificator::Class>(nNotifyIcon), strTitle, message);
     }
 }
 
@@ -498,11 +493,6 @@ void CARIGUI::goToAddresses()
 void CARIGUI::goToMasterNodes()
 {
     showTop(masterNodesWidget);
-}
-
-void CARIGUI::goToMasternodeList()
-{
-    showTop(masternodeListWidget);
 }
 
 void CARIGUI::goToColdStaking()
@@ -625,7 +615,6 @@ bool CARIGUI::addWallet(const QString& name, WalletModel* walletModel)
     sendWidget->setWalletModel(walletModel);
     addressesWidget->setWalletModel(walletModel);
     masterNodesWidget->setWalletModel(walletModel);
-    masternodeListWidget->setWalletModel(walletModel);
     coldStakingWidget->setWalletModel(walletModel);
     settingsWidget->setWalletModel(walletModel);
 
@@ -636,7 +625,6 @@ bool CARIGUI::addWallet(const QString& name, WalletModel* walletModel)
     connect(topBar, &TopBar::message, this, &CARIGUI::message);
     connect(sendWidget, &SendWidget::message,this, &CARIGUI::message);
     connect(receiveWidget, &ReceiveWidget::message,this, &CARIGUI::message);
-    connect(masternodeListWidget, &MasternodeList::message, this, &CARIGUI::message);
     connect(addressesWidget, &AddressesWidget::message,this, &CARIGUI::message);
     connect(settingsWidget, &SettingsWidget::message, this, &CARIGUI::message);
 
@@ -702,11 +690,11 @@ static bool ThreadSafeMessageBox(CARIGUI* gui, const std::string& message, const
 void CARIGUI::subscribeToCoreSignals()
 {
     // Connect signals to client
-    uiInterface.ThreadSafeMessageBox.connect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
+    m_handler_message_box = interfaces::MakeHandler(uiInterface.ThreadSafeMessageBox.connect(std::bind(ThreadSafeMessageBox, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
 }
 
 void CARIGUI::unsubscribeFromCoreSignals()
 {
     // Disconnect signals from client
-    uiInterface.ThreadSafeMessageBox.disconnect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
+    m_handler_message_box->disconnect();
 }

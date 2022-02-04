@@ -18,8 +18,6 @@
 #include "zcarichain.h"
 #include "zcari/zpos.h"
 
-#include <boost/assign/list_of.hpp>
-
 /**
  * CStakeKernel Constructor
  *
@@ -109,8 +107,8 @@ bool LoadStakeInput(const CBlock& block, const CBlockIndex* pindexPrev, std::uni
     // Construct the stakeinput object
     const CTxIn& txin = block.vtx[1]->vin[0];
     stake = txin.IsZerocoinSpend() ?
-            std::unique_ptr<CStakeInput>(new CLegacyZCariStake()) :
-            std::unique_ptr<CStakeInput>(CCariStake::NewCariStake(txin));
+            std::unique_ptr<CStakeInput>(new CLegacyZPivStake()) :
+            std::unique_ptr<CStakeInput>(CPivStake::NewPivStake(txin));
 
     return stake && stake->InitFromTxIn(txin);
 }

@@ -57,8 +57,6 @@ from .util import (
     set_node_times,
     SPORK_ACTIVATION_TIME,
     SPORK_DEACTIVATION_TIME,
-    sync_blocks,
-    sync_mempools,
     vZC_DENOMS,
     wait_until,
 )
@@ -75,7 +73,7 @@ TEST_EXIT_SKIPPED = 77
 TMPDIR_PREFIX = "cari_func_test_"
 
 
-class CariTestFramework():
+class PivxTestFramework():
     """Base class for a cari test script.
 
     Individual cari test scripts should subclass this class and override the set_test_params() and run_test() methods.
@@ -96,6 +94,7 @@ class CariTestFramework():
         self.setup_clean_chain = False
         self.nodes = []
         self.mocktime = 0
+        self.rpc_timewait = 600  # Wait for up to 600 seconds for the RPC server to respond
         self.supports_cli = False
         self.set_test_params()
 
@@ -261,7 +260,7 @@ class CariTestFramework():
 
     # Public helper methods. These can be accessed by the subclass test scripts.
 
-    def add_nodes(self, num_nodes, extra_args=None, rpchost=None, timewait=None, binary=None):
+    def add_nodes(self, num_nodes, extra_args=None, *, rpchost=None, binary=None):
         """Instantiate TestNode objects"""
 
         if extra_args is None:
@@ -276,7 +275,7 @@ class CariTestFramework():
         assert_equal(len(extra_args), num_nodes)
         assert_equal(len(binary), num_nodes)
         for i in range(num_nodes):
-            self.nodes.append(TestNode(i, self.options.tmpdir, extra_args[i], rpchost, timewait=timewait, binary=binary[i], stderr=None, mocktime=self.mocktime, coverage_dir=self.options.coveragedir, use_cli=self.options.usecli))
+            self.nodes.append(TestNode(i, self.options.tmpdir, extra_args[i], rpchost, timewait=self.rpc_timewait, binary=binary[i], stderr=None, mocktime=self.mocktime, coverage_dir=self.options.coveragedir, use_cli=self.options.usecli))
 
     def start_node(self, i, *args, **kwargs):
         """Start a carid"""
@@ -364,7 +363,8 @@ class CariTestFramework():
         """
         disconnect_nodes(self.nodes[1], 2)
         disconnect_nodes(self.nodes[2], 1)
-        self.sync_all([self.nodes[:2], self.nodes[2:]])
+        self.sync_all(self.nodes[:2])
+        self.sync_all(self.nodes[2:])
 
     def join_network(self):
         """
@@ -373,13 +373,52 @@ class CariTestFramework():
         connect_nodes(self.nodes[1], 2)
         self.sync_all()
 
-    def sync_all(self, node_groups=None):
-        if not node_groups:
-            node_groups = [self.nodes]
+    def sync_blocks(self, nodes=None, wait=1, timeout=60):
+        """
+        Wait until everybody has the same tip.
+        sync_blocks needs to be called with an rpc_connections set that has least
+        one node already synced to the latest, stable tip, otherwise there's a
+        chance it might return before all nodes are stably synced.
+        """
+        rpc_connections = nodes or self.nodes
+        stop_time = time.time() + timeout
+        while time.time() <= stop_time:
+            best_hash = [x.getbestblockhash() for x in rpc_connections]
+            if best_hash.count(best_hash[0]) == len(rpc_connections):
+                return
+            # Check that each peer has at least one connection
+            assert (all([len(x.getpeerinfo()) for x in rpc_connections]))
+            time.sleep(wait)
+        raise AssertionError("Block sync timed out after {}s:{}".format(
+            timeout,
+            "".join("\n  {!r}".format(b) for b in best_hash),
+        ))
 
-        for group in node_groups:
-            sync_blocks(group)
-            sync_mempools(group)
+    def sync_mempools(self, nodes=None, wait=1, timeout=60, flush_scheduler=True):
+        """
+        Wait until everybody has the same transactions in their memory
+        pools
+        """
+        rpc_connections = nodes or self.nodes
+        stop_time = time.time() + timeout
+        while time.time() <= stop_time:
+            pool = [set(r.getrawmempool()) for r in rpc_connections]
+            if pool.count(pool[0]) == len(rpc_connections):
+                if flush_scheduler:
+                    for r in rpc_connections:
+                        r.syncwithvalidationinterfacequeue()
+                return
+            # Check that each peer has at least one connection
+            assert (all([len(x.getpeerinfo()) for x in rpc_connections]))
+            time.sleep(wait)
+        raise AssertionError("Mempool sync timed out after {}s:{}".format(
+            timeout,
+            "".join("\n  {!r}".format(m) for m in pool),
+        ))
+
+    def sync_all(self, nodes=None):
+        self.sync_blocks(nodes)
+        self.sync_mempools(nodes)
 
     def enable_mocktime(self):
         """Enable mocktime for the script.
@@ -503,7 +542,7 @@ class CariTestFramework():
                 args = [os.getenv("BITCOIND", "carid"), "-spendzeroconfchange=1", "-server", "-keypool=1",
                         "-datadir=" + datadir, "-discover=0"]
                 self.nodes.append(
-                    TestNode(i, ddir, extra_args=[], rpchost=None, timewait=None, binary=None, stderr=None,
+                    TestNode(i, ddir, extra_args=[], rpchost=None, timewait=self.rpc_timewait, binary=None, stderr=None,
                              mocktime=self.mocktime, coverage_dir=None))
                 self.nodes[i].args = args
                 self.start_node(i)
@@ -550,7 +589,7 @@ class CariTestFramework():
                         self.nodes[peer].generate(1)
                         block_time += 60
                     # Must sync before next peer starts generating blocks
-                    sync_blocks(self.nodes)
+                    self.sync_blocks()
 
             # Shut them down, and clean up cache directories:
             self.log.info("Stopping nodes")
@@ -1017,7 +1056,7 @@ class CariTestFramework():
     def stake_and_sync(self, node_id, num_blocks):
         for i in range(num_blocks):
             self.mocktime = self.generate_pos(node_id, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         time.sleep(1)
 
 
@@ -1067,7 +1106,7 @@ class CariTestFramework():
 
 ### ------------------------------------------------------
 
-class ComparisonTestFramework(CariTestFramework):
+class ComparisonTestFramework(PivxTestFramework):
     """Test framework for doing p2p comparison testing
 
     Sets up some carid binaries:
@@ -1180,7 +1219,7 @@ class PivxTier2TestFramework(PivxTestFramework):
         # First mine 250 PoW blocks
         for i in range(250):
             self.mocktime = self.generate_pow(self.minerPos, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         # Then start staking
         self.stake(9)
 

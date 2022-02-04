@@ -21,7 +21,7 @@ if(RUSTC_PROGRAM)
     message(STATUS "Found rustc: ${RUSTC_PROGRAM}")
 endif()
 
-project(PIVX)
+project(CARI)
 
 set(BDB_VER "4.8.30")
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/contrib/cmake")
@@ -117,6 +117,14 @@ else()
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     )
 endif()
+
+# error out if configure fails
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/config/cari-config.h")
+else()
+    execute_process(COMMAND cat config.log WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    message(FATAL_ERROR "configure script didn't finish properly see config.log output above")
+
+endif()
 add_definitions(-DHAVE_CONFIG_H)
 
 ExternalProject_Add (
@@ -193,12 +201,15 @@ set(SERVER_SOURCES
         ./src/checkpoints.cpp
         ./src/httprpc.cpp
         ./src/httpserver.cpp
+        ./src/indirectmap.h
         ./src/init.cpp
-        ./src/interface/wallet.cpp
+        ./src/interfaces/handler.cpp
+        ./src/interfaces/wallet.cpp
         ./src/dbwrapper.cpp
         ./src/legacy/validation_zerocoin_legacy.cpp
         ./src/merkleblock.cpp
         ./src/miner.cpp
+        ./src/blockassembler.cpp
         ./src/net.cpp
         ./src/net_processing.cpp
         ./src/noui.cpp
@@ -272,7 +283,6 @@ set(WALLET_SOURCES
         ./src/zcari/mintpool.cpp
         ./src/wallet/hdchain.cpp
         ./src/wallet/rpcdump.cpp
-        ./src/zcari/deterministicmint.cpp
         ./src/zcari/zerocoin.cpp
         ./src/wallet/scriptpubkeyman.cpp
         ./src/wallet/rpcwallet.cpp
@@ -280,8 +290,8 @@ set(WALLET_SOURCES
         ./src/legacy/stakemodifier.cpp
         ./src/wallet/wallet.cpp
         ./src/wallet/walletdb.cpp
-        ./src/zpiv/zpivmodule.cpp
-        ./src/zpiv/zpos.cpp
+        ./src/zcari/zcarimodule.cpp
+        ./src/zcari/zpos.cpp
         ./src/stakeinput.cpp
         )
 add_library(WALLET_A STATIC ${BitcoinHeaders} ${WALLET_SOURCES})
@@ -378,7 +388,6 @@ set(COMMON_SOURCES
         ./src/consensus/tx_verify.cpp
         ./src/consensus/zerocoin_verify.cpp
         ./src/primitives/block.cpp
-        ./src/zcari/deterministicmint.cpp
         ./src/primitives/transaction.cpp
         ./src/zcari/zerocoin.cpp
         ./src/core_read.cpp
@@ -483,13 +492,13 @@ link_directories(
 
 link_directories(${CMAKE_BINARY_DIR})
 
-set(pivx-cli_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/pivx-cli.cpp)
+set(cari-cli_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/cari-cli.cpp)
 if($ENV{target} MATCHES "Windows")
     list(APPEND cari-cli_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/cari-cli-res.rc)
 endif()
-add_executable(pivx-cli ${pivx-cli_SOURCES})
-add_dependencies(pivx-cli libunivalue libzcashrust)
-target_link_libraries(pivx-cli
+add_executable(cari-cli ${cari-cli_SOURCES})
+add_dependencies(cari-cli libunivalue libzcashrust)
+target_link_libraries(cari-cli
         CLI_A
         univalue
         UTIL_A
@@ -501,14 +510,17 @@ target_link_libraries(pivx-cli
 if($ENV{target} MATCHES "Windows")
     target_link_libraries(cari-cli ${WINDOWS_LDADD})
 endif()
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    target_link_libraries(cari-cli "-framework Cocoa")
+endif()
 
 set(cari-tx_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/cari-tx.cpp)
 if($ENV{target} MATCHES "Windows")
     list(APPEND cari-tx_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/cari-tx-res.rc)
 endif()
-add_executable(pivx-tx ${pivx-tx_SOURCES})
-add_dependencies(pivx-tx libunivalue libsecp256k1 libzcashrust)
-target_link_libraries(pivx-tx
+add_executable(cari-tx ${cari-tx_SOURCES})
+add_dependencies(cari-tx libunivalue libsecp256k1 libzcashrust)
+target_link_libraries(cari-tx
         univalue
         COMMON_A
         ZEROCOIN_A
@@ -525,14 +537,17 @@ endif()
 if(GMP_FOUND)
     target_link_libraries(cari-tx ${GMP_LIBRARY})
 endif()
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    target_link_libraries(cari-tx "-framework Cocoa")
+endif()
 
-set(pivxd_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/pivxd.cpp)
+set(carid_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/carid.cpp)
 if($ENV{target} MATCHES "Windows")
     list(APPEND carid_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/carid-res.rc)
 endif()
-add_executable(pivxd ${pivxd_SOURCES} ${BitcoinHeaders})
-add_dependencies(pivxd libunivalue libsecp256k1 libzcashrust leveldb crc32c)
-target_include_directories(pivxd PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src
+add_executable(carid ${carid_SOURCES} ${BitcoinHeaders})
+add_dependencies(carid libunivalue libsecp256k1 libzcashrust leveldb crc32c)
+target_include_directories(carid PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}/src/leveldb
         ${CMAKE_CURRENT_SOURCE_DIR}/src/leveldb/include
         ${CMAKE_CURRENT_SOURCE_DIR}/src/leveldb/helpers/memenv
@@ -572,10 +587,10 @@ if(MINIUPNP_FOUND)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    target_link_libraries(pivxd "-framework Cocoa")
+    target_link_libraries(carid "-framework Cocoa")
 endif()
 
-target_link_libraries(pivxd ${sodium_LIBRARY_RELEASE} -ldl -lpthread)
+target_link_libraries(carid ${sodium_LIBRARY_RELEASE} -ldl -lpthread)
 
 add_subdirectory(src/qt)
 add_subdirectory(src/test)

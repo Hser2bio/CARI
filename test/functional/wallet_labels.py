@@ -11,10 +11,10 @@ RPCs tested are:
 """
 from collections import defaultdict
 
-from test_framework.test_framework import CariTestFramework
+from test_framework.test_framework import PivxTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error
 
-class WalletlabelsTest(CariTestFramework):
+class WalletlabelsTest(PivxTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -30,17 +30,17 @@ class WalletlabelsTest(CariTestFramework):
         assert_equal(node.getbalance(), 500)
 
         # there should be 2 address groups
-        # each with 1 address with a balance of 50 Bitcoins
+        # each with 1 address with a balance of 250 CARIs
         address_groups = node.listaddressgroupings()
-        assert_equal(len(address_groups), 1)
+        assert_equal(len(address_groups), 2)
         # the addresses aren't linked now, but will be after we send to the
         # common address
         linked_addresses = set()
-        #for address_group in address_groups:
-        #    assert_equal(len(address_group), 1)
-        #    assert_equal(len(address_group[0]), 2)
-        #    assert_equal(address_group[0][1], 250)
-        #    linked_addresses.add(address_group[0][0])
+        for address_group in address_groups:
+            assert_equal(len(address_group), 1)
+            assert_equal(len(address_group[0]), 2)
+            assert_equal(address_group[0][1], 250)
+            linked_addresses.add(address_group[0][0])
 
         # send 50 from each address to a third address not in this wallet
         # There's some fee that will come back to us when the miner reward

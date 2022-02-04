@@ -32,7 +32,7 @@ void TxViewHolder::init(QWidget* holder, const QModelIndex &index, bool isHovere
     txRow->showHideSecondAmount(hasDoubleAmount);
 
     if (type != TransactionRecord::ZerocoinMint &&
-            type !=  TransactionRecord::ZerocoinSpend_Change_zCari &&
+            type !=  TransactionRecord::ZerocoinSpend_Change_zPiv &&
             type !=  TransactionRecord::StakeZCARI &&
             type != TransactionRecord::Other) {
 

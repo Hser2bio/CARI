@@ -6,19 +6,18 @@
 
 #include "chain.h"
 #include "txdb.h"
-#include "zcari/deterministicmint.h"
 #include "wallet/wallet.h"
 
-CCariStake* CCariStake::NewCariStake(const CTxIn& txin)
+CPivStake* CPivStake::NewPivStake(const CTxIn& txin)
 {
     if (txin.IsZerocoinSpend()) {
-        error("%s: unable to initialize CCariStake from zerocoin spend", __func__);
+        error("%s: unable to initialize CPivStake from zerocoin spend", __func__);
         return nullptr;
     }
 
     // Find the previous transaction in database
     uint256 hashBlock;
-    CTransaction txPrev;
+    CTransactionRef txPrev;
     if (!GetTransaction(txin.prevout.hash, txPrev, hashBlock, true)) {
         error("%s : INFO: read txPrev failed, tx id prev: %s", __func__, txin.prevout.hash.GetHex());
         return nullptr;
@@ -36,29 +35,29 @@ CCariStake* CCariStake::NewCariStake(const CTxIn& txin)
         return nullptr;
     }
 
-    return new CCariStake(txPrev.vout[txin.prevout.n],
+    return new CPivStake(txPrev->vout[txin.prevout.n],
                          txin.prevout,
                          pindexFrom);
 }
 
-bool CCariStake::GetTxOutFrom(CTxOut& out) const
+bool CPivStake::GetTxOutFrom(CTxOut& out) const
 {
     out = outputFrom;
     return true;
 }
 
-bool CCariStake::CreateTxIn(CWallet* pwallet, CTxIn& txIn, uint256 hashTxOut)
+bool CPivStake::CreateTxIn(CWallet* pwallet, CTxIn& txIn, uint256 hashTxOut)
 {
     txIn = CTxIn(outpointFrom.hash, outpointFrom.n);
     return true;
 }
 
-CAmount CCariStake::GetValue() const
+CAmount CPivStake::GetValue() const
 {
     return outputFrom.nValue;
 }
 
-bool CCariStake::CreateTxOuts(CWallet* pwallet, std::vector<CTxOut>& vout, CAmount nTotal, const bool onlyP2PK)
+bool CPivStake::CreateTxOuts(CWallet* pwallet, std::vector<CTxOut>& vout, CAmount nTotal, const bool onlyP2PK)
 {
     std::vector<valtype> vSolutions;
     txnouttype whichType;
@@ -107,7 +106,7 @@ bool CCariStake::CreateTxOuts(CWallet* pwallet, std::vector<CTxOut>& vout, CAmou
     return true;
 }
 
-CDataStream CCariStake::GetUniqueness() const
+CDataStream CPivStake::GetUniqueness() const
 {
     //The unique identifier for a CARI stake is the outpoint
     CDataStream ss(SER_NETWORK, 0);
@@ -116,15 +115,15 @@ CDataStream CCariStake::GetUniqueness() const
 }
 
 //The block that the UTXO was added to the chain
-const CBlockIndex* CCariStake::GetIndexFrom() const
+const CBlockIndex* CPivStake::GetIndexFrom() const
 {
     // Sanity check, pindexFrom is set on the constructor.
-    if (!pindexFrom) throw std::runtime_error("CCariStake: uninitialized pindexFrom");
+    if (!pindexFrom) throw std::runtime_error("CPivStake: uninitialized pindexFrom");
     return pindexFrom;
 }
 
 // Verify stake contextual checks
-bool CCariStake::ContextCheck(int nHeight, uint32_t nTime)
+bool CPivStake::ContextCheck(int nHeight, uint32_t nTime)
 {
     const Consensus::Params& consensus = Params().GetConsensus();
     // Get Stake input block time/height

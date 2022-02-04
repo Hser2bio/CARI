@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2015 The Bitcoin Core developers
-# Copyright (c) 2020 The CARI developers
+# Copyright (c) 2020 The PIVX developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 # Test descendant package tracking code
 
-from test_framework.test_framework import CariTestFramework
+from test_framework.test_framework import PivxTestFramework
 from test_framework.util import (
     assert_equal,
     Decimal,
     ROUND_DOWN,
     JSONRPCException,
-    sync_blocks,
-    sync_mempools
 )
 
 def satoshi_round(amount):
@@ -22,7 +20,7 @@ def satoshi_round(amount):
 MAX_ANCESTORS = 25
 MAX_DESCENDANTS = 25
 
-class MempoolPackagesTest(CariTestFramework):
+class MempoolPackagesTest(PivxTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.extra_args = [["-maxorphantx=1000", "-relaypriority=0"], ["-maxorphantx=1000", "-relaypriority=0", "-limitancestorcount=5"]]
@@ -69,16 +67,40 @@ class MempoolPackagesTest(CariTestFramework):
         for x in reversed(chain):
             assert_equal(mempool[x]['descendantcount'], descendant_count)
             descendant_fees += mempool[x]['fee']
+            assert_equal(mempool[x]['modifiedfee'], mempool[x]['fee'])
             assert_equal(mempool[x]['descendantfees'], SATOSHIS*descendant_fees)
             descendant_size += mempool[x]['size']
             assert_equal(mempool[x]['descendantsize'], descendant_size)
             descendant_count += 1
+
+        # Check that descendant modified fees includes fee deltas from
+        # prioritisetransaction
+        self.nodes[0].prioritisetransaction(chain[-1], 0, 1000)
+        mempool = self.nodes[0].getrawmempool(True)
+
+        descendant_fees = 0
+        for x in reversed(chain):
+            descendant_fees += mempool[x]['fee']
+            assert_equal(mempool[x]['descendantfees'], SATOSHIS*descendant_fees+1000)
 
         # Adding one more transaction on to the chain should fail.
         try:
             self.chain_transaction(self.nodes[0],txid, vout, value, fee, 1)
         except JSONRPCException as e:
             self.log.info("too-long-ancestor-chain successfully rejected")
+
+        # Check that prioritising a tx before it's added to the mempool works
+        self.nodes[0].generate(1)
+        self.nodes[0].prioritisetransaction(chain[-1], 0, 2000)
+        self.nodes[0].invalidateblock(self.nodes[0].getbestblockhash())
+        mempool = self.nodes[0].getrawmempool(True)
+
+        descendant_fees = 0
+        for x in reversed(chain):
+            descendant_fees += mempool[x]['fee']
+            if (x == chain[-1]):
+                assert_equal(mempool[x]['modifiedfee'], mempool[x]['fee']+satoshi_round(0.00002))
+            assert_equal(mempool[x]['descendantfees'], SATOSHIS*descendant_fees+2000)
 
         # TODO: check that node1's mempool is as expected
 
@@ -117,7 +139,7 @@ class MempoolPackagesTest(CariTestFramework):
         # Test reorg handling
         # First, the basics:
         self.nodes[0].generate(1)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         self.nodes[1].invalidateblock(self.nodes[0].getbestblockhash())
         self.nodes[1].reconsiderblock(self.nodes[0].getbestblockhash())
 
@@ -172,12 +194,12 @@ class MempoolPackagesTest(CariTestFramework):
         rawtx = self.nodes[0].createrawtransaction(inputs, outputs)
         signedtx = self.nodes[0].signrawtransaction(rawtx)
         txid = self.nodes[0].sendrawtransaction(signedtx['hex'])
-        sync_mempools(self.nodes)
+        self.sync_mempools()
 
         # Now try to disconnect the tip on each node...
         self.nodes[1].invalidateblock(self.nodes[1].getbestblockhash())
         self.nodes[0].invalidateblock(self.nodes[0].getbestblockhash())
-        sync_blocks(self.nodes)
+        self.sync_blocks()
 
 if __name__ == '__main__':
     MempoolPackagesTest().main()

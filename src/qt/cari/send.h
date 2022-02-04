@@ -57,6 +57,10 @@ public Q_SLOTS:
     void onValueChanged();
     void refreshAmounts();
     void changeTheme(bool isLightTheme, QString &theme) override;
+    void updateAmounts(const QString& titleTotalRemaining,
+                       const QString& labelAmountSend,
+                       const QString& labelAmountRemaining,
+                       CAmount _delegationBalance);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -66,7 +70,7 @@ protected:
     void onError(QString error, int type) override;
 
 private Q_SLOTS:
-    void onPIVSelected(bool _isTransparent);
+    void onCARISelected(bool _isTransparent);
     void onSendClicked();
     void onContactsClicked(SendMultiRow* entry);
     void onMenuClicked(SendMultiRow* entry);
@@ -87,8 +91,6 @@ private:
     SendCustomFeeDialog* customFeeDialog = nullptr;
     bool isCustomFeeSelected = false;
     bool fDelegationsChecked = false;
-    bool fPoWAlternative = false;
-    CAmount cachedDelegatedBalance{0};
 
     int nDisplayUnit;
     QList<SendMultiRow*> entries;
@@ -99,6 +101,9 @@ private:
     std::atomic<bool> isProcessing{false};
     Optional<QString> processingResultError{nullopt};
     std::atomic<bool> processingResult{false};
+
+    // Balance update
+    std::atomic<bool> isUpdatingBalance{false};
 
     ContactsDropdown *menuContacts = nullptr;
     TooltipMenu *menu = nullptr;
@@ -114,12 +119,14 @@ private:
     OperationResult prepareTransparent(WalletModelTransaction* tx);
     bool sendFinalStep();
     void setFocusOnLastEntry();
-    void showHideCheckBoxDelegations();
-    void updateEntryLabels(QList<SendCoinsRecipient> recipients);
+    void showHideCheckBoxDelegations(CAmount delegationBalance);
+    void updateEntryLabels(const QList<SendCoinsRecipient>& recipients);
     void setCustomFeeSelected(bool isSelected, const CAmount& customFee = DEFAULT_TRANSACTION_FEE);
     void setCoinControlPayAmounts();
     void resetCoinControl();
     void resetChangeAddress();
+    void hideContactsMenu();
+    void tryRefreshAmounts();
 };
 
 #endif // SEND_H

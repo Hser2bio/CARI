@@ -22,18 +22,18 @@ uint32_t ParseAccChecksum(uint256 nCheckpoint, const libzerocoin::CoinDenominati
     return nCheckpoint.Get32();
 }
 
-bool CLegacyZCariStake::InitFromTxIn(const CTxIn& txin)
+bool CLegacyZPivStake::InitFromTxIn(const CTxIn& txin)
 {
     // Construct the stakeinput object
     if (!txin.IsZerocoinSpend())
-        return error("%s: unable to initialize CLegacyZCariStake from non zc-spend", __func__);
+        return error("%s: unable to initialize CLegacyZPivStake from non zc-spend", __func__);
 
     // Check spend type
     libzerocoin::CoinSpend spend = TxInToZerocoinSpend(txin);
     if (spend.getSpendType() != libzerocoin::SpendType::STAKE)
         return error("%s : spend is using the wrong SpendType (%d)", __func__, (int)spend.getSpendType());
 
-    *this = CLegacyZCariStake(spend);
+    *this = CLegacyZPivStake(spend);
 
     // Find the pindex with the accumulator checksum
     if (!GetIndexFrom())
@@ -43,7 +43,7 @@ bool CLegacyZCariStake::InitFromTxIn(const CTxIn& txin)
     return true;
 }
 
-CLegacyZCariStake::CLegacyZCariStake(const libzerocoin::CoinSpend& spend) : CStakeInput(nullptr)
+CLegacyZPivStake::CLegacyZPivStake(const libzerocoin::CoinSpend& spend) : CStakeInput(nullptr)
 {
     this->nChecksum = spend.getAccumulatorChecksum();
     this->denom = spend.getDenomination();
@@ -51,7 +51,7 @@ CLegacyZCariStake::CLegacyZCariStake(const libzerocoin::CoinSpend& spend) : CSta
     this->hashSerial = Hash(nSerial.begin(), nSerial.end());
 }
 
-const CBlockIndex* CLegacyZCariStake::GetIndexFrom() const
+const CBlockIndex* CLegacyZPivStake::GetIndexFrom() const
 {
     // First look in the legacy database
     int nHeightChecksum = 0;
@@ -79,12 +79,12 @@ const CBlockIndex* CLegacyZCariStake::GetIndexFrom() const
     return nullptr;
 }
 
-CAmount CLegacyZCariStake::GetValue() const
+CAmount CLegacyZPivStake::GetValue() const
 {
     return denom * COIN;
 }
 
-CDataStream CLegacyZCariStake::GetUniqueness() const
+CDataStream CLegacyZPivStake::GetUniqueness() const
 {
     CDataStream ss(SER_GETHASH, 0);
     ss << hashSerial;
@@ -92,7 +92,7 @@ CDataStream CLegacyZCariStake::GetUniqueness() const
 }
 
 // Verify stake contextual checks
-bool CLegacyZCariStake::ContextCheck(int nHeight, uint32_t nTime)
+bool CLegacyZPivStake::ContextCheck(int nHeight, uint32_t nTime)
 {
     const Consensus::Params& consensus = Params().GetConsensus();
     if (!consensus.NetworkUpgradeActive(nHeight, Consensus::UPGRADE_ZC_V2) || nHeight >= consensus.height_last_ZC_AccumCheckpoint)

@@ -68,12 +68,13 @@ OperationResult initMasternode(const std::string& _strMasterNodePrivKey, const s
 
     activeMasternode.pubKeyMasternode = pubkey;
     activeMasternode.privKeyMasternode = key;
+    activeMasternode.service = addrTest;
     fMasterNode = true;
     return OperationResult(true);
 }
 
 //
-// Bootup the Masternode, look for a 1000 CARI input and register on the network
+// Bootup the Masternode, look for a 10000 CARI input and register on the network
 //
 void CActiveMasternode::ManageStatus()
 {
@@ -104,30 +105,20 @@ void CActiveMasternode::ManageStatus()
         status = ACTIVE_MASTERNODE_NOT_CAPABLE;
         notCapableReason = "";
 
-        if (strMasterNodeAddr.empty()) {
-            if (!GetLocal(service)) {
-                notCapableReason = "Can't detect external address. Please use the masternodeaddr configuration option.";
-                LogPrintf("CActiveMasternode::ManageStatus() - not capable: %s\n", notCapableReason);
-                return;
-            }
-        } else {
-            int nPort = 0;
-            std::string strHost;
-            SplitHostPort(strMasterNodeAddr, nPort, strHost);
-            service = LookupNumeric(strHost.c_str(), nPort);
-        }
-
-        // The service needs the correct default port to work properly
-        if (!CMasternodeBroadcast::CheckDefaultPort(service, notCapableReason, "CActiveMasternode::ManageStatus()")) {
-            return;
-        }
-
-        LogPrintf("CActiveMasternode::ManageStatus() - Checking inbound connection to '%s'\n", service.ToString());
+        LogPrintf("%s - Checking inbound connection for masternode to '%s'\n", __func__ , service.ToString());
 
         CAddress addr(service, NODE_NETWORK);
-        if (!g_connman->OpenNetworkConnection(addr, true, nullptr)) {
-            notCapableReason = "Could not connect to " + service.ToString();
-            LogPrintf("CActiveMasternode::ManageStatus() - not capable: %s\n", notCapableReason);
+        if (!g_connman->IsNodeConnected(addr)) {
+            CNode* node = g_connman->ConnectNode(addr);
+            if (!node) {
+                notCapableReason =
+                        "Masternode address:port connection availability test failed, could not open a connection to the public masternode address (" +
+                        service.ToString() + ")";
+                LogPrintf("%s - not capable: %s\n", __func__, notCapableReason);
+            } else {
+                // don't leak allocated object in memory
+                delete node;
+            }
             return;
         }
 
@@ -185,7 +176,7 @@ bool CActiveMasternode::SendMasternodePing(std::string& errorMessage)
 
     const uint256& nBlockHash = mnodeman.GetBlockHashToPing();
     CMasternodePing mnp(*vin, nBlockHash, GetAdjustedTime());
-    if (!mnp.Sign(privKeyMasternode, pubKeyMasternode)) {
+    if (!mnp.Sign(privKeyMasternode, pubKeyMasternode.GetID())) {
         errorMessage = "Couldn't sign Masternode Ping";
         return false;
     }

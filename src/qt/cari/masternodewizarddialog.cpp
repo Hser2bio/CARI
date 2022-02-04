@@ -68,9 +68,9 @@ MasterNodeWizardDialog::MasterNodeWizardDialog(WalletModel *model, QWidget *pare
     ui->stackedWidget->setCurrentIndex(pos);
     ui->lineEditPort->setEnabled(false);    // use default port number
     if (walletModel->isRegTestNetwork()) {
-        ui->lineEditPort->setText("31817");
+        ui->lineEditPort->setText("51476");
     } else if (walletModel->isTestNetwork()) {
-        ui->lineEditPort->setText("31815");
+        ui->lineEditPort->setText("51474");
     } else {
         ui->lineEditPort->setText("31813");
     }
@@ -212,7 +212,7 @@ bool MasterNodeWizardDialog::createMN()
         SendCoinsRecipient sendCoinsRecipient(
                 QString::fromStdString(dest.ToString()),
                 QString::fromStdString(alias),
-                CAmount(GetCollateral()) * COIN,
+                CAmount(10000) * COIN,
                 "");
 
         // Send the 10 tx to one of your address
@@ -257,12 +257,12 @@ bool MasterNodeWizardDialog::createMN()
         }
 
         // look for the tx index of the collateral
-        CWalletTx* walletTx = currentTransaction.getTransaction();
+        CTransactionRef walletTx = currentTransaction.getTransaction();
         std::string txID = walletTx->GetHash().GetHex();
         int indexOut = -1;
         for (int i=0; i < (int)walletTx->vout.size(); i++) {
-            CTxOut& out = walletTx->vout[i];
-            if (out.nValue == GetCollateral() * COIN) {
+            const CTxOut& out = walletTx->vout[i];
+            if (out.nValue == MN_COLL_AMT) {
                 indexOut = i;
                 break;
             }

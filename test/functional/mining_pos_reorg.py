@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-# Copyright (c) 2019-2020 The CARI developers
+# Copyright (c) 2019-2020 The PIVX developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-from test_framework.authproxy import JSONRPCException
-from test_framework.test_framework import CariTestFramework
+from test_framework.test_framework import PivxTestFramework
 from test_framework.util import (
-    sync_blocks,
     assert_equal,
     assert_raises_rpc_error,
     connect_nodes,
@@ -16,7 +14,7 @@ from test_framework.util import (
     DecimalAmt,
 )
 
-class ReorgStakeTest(CariTestFramework):
+class ReorgStakeTest(PivxTestFramework):
 
     def set_test_params(self):
         self.num_nodes = 3
@@ -49,13 +47,14 @@ class ReorgStakeTest(CariTestFramework):
 
     def get_tot_balance(self, nodeid):
         wi = self.nodes[nodeid].getwalletinfo()
+        assert_equal(self.nodes[nodeid].getblockcount(), wi['last_processed_block'])
         return wi['balance'] + wi['immature_balance']
 
-    def check_money_supply(self, expected_piv):
-        # verify that nodes have the expected PIV supply
-        piv_supply = [self.nodes[i].getsupplyinfo(True)['transparentsupply']
+    def check_money_supply(self, expected_cari):
+        # verify that nodes have the expected CARI supply
+        cari_supply = [self.nodes[i].getsupplyinfo(True)['transparentsupply']
                       for i in range(self.num_nodes)]
-        assert_equal(piv_supply, [DecimalAmt(expected_piv)] * self.num_nodes)
+        assert_equal(cari_supply, [DecimalAmt(expected_cari)] * self.num_nodes)
 
 
     def run_test(self):
@@ -66,7 +65,7 @@ class ReorgStakeTest(CariTestFramework):
                     return True, x
             return False, None
 
-        # PIV supply: block rewards
+        # CARI supply: block rewards
         expected_money_supply = 250.0 * 200
         self.check_money_supply(expected_money_supply)
         block_time_0 = block_time_1 = self.mocktime
@@ -113,7 +112,7 @@ class ReorgStakeTest(CariTestFramework):
         # Connect with node 2 and sync
         self.log.info("Reconnecting node 0 and node 2")
         connect_nodes(self.nodes[0], 2)
-        sync_blocks([self.nodes[i] for i in [0, 2]])
+        self.sync_blocks([self.nodes[i] for i in [0, 2]])
 
         # verify that the stakeinput can't be spent
         stakeinput_tx_json = self.nodes[0].getrawtransaction(stakeinput["txid"], True)
@@ -143,7 +142,7 @@ class ReorgStakeTest(CariTestFramework):
         self.log.info("Connecting and syncing nodes...")
         set_node_times(self.nodes, block_time_1)
         connect_nodes_clique(self.nodes)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         for i in [0, 2]:
             assert_equal(self.nodes[i].getbestblockhash(), new_best_hash)
 
@@ -158,12 +157,12 @@ class ReorgStakeTest(CariTestFramework):
             stakeinput["txid"][:9], stakeinput["txid"][-4:], stakeinput["vout"]))
         self.nodes[0].sendrawtransaction(rawtx["hex"])
         self.nodes[1].generate(1)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         res, utxo = findUtxoInList(stakeinput["txid"], stakeinput["vout"], self.nodes[0].listunspent())
         assert (not res or not utxo["spendable"])
 
-        # Verify that PIV supply was properly updated after the reorgs
-        self.log.info("Check PIV supply...")
+        # Verify that CARI supply was properly updated after the reorgs
+        self.log.info("Check CARI supply...")
         expected_money_supply += 250.0 * (self.nodes[1].getblockcount() - 200)
         self.check_money_supply(expected_money_supply)
         self.log.info("Supply checks out.")

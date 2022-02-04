@@ -20,8 +20,6 @@
 
 #include "qt/cari/qtutils.h"
 
-#include <boost/assign/list_of.hpp> // for 'map_list_of()'
-
 #include <QApplication>
 #include <QCheckBox>
 #include <QCursor>
@@ -189,7 +187,7 @@ CoinControlDialog::CoinControlDialog(QWidget* parent, bool _forDelegation) : QDi
         ui->treeWidget->setRootIsDecorated(false);
     }
     if (settings.contains("nCoinControlSortColumn") && settings.contains("nCoinControlSortOrder"))
-        sortView(settings.value("nCoinControlSortColumn").toInt(), ((Qt::SortOrder)settings.value("nCoinControlSortOrder").toInt()));
+        sortView(settings.value("nCoinControlSortColumn").toInt(), (static_cast<Qt::SortOrder>(settings.value("nCoinControlSortOrder").toInt())));
 }
 
 CoinControlDialog::~CoinControlDialog()
@@ -591,8 +589,8 @@ void CoinControlDialog::updateLabels()
         return;
 
     ui->labelTitle->setText(fSelectTransparent ?
-            "Select PIV Outputs to Spend" :
-            "Select Shielded PIV to Spend");
+            "Select CARI Outputs to Spend" :
+            "Select Shielded CARI to Spend");
 
     const TotalAmounts& t = getTotals();
 
@@ -688,7 +686,7 @@ void CoinControlDialog::loadAvailableCoin(bool treeMode,
     itemOutput->setFlags(flgCheckbox);
     itemOutput->setCheckState(COLUMN_CHECKBOX, Qt::Unchecked);
 
-    // if listMode or change => show PIVX address. In tree mode, address is not shown again for direct wallet address outputs
+    // if listMode or change => show CARI address. In tree mode, address is not shown again for direct wallet address outputs
     if (!treeMode) {
         itemOutput->setText(COLUMN_ADDRESS, sWalletAddress);
     }else {

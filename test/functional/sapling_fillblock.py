@@ -11,8 +11,6 @@ from test_framework.util import (
     assert_equal,
     Decimal,
     satoshi_round,
-    sync_blocks,
-    sync_mempools,
 )
 
 import time
@@ -41,7 +39,7 @@ class SaplingFillBlockTest(PivxTestFramework):
         sorted(utxos, key=lambda utxo: utxo["amount"], reverse=True)
         # pick the first N
         utxos = utxos[:n_inputs]
-        # split each one in 100 (use fixed 0.05 PIV fee)
+        # split each one in 100 (use fixed 0.05 CARI fee)
         for u in utxos:
             prevout = [{"txid": u["txid"], "vout": u["vout"]}]
             output_amt = satoshi_round((u["amount"] - Decimal("0.05")) / 100)
@@ -53,7 +51,7 @@ class SaplingFillBlockTest(PivxTestFramework):
 
     def check_mempool(self, miner, txids):
         self.log.info("Checking mempool...")
-        sync_mempools(self.nodes)
+        self.sync_mempools()
         mempool_info = miner.getmempoolinfo()
         assert_equal(mempool_info['size'], len(txids))
         mempool_bytes = mempool_info['bytes']
@@ -77,6 +75,7 @@ class SaplingFillBlockTest(PivxTestFramework):
             txids.append(node.shieldsendmany(from_address, shield_to))
             if (i + 1) % 200 == 0:
                 self.log.info("...%d Transactions created..." % (i + 1))
+                self.sync_mempools()
         return txids
 
 
@@ -86,23 +85,23 @@ class SaplingFillBlockTest(PivxTestFramework):
         # First mine 300 blocks
         self.log.info("Generating 300 blocks...")
         miner.generate(300)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         assert_equal(self.nodes[0].getblockchaininfo()['upgrades']['v5 shield']['status'], 'active')
 
         ## -- First check that the miner never produces blocks with more than 750kB of shielded txes
 
-        # Split 10 utxos (of 250 PIV each) in 1000 new utxos of ~2.5 PIV each (to alice)
+        # Split 10 utxos (of 250 CARI each) in 1000 new utxos of ~2.5 CARI each (to alice)
         UTXOS_TO_SPLIT = 10
         UTXOS_TO_SHIELD = UTXOS_TO_SPLIT * 100
         self.log.info("Creating %d utxos..." % UTXOS_TO_SHIELD)
         txids = self.utxo_splitter(miner, UTXOS_TO_SPLIT, alice)
         assert_equal(len(txids), UTXOS_TO_SPLIT)
         miner.generate(2)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         new_utxos = alice.listunspent()
         assert_equal(len(new_utxos), UTXOS_TO_SHIELD)
 
-        # Now alice shields the new utxos individually (fixed 0.2 PIV fee --> ~2.3 PIV notes)
+        # Now alice shields the new utxos individually (fixed 0.2 CARI fee --> ~2.3 CARI notes)
         self.log.info("Shielding utxos...")
         alice_z_addr = alice.getnewshieldaddress()
         shield_to = [{"address": alice_z_addr, "amount": new_utxos[0]["amount"] - Decimal("0.2")}]

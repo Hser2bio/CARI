@@ -6,14 +6,11 @@
 from decimal import Decimal
 from io import BytesIO
 
-from test_framework.mininode import CTransaction, COIN
-from test_framework.test_framework import CariTestFramework
+from test_framework.mininode import CTransaction
+from test_framework.test_framework import PivxTestFramework
 from test_framework.util import (
     assert_array_result,
-    assert_equal,
-    bytes_to_hex_str,
     hex_str_to_bytes,
-    sync_mempools,
 )
 
 def txFromHex(hexstring):
@@ -22,7 +19,7 @@ def txFromHex(hexstring):
     tx.deserialize(f)
     return tx
 
-class ListTransactionsTest(CariTestFramework):
+class ListTransactionsTest(PivxTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.enable_mocktime()

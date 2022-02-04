@@ -1046,7 +1046,7 @@ public:
         // Serialize the script
         if (nInput != nIn)
             // Blank out other inputs' signatures
-            ::Serialize(s, CScriptBase());
+            ::Serialize(s, CScript());
         else
             SerializeScriptCode(s);
         // Serialize the nSequence
@@ -1089,21 +1089,21 @@ public:
     }
 };
 
-const unsigned char PIVX_PREVOUTS_HASH_PERSONALIZATION[crypto_generichash_blake2b_PERSONALBYTES] =
+const unsigned char CARI_PREVOUTS_HASH_PERSONALIZATION[crypto_generichash_blake2b_PERSONALBYTES] =
         {'P','I','V','X','P','r','e','v','o','u','t','H','a','s','h'};
-const unsigned char PIVX_SEQUENCE_HASH_PERSONALIZATION[crypto_generichash_blake2b_PERSONALBYTES] =
+const unsigned char CARI_SEQUENCE_HASH_PERSONALIZATION[crypto_generichash_blake2b_PERSONALBYTES] =
         {'P','I','V','X','S','e','q','u','e','n','c','H','a','s','h'};
-const unsigned char PIVX_OUTPUTS_HASH_PERSONALIZATION[crypto_generichash_blake2b_PERSONALBYTES] =
+const unsigned char CARI_OUTPUTS_HASH_PERSONALIZATION[crypto_generichash_blake2b_PERSONALBYTES] =
         {'P','I','V','X','O','u','t','p','u','t','s','H','a','s','h'};
-const unsigned char PIVX_SHIELDED_SPENDS_HASH_PERSONALIZATION[crypto_generichash_blake2b_PERSONALBYTES] =
+const unsigned char CARI_SHIELDED_SPENDS_HASH_PERSONALIZATION[crypto_generichash_blake2b_PERSONALBYTES] =
         {'P','I','V','X','S','S','p','e','n','d','s','H','a','s','h'};
-const unsigned char PIVX_SHIELDED_OUTPUTS_HASH_PERSONALIZATION[crypto_generichash_blake2b_PERSONALBYTES] =
+const unsigned char CARI_SHIELDED_OUTPUTS_HASH_PERSONALIZATION[crypto_generichash_blake2b_PERSONALBYTES] =
         {'P','I','V','X','S','O','u','t','p','u','t','H','a','s','h'};
 
 
 
 uint256 GetPrevoutHash(const CTransaction& txTo) {
-    CBLAKE2bWriter ss(SER_GETHASH, 0, PIVX_PREVOUTS_HASH_PERSONALIZATION);
+    CBLAKE2bWriter ss(SER_GETHASH, 0, CARI_PREVOUTS_HASH_PERSONALIZATION);
     for (unsigned int n = 0; n < txTo.vin.size(); n++) {
         ss << txTo.vin[n].prevout;
     }
@@ -1111,7 +1111,7 @@ uint256 GetPrevoutHash(const CTransaction& txTo) {
 }
 
 uint256 GetSequenceHash(const CTransaction& txTo) {
-    CBLAKE2bWriter ss(SER_GETHASH, 0, PIVX_SEQUENCE_HASH_PERSONALIZATION);
+    CBLAKE2bWriter ss(SER_GETHASH, 0, CARI_SEQUENCE_HASH_PERSONALIZATION);
     for (unsigned int n = 0; n < txTo.vin.size(); n++) {
         ss << txTo.vin[n].nSequence;
     }
@@ -1119,7 +1119,7 @@ uint256 GetSequenceHash(const CTransaction& txTo) {
 }
 
 uint256 GetOutputsHash(const CTransaction& txTo) {
-    CBLAKE2bWriter ss(SER_GETHASH, 0, PIVX_OUTPUTS_HASH_PERSONALIZATION);
+    CBLAKE2bWriter ss(SER_GETHASH, 0, CARI_OUTPUTS_HASH_PERSONALIZATION);
     for (unsigned int n = 0; n < txTo.vout.size(); n++) {
         ss << txTo.vout[n];
     }
@@ -1128,7 +1128,7 @@ uint256 GetOutputsHash(const CTransaction& txTo) {
 
 uint256 GetShieldedSpendsHash(const CTransaction& txTo) {
     assert(txTo.sapData);
-    CBLAKE2bWriter ss(SER_GETHASH, 0, PIVX_SHIELDED_SPENDS_HASH_PERSONALIZATION);
+    CBLAKE2bWriter ss(SER_GETHASH, 0, CARI_SHIELDED_SPENDS_HASH_PERSONALIZATION);
     auto sapData = txTo.sapData;
     for (const auto& n : sapData->vShieldedSpend) {
         ss << n.cv;
@@ -1142,7 +1142,7 @@ uint256 GetShieldedSpendsHash(const CTransaction& txTo) {
 
 uint256 GetShieldedOutputsHash(const CTransaction& txTo) {
     assert(txTo.sapData);
-    CBLAKE2bWriter ss(SER_GETHASH, 0, PIVX_SHIELDED_OUTPUTS_HASH_PERSONALIZATION);
+    CBLAKE2bWriter ss(SER_GETHASH, 0, CARI_SHIELDED_OUTPUTS_HASH_PERSONALIZATION);
     auto sapData = txTo.sapData;
     for (const auto& n : sapData->vShieldedOutput) {
         ss << n;
@@ -1194,7 +1194,7 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
         if ((nHashType & 0x1f) != SIGHASH_SINGLE && (nHashType & 0x1f) != SIGHASH_NONE) {
             hashOutputs = cache ? cache->hashOutputs : GetOutputsHash(txTo);
         } else if ((nHashType & 0x1f) == SIGHASH_SINGLE && nIn < txTo.vout.size()) {
-            CBLAKE2bWriter ss(SER_GETHASH, 0, PIVX_OUTPUTS_HASH_PERSONALIZATION);
+            CBLAKE2bWriter ss(SER_GETHASH, 0, CARI_OUTPUTS_HASH_PERSONALIZATION);
             ss << txTo.vout[nIn];
             hashOutputs = ss.GetHash();
         }
@@ -1214,7 +1214,7 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
         // todo: complete branch id with the active network upgrade
         uint32_t leConsensusBranchId = htole32(0);
         unsigned char personalization[16] = {};
-        memcpy(personalization, "PIVXSigHash", 12);
+        memcpy(personalization, "CARISigHash", 12);
         memcpy(personalization+12, &leConsensusBranchId, 4);
 
         CBLAKE2bWriter ss(SER_GETHASH, 0, personalization);
@@ -1242,7 +1242,7 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
             // The prevout may already be contained in hashPrevout, and the nSequence
             // may already be contained in hashSequence.
             ss << txTo.vin[nIn].prevout;
-            ss << static_cast<const CScriptBase&>(scriptCode);
+            ss << scriptCode;
             ss << amount;
             ss << txTo.vin[nIn].nSequence;
         }
@@ -1337,6 +1337,38 @@ bool TransactionSignatureChecker::CheckLockTime(const CScriptNum& nLockTime) con
         return false;
 
     return true;
+}
+
+bool TransactionSignatureChecker::CheckColdStake(const CScript& prevoutScript) const
+{
+    // Transaction must be a coinstake tx
+    if (!txTo->IsCoinStake()) {
+        return false;
+    }
+    // There must be one single input
+    if (txTo->vin.size() != 1) {
+        return false;
+    }
+    // Since this is a coinstake, it has at least 2 outputs
+    const unsigned int outs = txTo->vout.size();
+    assert(outs >= 2);
+    // All outputs, except the first, and (for cold stakes with outs >=3) the last one,
+    // must have the same pubKeyScript, and it must match the script we are spending.
+    // If the coinstake has at least 3 outputs, the last one is left free, to be used for
+    // budget/masternode payments, and is checked in CheckColdstakeFreeOutput().
+    // Here we verify only that input amount goes to the non-free outputs.
+    CAmount outValue{0};
+    for (unsigned int i = 1; i < outs; i++) {
+        if (txTo->vout[i].scriptPubKey != prevoutScript) {
+            // Only the last one can be different (and only when outs >=3)
+            if (i != outs-1 || outs < 3) {
+                return false;
+            }
+        } else {
+            outValue += txTo->vout[i].nValue;
+        }
+    }
+    return outValue > amount;
 }
 
 

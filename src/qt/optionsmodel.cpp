@@ -191,8 +191,8 @@ void OptionsModel::setDisplayDefaultOptions(QSettings& settings, bool reset)
     if (!gArgs.SoftSetArg("-lang", settings.value("language").toString().toStdString()))
         addOverriddenOption("-lang");
 
-    if (settings.contains("nAnonymizeCarixAmount") || reset)
-        gArgs.SoftSetArg("-anonymizepivxamount", settings.value("nAnonymizeCarixAmount").toString().toStdString());
+    if (settings.contains("nAnonymizePivxAmount") || reset)
+        gArgs.SoftSetArg("-anonymizecariamount", settings.value("nAnonymizePivxAmount").toString().toStdString());
 
     if (!settings.contains("strThirdPartyTxUrls") || reset)
         settings.setValue("strThirdPartyTxUrls", "");
@@ -482,12 +482,11 @@ void OptionsModel::setDisplayUnit(const QVariant& value)
 void OptionsModel::setStakeSplitThreshold(const CAmount nStakeSplitThreshold)
 {
     if (pwalletMain && pwalletMain->nStakeSplitThreshold != nStakeSplitThreshold) {
-        CWalletDB walletdb(pwalletMain->strWalletFile);
+        CWalletDB walletdb(pwalletMain->GetDBHandle());
         LOCK(pwalletMain->cs_wallet);
         {
             pwalletMain->nStakeSplitThreshold = nStakeSplitThreshold;
-            if (pwalletMain->fFileBacked)
-                walletdb.WriteStakeSplitThreshold(nStakeSplitThreshold);
+            walletdb.WriteStakeSplitThreshold(nStakeSplitThreshold);
         }
     }
 }
@@ -513,12 +512,11 @@ bool OptionsModel::isSSTValid()
 void OptionsModel::setUseCustomFee(bool fUse)
 {
     if (pwalletMain && pwalletMain->fUseCustomFee != fUse) {
-        CWalletDB walletdb(pwalletMain->strWalletFile);
+        CWalletDB walletdb(pwalletMain->GetDBHandle());
         {
             LOCK(pwalletMain->cs_wallet);
             pwalletMain->fUseCustomFee = fUse;
-            if (pwalletMain->fFileBacked)
-                walletdb.WriteUseCustomFee(fUse);
+            walletdb.WriteUseCustomFee(fUse);
         }
     }
 }
@@ -526,12 +524,11 @@ void OptionsModel::setUseCustomFee(bool fUse)
 void OptionsModel::setCustomFeeValue(const CAmount& value)
 {
     if (pwalletMain && pwalletMain->nCustomFee != value) {
-        CWalletDB walletdb(pwalletMain->strWalletFile);
+        CWalletDB walletdb(pwalletMain->GetDBHandle());
         {
             LOCK(pwalletMain->cs_wallet);
             pwalletMain->nCustomFee = value;
-            if (pwalletMain->fFileBacked)
-                walletdb.WriteCustomFeeValue(value);
+            walletdb.WriteCustomFeeValue(value);
         }
     }
 }

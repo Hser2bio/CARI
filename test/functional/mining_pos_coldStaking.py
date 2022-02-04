@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2019-2020 The CARI developers
+# Copyright (c) 2019-2020 The PIVX developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 # -*- coding: utf-8 -*-
@@ -9,9 +9,9 @@ from time import sleep
 
 from test_framework.messages import CTransaction, CTxIn, CTxOut, COIN, COutPoint
 from test_framework.mininode import network_thread_start
-from test_framework.cari_node import CariTestNode
+from test_framework.cari_node import PivxTestNode
 from test_framework.script import CScript, OP_CHECKSIG
-from test_framework.test_framework import CariTestFramework
+from test_framework.test_framework import PivxTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than,
@@ -19,8 +19,6 @@ from test_framework.util import (
     p2p_port,
     bytes_to_hex_str,
     set_node_times,
-    sync_blocks,
-    sync_mempools,
 )
 
 from decimal import Decimal
@@ -30,7 +28,7 @@ def getDelegatedUtxos(utxos):
     return [x for x in utxos if x["scriptPubKey"][:10] == '76a97b63d1']
 
 
-class CARI_ColdStakingTest(CariTestFramework):
+class CARI_ColdStakingTest(PivxTestFramework):
 
     def set_test_params(self):
         self.num_nodes = 3
@@ -51,7 +49,7 @@ class CARI_ColdStakingTest(CariTestFramework):
         # Setup the p2p connections and start up the network thread.
         self.test_nodes = []
         for i in range(self.num_nodes):
-            self.test_nodes.append(CariTestNode())
+            self.test_nodes.append(PivxTestNode())
             self.test_nodes[i].peer_connect('127.0.0.1', p2p_port(i))
 
         network_thread_start()  # Start up network handling in another thread
@@ -102,7 +100,7 @@ class CARI_ColdStakingTest(CariTestFramework):
         for peer in [0, 2]:
             for j in range(25):
                 self.mocktime = self.generate_pow(peer, self.mocktime)
-            sync_blocks(self.nodes)
+            self.sync_blocks()
 
         # 2) node[1] sends his entire balance (50 mature rewards) to node[2]
         #  - node[2] stakes a block - node[1] locks the change
@@ -112,9 +110,9 @@ class CARI_ColdStakingTest(CariTestFramework):
         assert_equal(self.nodes[1].getbalance(), 50 * 250)
         txid = self.nodes[1].sendtoaddress(self.nodes[2].getnewaddress(), (50 * 250 - 0.01))
         assert (txid is not None)
-        sync_mempools(self.nodes)
+        self.sync_mempools()
         self.mocktime = self.generate_pos(2, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         # lock the change output (so it's not used as stake input in generate_pos)
         for x in self.nodes[1].listunspent():
             assert (self.nodes[1].lockunspent(False, [{"txid": x['txid'], "vout": x['vout']}]))
@@ -128,7 +126,7 @@ class CARI_ColdStakingTest(CariTestFramework):
         self.sync_all()
         for i in range(6):
             self.mocktime = self.generate_pow(0, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         assert_equal(self.nodes[0].getshieldbalance(), 250)
 
         # 3) nodes[0] generates a owner address
@@ -193,9 +191,9 @@ class CARI_ColdStakingTest(CariTestFramework):
         assert_equal(res["staker_address"], staker_address)
         fee = self.nodes[0].viewshieldtransaction(res["txid"])['fee']
         # sync and mine 2 blocks
-        sync_mempools(self.nodes)
+        self.sync_mempools()
         self.mocktime = self.generate_pos(2, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         self.log.info("%d Txes created." % NUM_OF_INPUTS)
         # check balances:
         self.expected_balance = NUM_OF_INPUTS * INPUT_VALUE
@@ -215,9 +213,9 @@ class CARI_ColdStakingTest(CariTestFramework):
         txhash = self.spendUTXOwithNode(u, 0)
         assert(txhash != None)
         self.log.info("Good. Owner was able to spend - tx: %s" % str(txhash))
-        sync_mempools(self.nodes)
+        self.sync_mempools()
         self.mocktime = self.generate_pos(2, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         # check tx
         self.check_tx_in_chain(0, txhash)
         self.check_tx_in_chain(1, txhash)
@@ -251,7 +249,7 @@ class CARI_ColdStakingTest(CariTestFramework):
                                 self.spendUTXOwithNode, u, 1)
         self.log.info("Good. Cold staker was NOT able to spend (failed OP_CHECKCOLDSTAKEVERIFY)")
         self.mocktime = self.generate_pos(2, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
 
         # 9) check that the staker can use the coins to stake a block with internal miner.
         # --------------------------------------------------------------------------------
@@ -264,7 +262,7 @@ class CARI_ColdStakingTest(CariTestFramework):
         self.log.info("Block %s submitted" % newblockhash)
 
         # Verify that nodes[0] accepts it
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         assert_equal(self.nodes[0].getblockcount(), self.nodes[1].getblockcount())
         assert_equal(newblockhash, self.nodes[0].getbestblockhash())
         self.log.info("Great. Cold-staked block was accepted!")
@@ -292,7 +290,7 @@ class CARI_ColdStakingTest(CariTestFramework):
         assert_equal(new_block.hash, self.nodes[1].getbestblockhash())
 
         # Verify that nodes[0] accepts it
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         assert_equal(self.nodes[0].getblockcount(), self.nodes[1].getblockcount())
         assert_equal(new_block.hash, self.nodes[0].getbestblockhash())
         self.log.info("Great. Cold-staked block was accepted!")
@@ -321,7 +319,7 @@ class CARI_ColdStakingTest(CariTestFramework):
         assert("rejected" in ret)
 
         # Verify that nodes[0] rejects it
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         assert_raises_rpc_error(-5, "Block not found", self.nodes[0].getblock, new_block.hash)
         self.log.info("Great. Malicious cold-staked block was NOT accepted!")
         self.checkBalances()
@@ -345,7 +343,7 @@ class CARI_ColdStakingTest(CariTestFramework):
         assert_equal(ret, "bad-p2cs-outs")
 
         # Verify that nodes[0] rejects it
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         assert_raises_rpc_error(-5, "Block not found", self.nodes[0].getblock, new_block.hash)
         self.log.info("Great. Malicious cold-staked block was NOT accepted!")
         self.checkBalances()
@@ -355,7 +353,7 @@ class CARI_ColdStakingTest(CariTestFramework):
         # ----------------------------------------------------------------------------------------
         self.log.info("Let's void the contracts.")
         self.mocktime = self.generate_pos(2, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         print("*** 13 ***")
         self.log.info("Cancel the stake delegation spending the delegated utxos...")
         delegated_utxos = getDelegatedUtxos(self.nodes[0].listunspent())
@@ -364,9 +362,9 @@ class CARI_ColdStakingTest(CariTestFramework):
         txhash = self.spendUTXOsWithNode(delegated_utxos, 0)
         assert(txhash != None)
         self.log.info("Good. Owner was able to void the stake delegations - tx: %s" % str(txhash))
-        sync_mempools(self.nodes)
+        self.sync_blocks()
         self.mocktime = self.generate_pos(2, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
 
         # deactivate SPORK 17 and check that the owner can still spend the last utxo
         self.setColdStakingEnforcement(False)
@@ -374,9 +372,9 @@ class CARI_ColdStakingTest(CariTestFramework):
         txhash = self.spendUTXOsWithNode([final_spend], 0)
         assert(txhash != None)
         self.log.info("Good. Owner was able to void a stake delegation (with SPORK 17 disabled) - tx: %s" % str(txhash))
-        sync_mempools(self.nodes)
+        self.sync_mempools()
         self.mocktime = self.generate_pos(2, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         # check tx
         self.check_tx_in_chain(0, txhash)
         self.check_tx_in_chain(1, txhash)
@@ -403,7 +401,7 @@ class CARI_ColdStakingTest(CariTestFramework):
             for peer in [0, 2]:
                 for j in range(25):
                     self.mocktime = self.generate_pos(peer, self.mocktime)
-                sync_blocks(self.nodes)
+                self.sync_blocks()
         self.expected_balance = self.expected_immature_balance
         self.expected_immature_balance = 0
         self.checkBalances()
@@ -411,9 +409,9 @@ class CARI_ColdStakingTest(CariTestFramework):
         txhash = self.spendUTXOsWithNode(delegated_utxos, 0)
         assert (txhash != None)
         self.log.info("Good. Owner was able to spend the cold staked coins - tx: %s" % str(txhash))
-        sync_mempools(self.nodes)
+        self.sync_mempools()
         self.mocktime = self.generate_pos(2, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         # check tx
         self.check_tx_in_chain(0, txhash)
         self.check_tx_in_chain(1, txhash)
@@ -423,6 +421,7 @@ class CARI_ColdStakingTest(CariTestFramework):
 
     def checkBalances(self):
         w_info = self.nodes[0].getwalletinfo()
+        assert_equal(self.nodes[0].getblockcount(), w_info['last_processed_block'])
         self.log.info("OWNER - Delegated %f / Cold %f   [%f / %f]" % (
             float(w_info["delegated_balance"]), w_info["cold_staking_balance"],
             float(w_info["immature_delegated_balance"]), w_info["immature_cold_staking_balance"]))
@@ -430,6 +429,7 @@ class CARI_ColdStakingTest(CariTestFramework):
         assert_equal(float(w_info["immature_delegated_balance"]), self.expected_immature_balance)
         assert_equal(float(w_info["cold_staking_balance"]), 0)
         w_info = self.nodes[1].getwalletinfo()
+        assert_equal(self.nodes[1].getblockcount(), w_info['last_processed_block'])
         self.log.info("STAKER - Delegated %f / Cold %f   [%f / %f]" % (
             float(w_info["delegated_balance"]), w_info["cold_staking_balance"],
             float(w_info["immature_delegated_balance"]), w_info["immature_cold_staking_balance"]))
@@ -479,9 +479,6 @@ class CARI_ColdStakingTest(CariTestFramework):
         block.hashMerkleRoot = block.calc_merkle_root()
         block.rehash()
         block.re_sign_block()
-
-
-
 
 
 if __name__ == '__main__':

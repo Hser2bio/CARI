@@ -142,7 +142,7 @@ public:
         return false;
     }
 
-    bool IsTransactionValid(const CTransaction& txNew, int nBlockHeight);
+    bool IsTransactionValid(const CTransaction& txNew);
     std::string GetRequiredPaymentsString();
 
     ADD_SERIALIZE_METHODS;
@@ -182,7 +182,7 @@ public:
     // override CSignedMessage functions
     uint256 GetSignatureHash() const override { return GetHash(); }
     std::string GetStrMessage() const override;
-    const CTxIn GetVin() const override { return vinMasternode; };
+    CTxIn GetVin() const { return vinMasternode; };
 
     bool IsValid(CNode* pnode, std::string& strError);
     void Relay();

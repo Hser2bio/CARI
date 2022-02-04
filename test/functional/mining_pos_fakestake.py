@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2019-2020 The CARI developers
+# Copyright (c) 2019-2020 The PIVX developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -48,16 +48,15 @@ from time import sleep
 
 from test_framework.authproxy import JSONRPCException
 from test_framework.messages import COutPoint
-from test_framework.test_framework import CariTestFramework
+from test_framework.test_framework import PivxTestFramework
 from test_framework.util import (
-    sync_blocks,
     assert_equal,
     bytes_to_hex_str,
     set_node_times
 )
 
 
-class FakeStakeTest(CariTestFramework):
+class FakeStakeTest(PivxTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         # nodes[0] moves the chain and checks the spam blocks, nodes[1] sends them
@@ -93,7 +92,7 @@ class FakeStakeTest(CariTestFramework):
         self.log.info("Mining 50 blocks to reach PoS phase...")
         for i in range(50):
             self.mocktime = self.generate_pow(0, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
 
         # Check Tests 1-3
         self.test_1()
@@ -116,7 +115,7 @@ class FakeStakeTest(CariTestFramework):
         self.log.info("Mining 5 blocks as fork depth...")
         for i in range(5):
             self.mocktime = self.generate_pow(0, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
 
         # nodes[1] spams 3 blocks with height 256 --> [REJECTED]
         assert_equal(self.nodes[1].getblockcount(), 255)
@@ -138,7 +137,7 @@ class FakeStakeTest(CariTestFramework):
         self.log.info("Mining 5 blocks to include the spends...")
         for i in range(5):
             self.mocktime = self.generate_pow(0, self.mocktime)
-        sync_blocks(self.nodes)
+        self.sync_blocks()
         self.check_tx_in_chain(0, txid)
         assert_equal(self.nodes[1].getbalance(), 0)
 
